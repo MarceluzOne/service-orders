@@ -1,0 +1,13 @@
+<h1 class="text-white text-center">Lista de Equipamentos</h1>
+<div class="flex gap-4 flex-wrap justify-center items-center">
+  <app-cards
+    *ngFor="let item of serviceOrders"
+    [photo]="item.photo"
+    [productName]="item.productName"
+    [refCode]="item.refCode"
+    [priority]="item.priority"
+    [description]="item.description"
+    [entryDate]="item.entryDate">
+
+  </app-cards>
+</div>

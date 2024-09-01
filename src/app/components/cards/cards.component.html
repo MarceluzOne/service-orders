@@ -1,6 +1,16 @@
-<div class="flex justify-between w-80 h-20 p-4">
-  <div class="bg-slate-500">
-    img
+<div class="h-28 w-72 bg-white flex gap-2 justify-between">
+  <div class=" flex justify-center items-center w-1/4 p-2"> 
+    <img *ngIf="photo" [src]="photo" alt="" srcset="">
+    <i *ngIf="!photo" class="fa-regular fa-file-excel"></i>
   </div>
-  <div class="bg-red-400">text</div>
+  <div class="w-3/4 p-2">
+    <p class="text-[6px] text-right">
+      {{ refCode }}
+      <span *ngIf="priority" class="bg-slate-600 px-[2px] text-[8px] rounded-sm">
+        {{ priority }}</span>
+      </p>
+    <h5>{{ productName }}</h5>
+    <p class="text-[8px] text-justify">{{ description }}</p>
+    <p *ngIf="entryDate" class="text-[6px] text-right">Entrada:{{ entryDate }}</p>
+  </div>
 </div>
