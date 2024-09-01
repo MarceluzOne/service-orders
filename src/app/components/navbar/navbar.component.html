@@ -1,0 +1,38 @@
+<div class="w-full h-10 bg-slate-500 flex items-center gap-5 justify-between px-6" >
+  <div class="bg-white rounded-full px-2">
+    <i class="fa-regular fa-user"></i>
+  </div>
+  <div class="flex gap-4">
+    <app-search-bar></app-search-bar>
+    <div
+      *ngFor="let item of menu"
+      class="text-sm text-white font-semibold hidden sm:flex gap-3 px-3">
+      <p
+        class="hover:underline cursor-pointer"
+        [routerLink]="item.router"
+      >
+        {{item.name}}
+    </p>
+
+    </div>
+    <div class="sm:hidden">
+      <i class="fa-solid fa-bars" style="color: #ffffff;"
+      (click)="showMenu(canShowMenu)"></i>
+    </div>
+    <div>
+    </div>
+  </div>
+</div>
+
+<ng-container  *ngIf="canShowMenu" >
+  <div class="bg-white z-10 top-10 rounded-md fixed left-3/4" >
+    <p *ngFor="let item of menu"
+    class="px-3 py-1 hover:underline cursor-pointer"
+    [routerLink]="item.router"
+  >
+    {{item.name}}
+  </p>
+
+  </div>
+
+</ng-container>
