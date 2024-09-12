@@ -9,7 +9,7 @@ export class NavbarComponent implements OnInit {
   public menu: any[] = [
     {
       name: 'Inicio',
-      router: ''
+      router: 'home'
     },
     {
       name: 'Cadastrar',

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  @Output() isLogged: Boolean = false;
+  public canShowPassowrd: Boolean = false;
+  get type(){
+    return this.canShowPassowrd? 'text' : 'password'
+  }
+  constructor(private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
   }
-
+  public changeType(){
+    this.canShowPassowrd = !this.canShowPassowrd
+  }
+  public login(){
+    this.localStorage.set('isLogged', true)
+    this.isLogged = !this.isLogged
+  }
 }

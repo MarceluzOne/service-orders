@@ -2,7 +2,7 @@
 <div *ngIf="authenticated" class="py-5 px-8 relative min-h-screen flex justify-center w-full bg-slate-300">
   <router-outlet></router-outlet>
 </div>
-<div *ngIf="!authenticated">
+<div *ngIf="!authenticated" class="bg-slate-300">
   <router-outlet></router-outlet>
 </div>
 
