@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
       router: ''
     },
     {
-      name: 'Cadastro',
+      name: 'Cadastrar',
       router: 'register'
     },
     {
@@ -24,9 +24,13 @@ export class NavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    setInterval(() => {
+      if(this.canShowMenu){
+        this.canShowMenu = !this.canShowMenu
+      }
+    }, 5000);
   }
   public showMenu(menu:Boolean){
     this.canShowMenu = !menu
-    console.log(this.canShowMenu)
   }
 }

@@ -12,6 +12,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MemberRegisterComponent } from './components/register/member-register/member-register.component';
 import { EquipmentRegisterComponent } from './components/register/equipment-register/equipment-register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
