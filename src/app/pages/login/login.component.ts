@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { UserProfileService } from 'src/app/services/profile/user-profile.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,17 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 export class LoginComponent implements OnInit {
   @Output() isLogged: Boolean = false;
   public canShowPassowrd: Boolean = false;
+  public clients: any;
   get type(){
     return this.canShowPassowrd? 'text' : 'password'
   }
-  constructor(private localStorage: LocalStorageService) { }
+  constructor(
+    private localStorage: LocalStorageService,
+    private serviceClient: UserProfileService
 
-  ngOnInit(): void {
+  ) { }
+
+  ngOnInit() {
   }
   public changeType(){
     this.canShowPassowrd = !this.canShowPassowrd

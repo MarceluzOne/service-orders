@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       name: 'Cadastrar',
-      router: 'register'
+      router: '/register'
     },
     {
       name: 'Perfil',
@@ -21,7 +22,7 @@ export class NavbarComponent implements OnInit {
     }
   ]
   public canShowMenu:Boolean = false;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     setInterval(() => {
@@ -29,6 +30,9 @@ export class NavbarComponent implements OnInit {
         this.canShowMenu = !this.canShowMenu
       }
     }, 5000);
+  }
+  public goTo(router: String){
+this.router.navigate([router])
   }
   public showMenu(menu:Boolean){
     this.canShowMenu = !menu

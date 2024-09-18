@@ -1,15 +1,17 @@
-<div class="flex flex-col gap-3">
-  <h1 class="text-white text-center">Lista de Equipamentos</h1>
-  <div class=" gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  items-center">
-    <app-cards
-      *ngFor="let item of serviceOrders"
-      [photo]="item.photo"
-      [productName]="item.productName"
-      [refCode]="item.refCode"
-      [priority]="item.priority"
-      [description]="item.description"
-      [entryDate]="item.entryDate"
+<app-navbar></app-navbar>
+<div class="flex m-auto justify-center  max-w-7xl p-10 bg-red-600 h-52">
+  <div  class="grid grid-cols-4 gap-5">
+    <app-cards class="py-8" *ngFor="let card of serviceOrders"
+    [productName]="card.equipmentName"
+    [refCode]="card.refCode"
+    [priority]="card.priority"
+    [description]="card.description"
+    [entryDate]="card.registrationDate"
+    [photo]="card.url"
+    [priority]="card.priority"
     >
+  
     </app-cards>
   </div>
+
 </div>

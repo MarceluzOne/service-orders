@@ -1,8 +1,5 @@
-<app-navbar *ngIf="authenticated"></app-navbar>
-<div *ngIf="authenticated" class="py-5 px-8 relative min-h-screen flex justify-center w-full bg-slate-300">
+<div  class="min-h-screen w-full bg-slate-300">
   <router-outlet></router-outlet>
 </div>
-<div *ngIf="!authenticated" class="bg-slate-300">
-  <router-outlet></router-outlet>
-</div>
+
 

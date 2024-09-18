@@ -1,18 +1,27 @@
-<div class=" w-auto flex flex-col gap-3">
-  <h3>Cadastrar Equipamentos</h3>
+<app-navbar></app-navbar>
 
-  <form [formGroup]="formEquipment" class="w-auto bg-white flex flex-col p-3">
+<div class=" w-auto flex items-center flex-col gap-3 py-4">
+  <h3>{{ registerTitle }}</h3>
+  <!-- <div *ngIf="true" class="bg-green-500 w-full flex justify-center">
+    <p>{{ statusMessenger }}</p>
+  </div> -->
+  <div class="flex gap-2">
+    <button (click)="equipmentForm = true" class="bg-white p-2 rounded-md">Equipamento</button>
+    <button (click)="equipmentForm = false" class="bg-white p-2 rounded-md">Cliente</button>
+  </div>
+
+  <form *ngIf="equipmentForm" [formGroup]="formEquipment" class="w-auto bg-white flex flex-col p-3">
     <div>
       <span class="font-thin">Equipamento</span>
-      <input type="text" formControlName="productName" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Nota Fiscal</span>
-      <input type="text" formControlName="fiscalNote" class="border-2 w-full">
+      <input type="text" formControlName="equipmentName" class="border-2 w-full">
     </div>
     <div>
       <span class="font-thin">Número de Serie</span>
       <input type="text" formControlName="serialNumber" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">Responsável</span>
+      <input type="text" formControlName="carrier" class="border-2 w-full">
     </div>
     <div>
       <span class="font-thin">Marca</span>
@@ -33,13 +42,17 @@
     <div class="flex justify-between items-center p-2">
       <div>
         <span class="font-thin">Tensão</span>
+        <input type="text" formControlName="voltage" class="border-2 w-full">
+      </div>
+      <!-- <div>
+        <span class="font-thin">Tensão</span>
         <select formControlName="voltage">
           <option>480V</option>
           <option>360V</option>
           <option>220V</option>
           <option>110V</option>
         </select>
-      </div>
+      </div> -->
       <div>
         <button (click)="openCamera()">
           Enviar foto
@@ -64,9 +77,30 @@
       <img *ngIf="capturedImage" [src]="capturedImage" alt="Foto Capturada">
     </div>
 
-
-
-    <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submit()">Cadastrar</button>
+    <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitEquipment()">Cadastrar</button>
 
   </form>
+
+  <form *ngIf="!equipmentForm" [formGroup]="formClient" class="w-auto bg-white flex flex-col p-3">
+    <div>
+      <span class="font-thin">Nome</span>
+      <input type="text" formControlName="name" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">Telefone</span>
+      <input type="phone" formControlName="phone" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">cnpj</span>
+      <input type="text" formControlName="cnpj" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">Código do cliente </span>
+      <input type="text" formControlName="codClient" class="border-2 w-full">
+    </div>
+    <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitClient()">Cadastrar cliente</button>
+  </form>
+  <div *ngIf="statusMessenger" class="bg-green-500 w-full flex justify-center">
+    <p>{{ statusMessenger }}</p>
+  </div>
 </div>
