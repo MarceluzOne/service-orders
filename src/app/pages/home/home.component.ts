@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { serviceOrders } from 'src/app/interface/serviceOrders';
-import { LoginComponent } from '../login/login.component';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 

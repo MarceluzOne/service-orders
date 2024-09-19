@@ -13,7 +13,6 @@ import { MemberRegisterComponent } from './components/register/member-register/m
 import { EquipmentRegisterComponent } from './components/register/equipment-register/equipment-register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 
 

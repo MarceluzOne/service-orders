@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
       power: ['', [Validators.required]],
       voltage: ['', [Validators.required]],
       description: [''],
-      priority: ['B']
+      priority: ['']
       });
     }
 
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
           this.statusMessenger = 'Equipamento Cadastrado'
           console.log('Equipamento cadastrado com sucesso:', response);
         },
-        error => {
+        error => { 
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
