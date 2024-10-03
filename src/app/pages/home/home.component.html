@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="flex m-auto justify-center  max-w-7xl p-10">
-  <div  class="grid grid-cols-4 gap-5">
+  <div  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
     <app-cards class="py-8" *ngFor="let card of serviceOrders"
     [productName]="card.equipmentName"
     [refCode]="card.refCode"

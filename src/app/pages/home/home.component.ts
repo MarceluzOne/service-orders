@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     await this.getEquipament();
-    console.log(this.serviceOrders)
+    // console.log(this.serviceOrders)
     // this.serviceOrders  = [
     //   {
     //     photo:'https://www.viewtech.ind.br/media/catalog/product/cache/81fd79446bf1269e3fc6e93bae483652/t/a/tamanho_b.jpg',
@@ -58,8 +58,9 @@ export class HomeComponent implements OnInit {
   }
   public async getEquipament(){
     try {
-      const equipament = await this.registerEquipment.getEquipament().toPromise()
+      const equipament = await this.registerEquipment.getEquipament().toPromise();
       this.serviceOrders = equipament
+      console.log(this.serviceOrders)
     } catch (error) {
       this.serviceOrders = []
     }

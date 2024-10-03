@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
@@ -7,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardsComponent implements OnInit {
   @Input() public productName?: String ;
-  @Input() public refCode?: String;
+  @Input() public refCode?: String ='null';
   @Input() public priority?: String;
   @Input() public description?: String;
   @Input() public entryDate?: String;
