@@ -11,6 +11,6 @@
       </p>
     <h5>{{ productName }}</h5>
     <p class="text-[8px] text-justify">{{ description }}</p>
-    <p *ngIf="entryDate" class="text-[6px] text-right">Entrada:{{ entryDate }}</p>
+    <p *ngIf="entryDate" class="text-[6px] text-right">Entrada:{{ entryDate | dateType }}</p>
   </div>
 </div>

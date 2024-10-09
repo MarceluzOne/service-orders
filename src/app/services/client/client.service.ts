@@ -13,14 +13,20 @@ export class ClientService {
   ) { }
 
   public getClients(): Observable<any> {
-    return this.http.get(`${apiUrl}/api/clients`)
+    return this.http.get(`${apiUrl}/api/clients/all`)
       .pipe(
         retry(3)
       );
   }
   
   public registerClient(data: any): Observable<any> {
-    return this.http.post(`${apiUrl}/api/clients`, data)
-      .pipe(retry(3));
+    return this.http.post(`${apiUrl}/api/clients/create`, data)
+      ;
+  }
+  public updateClient(data: any, cnpj: string ): Observable<any> {
+    return this.http.post(`${apiUrl}/api/clients/create/${cnpj}`, data)
+      .pipe(
+        retry(3)
+      );
   }
 }

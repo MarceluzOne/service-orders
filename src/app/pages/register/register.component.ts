@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   public capturedImage: string | null = null;
   public stream: MediaStream | null = null;
   public statusMessenger: String = '';
+  public client: any;
+  public isSubmiting: Boolean = false
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -42,18 +44,27 @@ export class RegisterComponent implements OnInit {
       description: [''],
       priority: ['']
       });
+
+      this.formClient = this.fb.group({
+        'name': new FormControl('', [Validators.required]),
+        'phone': new FormControl('', [Validators.required]),
+        'codClient': new FormControl('', [Validators.required]),
+        'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
+      })
     }
 
   async ngOnInit() {
-    console.log(await this.registerClient.getClients().toPromise());
-
-
-    this.formClient = this.fb.group({
-      'name': new FormControl('', [Validators.required]),
-      'phone': new FormControl('', [Validators.required]),
-      'codClient': new FormControl('', [Validators.required]),
-      'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
-    })
+    this.client = await this.registerClient.getClients().toPromise();
+    console.log(this.client)
+  }
+  public async  getClient(){
+    try {
+      await this.registerClient.getClients().subscribe((response) => {
+        this.client = response
+      })
+    } catch (error) {
+      this.client = []
+    }
   }
 
   // Método de envio do formulário
@@ -103,6 +114,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitClient(){
+    this.isSubmiting = true
     if (this.formClient.valid) {
       const clientData = this.formClient.value;
       this.registerClient.registerClient(clientData).subscribe(

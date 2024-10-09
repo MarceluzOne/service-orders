@@ -5,12 +5,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./cards.component.scss']
 })
 export class CardsComponent implements OnInit {
-  @Input() public productName?: String ;
-  @Input() public refCode?: String ='null';
+  @Input() public productName?: string ;
+  @Input() public refCode?: string ='null';
   @Input() public priority?: String;
   @Input() public description?: String;
-  @Input() public entryDate?: String;
-  @Input() public photo?: String
+  @Input() public entryDate?: string;
+  @Input() public photo?: string
 
   constructor() { }
 

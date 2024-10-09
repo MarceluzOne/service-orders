@@ -2,9 +2,6 @@
 
 <div class=" w-auto flex items-center flex-col gap-3 py-4">
   <h3>{{ registerTitle }}</h3>
-  <!-- <div *ngIf="true" class="bg-green-500 w-full flex justify-center">
-    <p>{{ statusMessenger }}</p>
-  </div> -->
   <div class="flex gap-2">
     <button (click)="equipmentForm = true" class="bg-white p-2 rounded-md">Equipamento</button>
     <button (click)="equipmentForm = false" class="bg-white p-2 rounded-md">Cliente</button>
@@ -48,15 +45,6 @@
         <span class="font-thin">Prioridade</span>
         <input type="text" formControlName="priority" class="border-2 w-full">
       </div>
-      <!-- <div>
-        <span class="font-thin">Tensão</span>
-        <select formControlName="voltage">
-          <option>480V</option>
-          <option>360V</option>
-          <option>220V</option>
-          <option>110V</option>
-        </select>
-      </div> -->
       <div>
         <button (click)="openCamera()">
           Enviar foto
@@ -102,8 +90,13 @@
       <span class="font-thin">Código do cliente </span>
       <input type="text" formControlName="codClient" class="border-2 w-full">
     </div>
-    <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitClient()">Cadastrar cliente</button>
+    <button 
+      class="bg-gray-300 p-3 mt-3 rounded-md" 
+      type="submit" 
+      (click)="submitClient()"
+    >Cadastrar cliente</button>
   </form>
+
   <div *ngIf="statusMessenger" class="bg-green-500 w-full flex justify-center">
     <p>{{ statusMessenger }}</p>
   </div>

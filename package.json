@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "moment": "^2.30.1",
     "rxjs": "~7.5.0",
     "service-orders": "file:",
     "tslib": "^2.3.0",
