@@ -3,11 +3,12 @@
 <div class=" w-auto flex items-center flex-col gap-3 py-4">
   <h3>{{ registerTitle }}</h3>
   <div class="flex gap-2">
-    <button (click)="equipmentForm = true" class="bg-white p-2 rounded-md">Equipamento</button>
-    <button (click)="equipmentForm = false" class="bg-white p-2 rounded-md">Cliente</button>
+    <button (click)="equipmentForm ='equipment'" class="bg-white p-2 rounded-md">Equipamento</button>
+    <button *ngIf="isAdmin" (click)="equipmentForm ='client'" class="bg-white p-2 rounded-md">Cliente</button>
+    <button *ngIf="isAdmin" (click)="equipmentForm ='employee'" class="bg-white p-2 rounded-md">Funcionário</button>
   </div>
 
-  <form *ngIf="equipmentForm" [formGroup]="formEquipment" class="w-auto bg-white flex flex-col p-3">
+  <form *ngIf='equipmentForm === "equipment"' [formGroup]="formEquipment" class="w-auto bg-white flex flex-col p-3">
     <div>
       <span class="font-thin">Equipamento</span>
       <input type="text" formControlName="equipmentName" class="border-2 w-full">
@@ -73,14 +74,14 @@
 
   </form>
 
-  <form *ngIf="!equipmentForm" [formGroup]="formClient" class="w-auto bg-white flex flex-col p-3">
+  <form *ngIf="equipmentForm === 'client' && isAdmin" [formGroup]="formClient" class="w-auto bg-white flex flex-col p-3">
     <div>
       <span class="font-thin">Nome</span>
       <input type="text" formControlName="name" class="border-2 w-full">
     </div>
     <div>
       <span class="font-thin">Telefone</span>
-      <input type="phone" formControlName="phone" class="border-2 w-full">
+      <input  type="phone" formControlName="phone" class="border-2 w-full">
     </div>
     <div>
       <span class="font-thin">cnpj</span>
@@ -94,6 +95,36 @@
       class="bg-gray-300 p-3 mt-3 rounded-md" 
       type="submit" 
       (click)="submitClient()"
+    >Cadastrar cliente</button>
+  </form>
+  <form *ngIf="equipmentForm === 'employee' && isAdmin" [formGroup]="formEmployee" class="w-auto bg-white flex flex-col p-3">
+    <div>
+      <span class="font-thin">Nome</span>
+      <input type="text" formControlName="name" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">email</span>
+      <input type="phone" formControlName="email" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">Senha</span>
+      <input type="text" formControlName="password" class="border-2 w-full">
+    </div>
+    <div>
+      <span class="font-thin">Tipo de funcionário</span>
+      <select formControlName="role" class="border-2 w-full h-8">
+        <option value="ADM">Administrador</option>
+        <option value="NORMAL">Funcinário</option>
+      </select>
+    </div>
+    <div>
+      <span class="font-thin">Código do funcionário</span>
+      <input type="text" formControlName="employeeCod" class="border-2 w-full">
+    </div>
+    <button 
+      class="bg-gray-300 p-3 mt-3 rounded-md" 
+      type="submit" 
+      (click)="submitEmployee()"
     >Cadastrar cliente</button>
   </form>
 

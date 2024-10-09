@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
+import { EmployeeService } from 'src/app/services/emploee/emploee.service';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
@@ -11,26 +12,31 @@ import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 export class RegisterComponent implements OnInit {
   public formEquipment: FormGroup = this.fb.group({});
   public formClient: FormGroup = this.fb.group({});
+  public formEmployee: FormGroup = this.fb.group({});
   public showCam: boolean = false;
-  public equipmentForm: Boolean = true;
+  public isAdmin: Boolean = true;
+  public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
   public equipament: any;
   public capturedImage: string | null = null;
   public stream: MediaStream | null = null;
   public statusMessenger: String = '';
   public client: any;
+  public employee: any; 
   public isSubmiting: Boolean = false
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
   
   public get registerTitle(){
+
     return this.equipmentForm ? 'Cadastro de Equipamento' : 'Cadastro de Cliente'
   };
 
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-    private registerClient: ClientService
+    private registerClient: ClientService,
+    private employeeService: EmployeeService
   ) {
     this.formEquipment = this.fb.group({
       equipmentName: ['', [Validators.required]],
@@ -50,12 +56,22 @@ export class RegisterComponent implements OnInit {
         'phone': new FormControl('', [Validators.required]),
         'codClient': new FormControl('', [Validators.required]),
         'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
+      });
+
+      this.formEmployee = this.fb.group({
+        'name': new FormControl('', [Validators.required]),
+        'email': new FormControl('', [Validators.required, Validators.email]),
+        'password': new FormControl('', [Validators.required]),
+        'role': new FormControl(('').toLocaleUpperCase(), [Validators.required, Validators.maxLength(18)]),
+        'employeeCod': new FormControl('', [Validators.required, Validators.maxLength(18)]),
       })
     }
 
   async ngOnInit() {
     this.client = await this.registerClient.getClients().toPromise();
     console.log(this.client)
+    this.employee = await this.employeeService.getEmployee().toPromise();
+    console.log(this.employee)
   }
   public async  getClient(){
     try {
@@ -95,8 +111,6 @@ export class RegisterComponent implements OnInit {
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
-    } else {
-      console.log('Formulário inválido');
     }
   }
 
@@ -126,7 +140,20 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
-
+  }
+  public submitEmployee(){
+    this.isSubmiting = true
+    if (this.formEmployee.valid) {
+      const employeeData = this.formEmployee.value;
+      this.employeeService.registerEmployee(employeeData).subscribe(
+        response => {
+          console.log('Cliente registrado com sucesso', response);
+        },
+        error => {
+          console.error('Erro ao registrar o cliente', error);
+        }
+      );
+    }
   }
 
   // Método para abrir a câmera

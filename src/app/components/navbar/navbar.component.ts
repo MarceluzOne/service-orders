@@ -10,16 +10,12 @@ export class NavbarComponent implements OnInit {
   public menu: any[] = [
     {
       name: 'Inicio',
-      router: 'home'
+      router: '/home'
     },
     {
       name: 'Cadastrar',
       router: '/register'
     },
-    {
-      name: 'Perfil',
-      router: 'profile'
-    }
   ]
   public canShowMenu:Boolean = false;
   constructor(private router: Router) { }
