@@ -1,4 +1,5 @@
-import { NgModule, Pipe } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { NgxMaskModule } from 'ngx-mask'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DateTypePipe } from './pipes/date-type.pipe';
+import { AlertComponent } from './components/alert/alert.component';
+
+
+
 
 
 @NgModule({
@@ -31,13 +36,14 @@ import { DateTypePipe } from './pipes/date-type.pipe';
     EquipmentRegisterComponent,
     ProfileComponent,
     DateTypePipe,
-
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
