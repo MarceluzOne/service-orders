@@ -31,7 +31,7 @@
   <div class="bg-white z-10 top-10 rounded-md fixed left-3/4" >
     <p *ngFor="let item of menu"
     class="px-3 py-1 hover:underline cursor-pointer"
-    [routerLink]="item.router"
+    (click)="goTo(item.router)"
   >
     {{item.name}}
   </p>
