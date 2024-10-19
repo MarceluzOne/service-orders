@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class=" w-auto flex items-center flex-col gap-3 py-4">
+<div class=" w-auto flex items-center flex-col gap-3 py-4 px-4">
   <h3>{{ registerTitle }}</h3>
   <div class="flex gap-2">
     <button (click)="equipmentForm ='equipment'" class="bg-white p-2 rounded-md">Equipamento</button>
@@ -8,125 +8,26 @@
     <button *ngIf="isAdmin" (click)="equipmentForm ='employee'" class="bg-white p-2 rounded-md">Funcionário</button>
   </div>
 
-  <form *ngIf='equipmentForm === "equipment"' [formGroup]="formEquipment" class="w-auto bg-white flex flex-col p-3">
-    <div>
-      <span class="font-thin">Equipamento</span>
-      <input type="text" formControlName="equipmentName" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Número de Serie</span>
-      <input type="text" formControlName="serialNumber" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Responsável</span>
-      <input type="text" formControlName="carrier" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Marca</span>
-      <input type="text" formControlName="brand" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Modelo</span>
-      <input type="text" formControlName="model" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Corrente</span>
-      <input type="text" formControlName="current" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Potencia</span>
-      <input type="text" formControlName="power" class="border-2 w-full">
-    </div>
-    <div class="flex justify-between items-center p-2">
-      <div>
-        <span class="font-thin">Tensão</span>
-        <input type="text" formControlName="voltage" class="border-2 w-full">
-      </div>
-      <div>
-        <span class="font-thin">Prioridade</span>
-        <input type="text" formControlName="priority" class="border-2 w-full">
-      </div>
-      <div>
-        <button (click)="openCamera()">
-          Enviar foto
-          <i class="fa-solid fa-camera">
-          </i>
-        </button>
-      </div>
-    </div>
-    <div>
-      <span class="font-thin">Descrição</span>
-      <textarea rows="4" cols="50" formControlName="description" placeholder="Digite aqui..."></textarea>
+  <app-equipment-register
+    *ngIf="equipmentForm === 'equipment'"
+    [formEquipment]="formEquipment"
+  >
+  </app-equipment-register>
 
-    </div>
-    <div  class="flex flex-col items-center">
-      <video *ngIf="showCam" #video autoplay></video>
-      <canvas #canvas></canvas>
-    
-      <div *ngIf="showCam" >
-        <button class="bg-gray-300 p-3 mt-3 rounded-md" (click)="capture()">Capturar Foto</button>
-      </div>
-    
-      <img *ngIf="capturedImage" [src]="capturedImage" alt="Foto Capturada">
-    </div>
+  <app-client-register
+  *ngIf="equipmentForm === 'client' && isAdmin"
+  
+  >
+  </app-client-register>
 
-    <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitEquipment()">Cadastrar</button>
+  <app-employee-register
+  *ngIf="equipmentForm === 'employee' && isAdmin"
+  [formEmployee]="formEmployee"
+  >
 
-  </form>
+  </app-employee-register>
 
-  <form *ngIf="equipmentForm === 'client' && isAdmin" [formGroup]="formClient" class="w-auto bg-white flex flex-col p-3">
-    <div>
-      <span class="font-thin">Nome</span>
-      <input type="text" formControlName="name" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Telefone</span>
-      <input  type="phone" formControlName="phone" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">cnpj</span>
-      <input type="text" formControlName="cnpj" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Código do cliente </span>
-      <input type="text" formControlName="codClient" class="border-2 w-full">
-    </div>
-    <button 
-      class="bg-gray-300 p-3 mt-3 rounded-md" 
-      type="submit" 
-      (click)="submitClient()"
-    >Cadastrar cliente</button>
-  </form>
-  <form *ngIf="equipmentForm === 'employee' && isAdmin" [formGroup]="formEmployee" class="w-auto bg-white flex flex-col p-3">
-    <div>
-      <span class="font-thin">Nome</span>
-      <input type="text" formControlName="name" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">email</span>
-      <input type="phone" formControlName="email" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Senha</span>
-      <input type="text" formControlName="password" class="border-2 w-full">
-    </div>
-    <div>
-      <span class="font-thin">Tipo de funcionário</span>
-      <select formControlName="role" class="border-2 w-full h-8">
-        <option value="ADM">Administrador</option>
-        <option value="NORMAL">Funcinário</option>
-      </select>
-    </div>
-    <div>
-      <span class="font-thin">Código do funcionário</span>
-      <input type="text" formControlName="employeeCod" class="border-2 w-full">
-    </div>
-    <button 
-      class="bg-gray-300 p-3 mt-3 rounded-md" 
-      type="submit" 
-      (click)="submitEmployee()"
-    >Cadastrar cliente</button>
-  </form>
+
 
   <div *ngIf="statusMessenger" class="bg-green-500 w-full flex justify-center">
     <p>{{ statusMessenger }}</p>

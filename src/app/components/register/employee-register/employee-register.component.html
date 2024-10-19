@@ -1,0 +1,33 @@
+<form
+  [formGroup]="formEmployee"
+  class="w-auto bg-white flex rounded-md flex-col p-3 border-4">
+  <div>
+    <span class="text-sm font-medium">Nome</span>
+    <input type="text" formControlName="name" class="border-2 rounded-md w-full h-8">
+  </div>
+  <div>
+    <span class="text-sm font-medium">E-mail</span>
+    <input type="phone" formControlName="email" class="border-2 rounded-md w-full h-8">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Senha</span>
+    <input type="password" formControlName="password" class="border-2 rounded-md w-full h-8">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Tipo de funcionário</span>
+    <select formControlName="role" class="border-2 rounded-md w-full h-8">
+      <option value="" disabled selected>Selecione um tipo de funcionário</option>
+      <option value="ADM">Administrador</option>
+      <option value="NORMAL">Funcionário</option>
+    </select>
+  </div>
+  <div>
+    <span class="text-sm font-medium">Código do funcionário</span>
+    <input type="text" formControlName="employeeCod" class="border-2 rounded-md w-full h-8">
+  </div>
+  <button 
+    class="bg-gray-300 p-3 mt-3 rounded-md" 
+    type="submit" 
+    (click)="submitEmployee()"
+  >Cadastrar cliente</button>
+</form>

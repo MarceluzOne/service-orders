@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DateTypePipe } from './pipes/date-type.pipe';
 import { AlertComponent } from './components/alert/alert.component';
+import { ClientRegisterComponent } from './components/register/client-register/client-register.component';
+import { EmployeeRegisterComponent } from './components/register/employee-register/employee-register.component';
 
 
 
@@ -37,6 +39,8 @@ import { AlertComponent } from './components/alert/alert.component';
     ProfileComponent,
     DateTypePipe,
     AlertComponent,
+    ClientRegisterComponent,
+    EmployeeRegisterComponent,
   ],
   imports: [
     BrowserModule,

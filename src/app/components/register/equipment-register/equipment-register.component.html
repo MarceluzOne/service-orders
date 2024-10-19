@@ -1,1 +1,97 @@
-<p>equipment-register works!</p>
+<form 
+  [formGroup]="formEquipment"
+  class="w-auto bg-white flex rounded-md flex-col p-3 border-4">
+  <div>
+    <span class="text-sm font-medium">Equipamento</span>
+    <input 
+      type="text"
+      formControlName="equipmentName"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Número de Serie</span>
+    <input
+    type="text"
+    formControlName="serialNumber"
+    class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Responsável</span>
+    <input
+      type="text"
+      formControlName="carrier"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Marca</span>
+    <input
+      type="text"
+      formControlName="brand"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Modelo</span>
+    <input
+      type="text"
+      formControlName="model"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Corrente</span>
+    <input
+      type="text"
+      formControlName="current"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div>
+    <span class="text-sm font-medium">Potencia</span>
+    <input
+      type="text"
+      formControlName="power"
+      class="border-2 rounded-md w-full">
+  </div>
+  <div class="flex justify-between items-center gap-3">
+    <div>
+      <span class="text-sm font-medium">Tensão</span>
+      <input
+        type="text"
+        formControlName="voltage"
+        class="border-2 rounded-md text-xs w-full h-8">
+    </div>
+    <div>
+      <span class="text-sm font-medium">Prioridade</span>
+      <select formControlName="priority" class="border-2 rounded-md text-xs w-full h-8">
+        <option value="" disabled selected >Qual a prioridade?</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+      </select>
+    </div>
+    
+  </div>
+  <div>
+    <span class="text-sm font-medium">Descrição</span>
+    <textarea class="border-2 rounded-md w-full" rows="4" cols="50" formControlName="description" placeholder="Digite aqui..."></textarea>
+  </div>
+  <div class="flex justify-end">
+    <button (click)="openCamera()">
+      Enviar foto
+      <i class="fa-solid fa-camera">
+      </i>
+    </button>
+  </div>
+  <div *ngIf="showCam" class="flex flex-col items-center">
+    <video *ngIf="showCam" #video autoplay></video>
+    <canvas #canvas></canvas>
+  
+    <div *ngIf="showCam" >
+      <button class="bg-gray-300 p-3 rounded-md" (click)="capture()">Capturar Foto</button>
+    </div>
+  </div>
+  <div class="w-full bg-red-400" *ngIf="capturedImage">
+    <img class="w-80"  [src]="capturedImage" alt="Foto Capturada">
+  </div>
+  
+
+  <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitEquipment()">Cadastrar</button>
+
+</form>
