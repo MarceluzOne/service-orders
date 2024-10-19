@@ -10,18 +10,11 @@ import { EquipmentService } from 'src/app/services/equipment/equipment.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public formEquipment: FormGroup = this.fb.group({});
-  public formEmployee: FormGroup = this.fb.group({});
-  public showCam: boolean = false;
   public isAdmin: Boolean = true;
   public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
   public equipament: any;
-  public capturedImage: string | null = null;
-  public stream: MediaStream | null = null;
   public statusMessenger: String = '';
-  public client: any;
-  public employee: any; 
-  public isSubmiting: Boolean = false
+
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -42,20 +35,9 @@ export class RegisterComponent implements OnInit {
   ) {  }
 
   async ngOnInit() {
-    this.client = await this.registerClient.getClients().toPromise();
-    console.log(this.client)
-    this.employee = await this.employeeService.getEmployee().toPromise();
-    console.log(this.employee)
+
     
   }
-  public async  getClient(){
-    try {
-      await this.registerClient.getClients().subscribe((response) => {
-        this.client = response
-      })
-    } catch (error) {
-      this.client = []
-    }
-  }
+
 
 }

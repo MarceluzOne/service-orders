@@ -79,15 +79,16 @@
       </i>
     </button>
   </div>
-  <div *ngIf="showCam" class="flex flex-col items-center">
+  <div *ngIf="showCam" class="flex w-80 flex-col justify-center items-center">
     <video *ngIf="showCam" #video autoplay></video>
     <canvas #canvas></canvas>
   
-    <div *ngIf="showCam" >
-      <button class="bg-gray-300 p-3 rounded-md" (click)="capture()">Capturar Foto</button>
+    <div class="flex gap-3" *ngIf="showCam">
+      <button class="bg-gray-300 p-3 rounded-md" (click)="capture()">Capturar foto</button>
+      <button class="bg-gray-300 p-3 rounded-md" (click)="stopCamera()">Encerrar câmera</button>
     </div>
   </div>
-  <div class="w-full bg-red-400" *ngIf="capturedImage">
+  <div class="w-full flex justify-center" *ngIf="capturedImage">
     <img class="w-80"  [src]="capturedImage" alt="Foto Capturada">
   </div>
   

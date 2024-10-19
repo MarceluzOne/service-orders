@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private registerEquipment: EquipmentService) { }
 
   async ngOnInit() {
-    await this.getEquipament();
+    //await this.getEquipament();
 
   }
   public async getEquipament(){

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { EquipmentService } from 'src/app/services/equipment/equipment.service';
   styleUrls: ['./equipment-register.component.scss']
 })
 export class EquipmentRegisterComponent implements OnInit {
-  @Input() formEquipment = this.fb.group({});
+  public formEquipment:  FormGroup = this.fb.group({});
   public showCam: boolean = false;
   public isAdmin: Boolean = true;
   public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
@@ -30,6 +30,20 @@ export class EquipmentRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.formEquipment = this.fb.group({
+      'equipmentName' : new FormControl('', [Validators.required]),
+      'serialNumber' : new FormControl('', [Validators.required]),
+      'carrier' : new FormControl('', [Validators.required]),
+      'brand' : new FormControl('', [Validators.required]),
+      'model' : new FormControl('', [Validators.required]),
+      'current' : new FormControl('', [Validators.required]),
+      'power' : new FormControl('', [Validators.required]),
+      'voltage' : new FormControl('', [Validators.required]),
+      'priority' : new FormControl('', [Validators.required]),
+      'description' : new FormControl('', [Validators.required]),
+      'photo' : new FormControl('', [Validators.required]),
+
+    })
   }
 
   submitEquipment(): void {
@@ -49,21 +63,20 @@ export class EquipmentRegisterComponent implements OnInit {
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
       }
-      console.log('aqui')
-      this.registerEquipment.registerEquipament(formData).subscribe(
-        response => {
-          this.statusMessenger = 'Equipamento Cadastrado'
-          console.log('Equipamento cadastrado com sucesso:', response);
-        },
-        error => { 
-          console.error('Erro ao cadastrar equipamento:', error);
-        }
-      );
+      // this.registerEquipment.registerEquipament(formData).subscribe(
+      //   response => {
+      //     this.statusMessenger = 'Equipamento Cadastrado'
+      //     console.log('Equipamento cadastrado com sucesso:', response);
+      //   },
+      //   error => { 
+      //     console.error('Erro ao cadastrar equipamento:', error);
+      //   }
+      // );
     }
   }
 
   // Função auxiliar para converter Data URL em File
-  convertDataURLToFile(dataURL: string, filename: string): File {
+  private convertDataURLToFile(dataURL: string, filename: string): File {
     const arr = dataURL.split(',');
     const mime = arr[0].match(/:(.*?);/)?.[1];
     const bstr = atob(arr[1]);
@@ -75,10 +88,8 @@ export class EquipmentRegisterComponent implements OnInit {
     return new File([u8arr], filename, { type: mime });
   }
 
-  
-
   // Método para abrir a câmera
-  public openCamera(): void {
+  openCamera(): void {
     this.startCamera();
     this.showCam = true;
   }
@@ -99,7 +110,7 @@ export class EquipmentRegisterComponent implements OnInit {
   }
 
   // Capturar a imagem da câmera
-  capture(): void {
+  public capture(): void {
     const video = this.videoElement.nativeElement;
     const canvas = this.canvas.nativeElement;
 
@@ -118,12 +129,13 @@ export class EquipmentRegisterComponent implements OnInit {
     });
 
     // Ocultar a câmera e parar o stream
-    this.showCam = false;
+    
     this.stopCamera();
   }
 
   // Parar a câmera
-  stopCamera(): void {
+  public stopCamera(): void {
+    this.showCam = false;
     if (this.stream) {
       this.stream.getTracks().forEach(track => track.stop());
     }

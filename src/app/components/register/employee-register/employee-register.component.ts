@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/emploee/emploee.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { EmployeeService } from 'src/app/services/emploee/emploee.service';
   styleUrls: ['./employee-register.component.scss']
 })
 export class EmployeeRegisterComponent implements OnInit {
-  @Input() formEmployee =this.fb.group({});
+  @Input() formEmployee: FormGroup = this.fb.group({});
   @Output() isSubmiting: Boolean = false
 
   constructor(
@@ -17,6 +17,13 @@ export class EmployeeRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.formEmployee = this.fb.group({
+      'name' : new FormControl('', [Validators.required]),
+      'email' : new FormControl('', [Validators.required, Validators.email, ]),
+      'password' : new FormControl('', [Validators.required, Validators.min(6)]),
+      'role' : new FormControl('', [Validators.required]),
+      'employeeCod' : new FormControl('', [Validators.required]),      
+    })
   }
   public submitEmployee(){
 

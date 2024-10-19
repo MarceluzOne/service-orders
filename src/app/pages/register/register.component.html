@@ -10,7 +10,6 @@
 
   <app-equipment-register
     *ngIf="equipmentForm === 'equipment'"
-    [formEquipment]="formEquipment"
   >
   </app-equipment-register>
 
@@ -22,7 +21,7 @@
 
   <app-employee-register
   *ngIf="equipmentForm === 'employee' && isAdmin"
-  [formEmployee]="formEmployee"
+
   >
 
   </app-employee-register>
