@@ -32,8 +32,7 @@ export class EmployeeRegisterComponent implements OnInit {
   public async getEmployee(){
     try {
       const employees: IEmployee[] = await this.employeeService.getEmployee().toPromise();
-      this.employee = {...employees}
-      console.log(this.employee)
+      this.employee = [...employees]
     } catch (error) {
       console.log(error)
     }

@@ -23,7 +23,7 @@ export class ClientRegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registerClient: ClientService,
+    private clientService: ClientService,
   ) {  }
 
   async ngOnInit() {
@@ -33,37 +33,26 @@ export class ClientRegisterComponent implements OnInit {
       'codClient': new FormControl('', [Validators.required]),
       'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
     });
-    await this.getClient();
   }
 
-  public async getClient(){
-    try {
-      const clients = await this.registerClient.getClients().toPromise();
-      this.clients = clients
-      console.log(this.clients)
-    } catch (error) {
-      this.clients = []
-    }
-  }
+  
 
   public submitClient(){
-    this.isSubmiting = true;
-    setTimeout(()=>{
-      this.isSubmiting = false
-    }, 1000)
-    console.log(this.formClient.value)
-    // if (this.formClient.valid) {
-    //   const clientData = this.formClient.value;
-    //   this.validarCnpj(clientData.cnpj)
-    //   this.registerClient.registerClient(clientData).subscribe(
-    //     response => {
-    //       console.log('Cliente registrado com sucesso', response);
-    //     },
-    //     error => {
-    //       console.error('Erro ao registrar o cliente', error);
-    //     }
-    //   );
-    // }
+    this.isSubmiting = true
+    if (this.formClient.valid) {
+      const client = this.formClient.value;
+      this.clientService.registerClient(client).subscribe(
+        response => {
+          console.log('Cliente registrado com sucesso', response);
+          this.isSubmiting = false
+          this.formClient.reset()
+        },
+        error => {
+          console.error('Erro ao registrar o cliente', error);
+          this.isSubmiting = false
+        }
+      );
+    }
   }
 
 }

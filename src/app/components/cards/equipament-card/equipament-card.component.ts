@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss']
+  selector: 'app-equipament-card',
+  templateUrl: './equipament-card.component.html',
+  styleUrls: ['./equipament-card.component.scss']
 })
-export class CardsComponent implements OnInit {
+export class EquipamentCardComponent implements OnInit {
   @Input() public productName?: string ;
   @Input() public refCode?: string ='null';
   @Input() public priority?: String;
@@ -12,8 +13,10 @@ export class CardsComponent implements OnInit {
   @Input() public entryDate?: string;
   @Input() public photo?: string
 
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
 }
