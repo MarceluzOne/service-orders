@@ -1,8 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientService } from 'src/app/services/client/client.service';
-import { EmployeeService } from 'src/app/services/emploee/emploee.service';
-import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
   selector: 'app-register',
@@ -28,16 +24,11 @@ export class RegisterComponent implements OnInit {
     return 'Cadastro de Equipamento'
   };
 
-  constructor(
-    private fb: FormBuilder,
-    private registerClient: ClientService,
-    private employeeService: EmployeeService
-  ) {  }
+  constructor( ) {  }
 
   async ngOnInit() {
 
     
   }
-
 
 }
