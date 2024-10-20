@@ -26,6 +26,5 @@ export class EmployeeService {
         retry(3)
       );
   }
-
 }
 

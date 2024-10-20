@@ -18,11 +18,14 @@ export class ClientService {
         retry(3)
       );
   }
+  public deletClient(cnpj: string) {
+    return this.http.delete(`${apiUrl}api/clients/cnpj/${cnpj}`, { observe: 'response' });
+  }
   
   public registerClient(data: any): Observable<any> {
     return this.http.post(`${apiUrl}/api/clients/create`, data)
-      ;
   }
+
   public updateClient(data: any, cnpj: string ): Observable<any> {
     return this.http.post(`${apiUrl}/api/clients/create/${cnpj}`, data)
       .pipe(

@@ -15,8 +15,6 @@ export class EquipmentService {
     return this.http.get(`${apiUrl}/api/equipments`)
       .pipe(
         retry(3)
-        
-
       );
   }
   public registerEquipament(data: any): Observable<any> {
