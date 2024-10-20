@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CardsComponent } from './components/cards/cards.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,18 +18,18 @@ import { DateTypePipe } from './pipes/date-type.pipe';
 import { AlertComponent } from './components/alert/alert.component';
 import { ClientRegisterComponent } from './components/register/client-register/client-register.component';
 import { EmployeeRegisterComponent } from './components/register/employee-register/employee-register.component';
-
-
-
-
-
+import { ClientCardComponent } from './components/cards/client-card/client-card.component';
+import { EmployeeCardComponent } from './components/cards/employee-card/employee-card.component';
+import { EquipamentCardComponent } from './components/cards/equipament-card/equipament-card.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     NavbarComponent,
-    CardsComponent,
+    EquipamentCardComponent,
+    EmployeeCardComponent,
+    ClientCardComponent,
     SearchBarComponent,
     FooterComponent,
     RegisterComponent,
@@ -41,6 +40,9 @@ import { EmployeeRegisterComponent } from './components/register/employee-regist
     AlertComponent,
     ClientRegisterComponent,
     EmployeeRegisterComponent,
+    ClientCardComponent,
+    EmployeeCardComponent,
+    EquipamentCardComponent,
   ],
   imports: [
     BrowserModule,

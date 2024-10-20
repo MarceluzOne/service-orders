@@ -1,6 +1,51 @@
 <app-navbar></app-navbar>
-<div class="flex m-auto justify-center  max-w-7xl p-10">
-  <div  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+<div class="m-auto justify-center max-w-7xl p-10">
+<div class="w-full flex-col bg-white rounded-md h-auto gap-5 flex justify-center p-4">
+  <div *ngIf="isAdmin" class="flex min-w-full justify-around rounded-md gap-4">
+    <button 
+      [ngClass]="typeList === 'equipments' ? buttonStyleSelected : buttonStyle"
+      (click)="typeListSelect('equipments')"
+    >
+      Equipamento
+    </button>
+    <button
+      [ngClass]="typeList === 'clients' ? buttonStyleSelected : buttonStyle"
+      (click)="typeListSelect('clients')"
+
+    >
+      Cliente
+    </button>
+    <button
+      [ngClass]="typeList === 'employees' ? buttonStyleSelected : buttonStyle"
+      (click)="typeListSelect('employees')"
+
+    >
+      Funcionário
+    </button>
+  </div>
+  <div>
+    <div *ngIf="typeList === 'clients'">
+      <app-client-card>
+      </app-client-card>
+    </div>
+    <div *ngIf="typeList === 'employees'">
+      <app-employee-card>
+  
+      </app-employee-card>
+    </div>
+    <div *ngIf="typeList === 'equipments'">
+      <app-equipament-card>
+  
+      </app-equipament-card>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+  <!-- <div  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
     <app-cards class="py-8" *ngFor="let card of serviceOrders"
     [productName]="card.equipmentName"
     [refCode]="card.refCode"
@@ -10,8 +55,7 @@
     [photo]="card.url"
     [priority]="card.priority"
     >
-
     </app-cards>
-  </div>
+  </div> -->
 
 </div>
