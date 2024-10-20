@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, retry } from 'rxjs';
+import { map, Observable, retry } from 'rxjs';
 
 const apiUrl = 'http://localhost:8080';
 
@@ -9,31 +9,23 @@ const apiUrl = 'http://localhost:8080';
 })
 export class EmployeeService {
 
-  constructor(private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
 
-  public getEmployee(): Observable<any> {
-    return this.http.get(`${apiUrl}/api/employees/all`)
-      .pipe(
-        retry(3)
-      );
-  }
-  
   public registerEmployee(data: any): Observable<any> {
     return this.http.post(`${apiUrl}/api/employees/create`, data)
       ;
   }
+  public getEmployee(): Observable<any> {
+    return this.http.get(`${apiUrl}/api/employees/all`)
+      ;
+  }
 
-  //não tem no momento
   public updateEmployee(data: any, cnpj: string ): Observable<any> {
-    return this.http.post(`${apiUrl}/api/employees//${cnpj}`, data)
+    return this.http.post(`${apiUrl}/api/clients/create/${cnpj}`, data)
       .pipe(
         retry(3)
       );
   }
 
-  public removeEmployee(data: any): Observable<any> {
-    return this.http.delete(`${apiUrl}/api/employees/delet`, data)
-      ;
-  }
 }
+
