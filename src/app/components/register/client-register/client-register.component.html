@@ -1,6 +1,18 @@
 <form
   [formGroup]="formClient"
   class="w-auto bg-white flex rounded-md flex-col p-3 border-4">
+  <div class="flex justify-center gap-3">
+    <button 
+      (click)="isCpf=true" 
+      class="border-2 rounded-md p-3 hover:bg-gray-200"
+      [ngClass]="isCpf ? 'w-full border-2 rounded-md p-1 bg-gray-300' : 'w-full border-2 rounded-md p-1 hover:bg-gray-200'"
+    >
+      Pessoa Fisica
+    </button>
+    <button
+      (click)="isCpf=false"
+      [ngClass]="!isCpf ? 'w-full border-2 rounded-md p-1 bg-gray-300' : 'w-full border-2 rounded-md p-1 hover:bg-gray-200'">Pessoa Juridica</button>
+  </div>
   <div>
     <span class="text-sm font-medium">Nome</span>
     <input type="text" formControlName="name" class="border-2 rounded-md w-full">
@@ -10,16 +22,23 @@
     <input mask="(00) 0 0000-0000" type="phone" formControlName="phone" class="border-2 rounded-md w-full">
   </div>
   <div>
-    <span class="text-sm font-medium">cnpj</span>
-    <input mask="00.000.000/0000-00" type="text" formControlName="cnpj" class="border-2 rounded-md w-full">
+    <span class="text-sm font-medium">{{documentInput}}</span>
+    <input 
+      [mask]="maskInput"
+      type="text"
+      formControlName="cnpj"
+      class="border-2 rounded-md w-full">
   </div>
   <div>
     <span class="text-sm font-medium">Código do cliente </span>
     <input type="text" formControlName="codClient" class="border-2 rounded-md w-full">
   </div>
   <button 
-    class="bg-gray-300 p-3 mt-3 rounded-md" 
+    [ngClass]="isSubmiting ? 'bg-blue-400 p-3 mt-3 rounded-md' : 'bg-gray-300 p-3 mt-3 rounded-md'" 
     type="submit" 
     (click)="submitClient()"
-  >Cadastrar cliente</button>
+    [disabled]="isSubmiting"
+  >
+    Cadastrar cliente
+  </button>
 </form>

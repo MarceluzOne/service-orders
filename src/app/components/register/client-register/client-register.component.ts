@@ -9,9 +9,15 @@ import { ClientService } from 'src/app/services/client/client.service';
 })
 export class ClientRegisterComponent implements OnInit {
   public formClient: FormGroup = this.fb.group({});
-
-
-  public isSubmiting: Boolean = false
+  public isSubmiting: Boolean = false;
+  public isCpf: Boolean = true;
+  
+  get documentInput(){
+    return this.isCpf ? 'CPF' : 'CNPJ'
+  }
+  get maskInput(){
+    return this.isCpf ? '000.000.000-00' : '00.000.000/0000-00'
+  }
 
 
   constructor(
@@ -29,6 +35,10 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   public submitClient(){
+    this.isSubmiting = true;
+    setTimeout(()=>{
+      this.isSubmiting = false
+    }, 1000)
     console.log(this.formClient.value)
     // if (this.formClient.valid) {
     //   const clientData = this.formClient.value;

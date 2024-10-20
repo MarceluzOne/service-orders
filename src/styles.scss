@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.primary-color{
+  color: #8ba6ac
+}
+.bg-primary-color{
+  background-color: #8ba6ac !important
+}
