@@ -46,7 +46,7 @@ export class EquipmentRegisterComponent implements OnInit {
     })
   }
 
-  submitEquipment(): void {
+  public submitEquipment(): void {
     this.statusMessenger = ' Cadastrando Equipamento'
     if (this.formEquipment.valid) {
       const formData = new FormData();

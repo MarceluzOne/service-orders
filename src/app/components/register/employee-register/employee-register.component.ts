@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from 'src/app/services/emploee/emploee.service';
+import { IEmployee } from 'src/app/interface/IEmployee';
+import { EmployeeService } from 'src/app/services/employee/employee.service';
 
 @Component({
   selector: 'app-employee-register',
@@ -9,14 +10,15 @@ import { EmployeeService } from 'src/app/services/emploee/emploee.service';
 })
 export class EmployeeRegisterComponent implements OnInit {
   @Input() formEmployee: FormGroup = this.fb.group({});
-  @Output() isSubmiting: Boolean = false
+  @Output() isSubmiting: Boolean = false;
+  public employee: IEmployee[] = [];
 
   constructor(
     private fb: FormBuilder,    
     private employeeService: EmployeeService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.formEmployee = this.fb.group({
       'name' : new FormControl('', [Validators.required]),
       'email' : new FormControl('', [Validators.required, Validators.email, ]),
@@ -24,22 +26,31 @@ export class EmployeeRegisterComponent implements OnInit {
       'role' : new FormControl('', [Validators.required]),
       'employeeCod' : new FormControl('', [Validators.required]),      
     })
+    await this.getEmployee()
   }
-  public submitEmployee(){
 
-    console.log(this.formEmployee.value)
-    // this.isSubmiting = true
-    // if (this.formEmployee.valid) {
-    //   const employeeData = this.formEmployee.value;
-    //   this.employeeService.registerEmployee(employeeData).subscribe(
-    //     response => {
-    //       console.log('Cliente registrado com sucesso', response);
-    //     },
-    //     error => {
-    //       console.error('Erro ao registrar o cliente', error);
-    //     }
-    //   );
-    // }
+  public async getEmployee(){
+    try {
+      const employees: IEmployee[] = await this.employeeService.getEmployee().toPromise();
+      this.employee = {...employees}
+      console.log(this.employee)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  public submitEmployee(){
+    if (this.formEmployee.valid) {
+        const employee = this.formEmployee.value;
+        this.employeeService.registerEmployee(employee).subscribe(
+          response => {
+            console.log('Cliente registrado com sucesso', response);
+          },
+          error => {
+            console.error('Erro ao registrar o cliente', error);
+          }
+        );
+      }
   }
 
 }

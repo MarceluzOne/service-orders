@@ -11,6 +11,7 @@ export class ClientRegisterComponent implements OnInit {
   public formClient: FormGroup = this.fb.group({});
   public isSubmiting: Boolean = false;
   public isCpf: Boolean = true;
+  public clients: any;
   
   get documentInput(){
     return this.isCpf ? 'CPF' : 'CNPJ'
@@ -25,13 +26,24 @@ export class ClientRegisterComponent implements OnInit {
     private registerClient: ClientService,
   ) {  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.formClient = this.fb.group({
       'name': new FormControl('', [Validators.required]),
       'phone': new FormControl('', [Validators.required,]),
       'codClient': new FormControl('', [Validators.required]),
       'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
     });
+    await this.getClient();
+  }
+
+  public async getClient(){
+    try {
+      const clients = await this.registerClient.getClients().toPromise();
+      this.clients = clients
+      console.log(this.clients)
+    } catch (error) {
+      this.clients = []
+    }
   }
 
   public submitClient(){
