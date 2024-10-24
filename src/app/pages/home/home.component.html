@@ -28,9 +28,11 @@
       <app-client-card>
       </app-client-card>
     </div>
-    <div *ngIf="typeList === 'employees'">
+    <div class="flex flex-wrap gap-8 justify-center"  *ngIf="typeList === 'employees'">
       <app-employee-card>
-  
+      </app-employee-card>
+      <app-employee-card>
+      </app-employee-card><app-employee-card>
       </app-employee-card>
     </div>
     <div *ngIf="typeList === 'equipments'">

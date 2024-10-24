@@ -1,36 +1,36 @@
-<div
+<!-- <div
   class="h-full min-w-64 rounded-md bg-gray-100 p-2 flex flex-col md:flex-row mb-3 md:flex justify-between"
   *ngFor="let client of clients"
+  > -->
+  <div
+  class="h-full min-w-64 rounded-md bg-gray-100 p-2 flex flex-col md:flex-row mb-3 md:flex justify-between"
   >
   <div class="flex flex-col gap-1">
     <p class="gap-1 flex items-center ">
       <span class="text-sm">Nome: </span>
-      <span>{{client.name}}</span>
+      <span>MARCELO ARRUDA</span>
       </p>
     <p class="text-xs">
       <span class="text-sm">CNPJ/CPF: </span>
-      <span>{{client.cnpj}}</span>
+      <span>08375188492</span>
     </p>
     <p class="text-xs">
       <span class="text-sm">Telefone: </span>
-      <span>{{client.phone}}</span>
+      <span>81982041065</span>
     </p>
   </div>
   <div class="flex md:flex-col justify-between gap-1">
     <div>
-      <p class="text-xs">Cód: {{client.codClient}}</p>
-      <p class="text-xs">Data de registro:{{client.registerDate | dateType}}</p>
+      <p class="text-xs">Cód: </p>
+      <p class="text-xs">Data de registro:</p>
     </div>
     <div class="flex gap-3">
       <button>
         <i class="fa-solid fa-pencil" style="color: #74C0FC;"></i>
       </button>
-      <button (click)="confirmDelete(client.cnpj)">
+      <button (click)="confirmDelete('1231546585')">
         <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
       </button>
-      
-      
     </div>
-    
   </div>
 </div>

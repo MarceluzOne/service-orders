@@ -1,11 +1,11 @@
-<div  class="flex max-w-7xl bg-blue-400 min-h-screen justify-center sm:justify-evenly">
+<div class="flex  bg-blue-400 min-h-screen justify-center sm:justify-evenly">
   <div class="bg-blue-400 hidden sm:flex w-3/5">
     <div class="flex flex-col m-auto justify-center items-center">
       <h1 class="font-bold text-7xl logo-title">OS TRACKER</h1>
       <h1 class="font-bold text-7xl logo-title opacity-25 blur-sm">OS TRACKER</h1>
     </div>
   </div>
-  <div class="flex w-96 sm:ml-60 justify-center bg-slate-300">
+  <form [formGroup]="login" class="flex w-96 sm:ml-60 justify-center bg-slate-300">
     <div class="flex flex-col items-center w-60 justify-center h-full">
     <div class="flex justify-center flex-col gap-14">
       <div class="flex justify-center gap-5">
@@ -19,12 +19,12 @@
       <div class="w-full flex flex-col gap-8">
         <div class="w-full">
           <p class="font-bold text-black">Username:</p>
-          <input class="w-full h-8 rounded-md outline-none" type="text">
+          <input formControlName="username" class="w-full h-8 rounded-md outline-none" type="text">
         </div>
         <div>
           <p class="font-bold text-black">Password:</p>
           <div class="bg-white flex h-8 w-full rounded-md pl-1 pr-2">
-            <input class="outline-none" [type]="type">
+            <input formControlName="username" class="outline-none" [type]="type">
             <button class="w-4" (click)="changeType()">
               <i *ngIf="!canShowPassowrd" class="fa-solid fa-eye-slash"></i>
               <i *ngIf="canShowPassowrd" class="fa-solid fa-eye"></i>
@@ -33,10 +33,29 @@
         </div>
       </div>
       <div class="bg-slate-600 btn-collor rounded-md h-8 flex justify-center">
-        <button routerLink="/home" (click)="login()" class="w-full font-medium">Login now</button>
+        <button routerLink="/home" (click)="toLogin()" class="w-full font-medium">Login now</button>
       </div>
     </div>
   </div>
-  </div>
+  </form>
   
 </div>
+
+
+
+
+<!-- <div class="w-full flex flex-col justify-around items-center h-[100vh] bg-primary-color">
+  <h1>OS TRACKER</h1>
+  <div class="w-72 p-4 bg-white h-auto rounded-md flex justify-center flex-col items-center">
+    
+    <p>Bem vindo</p>
+    <div class=" w-full flex flex-col">
+      <span>Username</span>
+      <input class="shadow-md border-2 rounded-lg" type="text">
+    </div>
+    <div class=" w-full flex flex-col">
+      <span>Password</span>
+      <input class="shadow-md border-2 rounded-lg" type="text">
+    </div>
+  </div>
+</div> -->
