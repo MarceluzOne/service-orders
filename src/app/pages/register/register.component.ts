@@ -14,21 +14,21 @@ export class RegisterComponent implements OnInit {
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
-  
-  public get registerTitle(){
-    if(this.equipmentForm == 'client'){
+
+  public get registerTitle() {
+    if (this.equipmentForm == 'client') {
       return 'Cadastro de Cliente'
-    }if(this.equipmentForm == 'employee'){
+    } if (this.equipmentForm == 'employee') {
       return 'Cadastro de Funcionário'
     }
     return 'Cadastro de Equipamento'
   };
 
-  constructor( ) {  }
+  constructor() { }
 
   async ngOnInit() {
 
-    
+
   }
 
 }

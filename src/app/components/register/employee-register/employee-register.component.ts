@@ -31,7 +31,7 @@ export class EmployeeRegisterComponent implements OnInit {
 
   public async getEmployee(){
     try {
-      const employees: IEmployee[] = await this.employeeService.getEmployee().toPromise();
+      const employees: IEmployee[] = await this.employeeService.getEmployees().toPromise();
       this.employee = [...employees]
     } catch (error) {
       console.log(error)
@@ -44,6 +44,8 @@ export class EmployeeRegisterComponent implements OnInit {
         this.employeeService.registerEmployee(employee).subscribe(
           response => {
             console.log('Cliente registrado com sucesso', response);
+            alert('Funcionário cadastrado com sucesso')
+            this.formEmployee.reset()
           },
           error => {
             console.error('Erro ao registrar o cliente', error);

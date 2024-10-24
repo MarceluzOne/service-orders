@@ -1,5 +1,5 @@
 <div class="h-28 w-72 bg-red-300 flex gap-2 justify-between rounded-md">
-  <div class=" flex justify-center items-center w-1/4 p-2"> 
+  <div class=" flex justify-center items-center w-1/4 p-2">
     <img *ngIf="photo" [src]="photo" alt="" srcset="">
     <i *ngIf="!photo" class="fa-regular fa-file-excel"></i>
   </div>
@@ -8,7 +8,7 @@
       {{ refCode }}
       <span *ngIf="priority" class="bg-slate-300 px-[2px] text-[8px] rounded-sm">
         {{ priority }}</span>
-      </p>
+    </p>
     <h5>{{ productName }}</h5>
     <p class="text-[8px] text-justify">{{ description }}</p>
     <p *ngIf="entryDate" class="text-[6px] text-right">Entrada:{{ entryDate | dateType }}</p>

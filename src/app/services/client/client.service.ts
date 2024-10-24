@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, retry } from 'rxjs';
+import { catchError, map, Observable, retry, throwError } from 'rxjs';
 
 const apiUrl = 'http://localhost:8080';
 
@@ -18,8 +18,15 @@ export class ClientService {
         retry(3)
       );
   }
-  public deletClient(cnpj: string) {
-    return this.http.delete(`${apiUrl}api/clients/cnpj/${cnpj}`, { observe: 'response' });
+  public deleteClient(cnpj: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete(`${apiUrl}/api/clients/cnpj/${cnpj}`, {headers, observe: 'response' })
+      .pipe(
+        catchError(error => {
+          console.error('Erro ao deletar cliente:', error);
+          return throwError(() => new Error('Erro ao deletar cliente.'));
+        })
+      );
   }
   
   public registerClient(data: any): Observable<any> {

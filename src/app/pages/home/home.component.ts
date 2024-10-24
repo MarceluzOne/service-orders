@@ -10,37 +10,27 @@ import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 export class HomeComponent implements OnInit {
   public isAdmin: Boolean = true;
   public serviceOrders: any;
-  public typeList: 'clients' | 'employees' | 'equipments' = 'clients';
-  public buttonStyleSelected: string ='border-b-4 border-blue-300 rounded-md w-full';
-  public buttonStyle: string ='rounded-md w-full';
+  public typeList: 'clients' | 'employees' | 'equipments' = 'employees';
+  public buttonStyleSelected: string = 'border-b-4 border-blue-300 rounded-md w-full';
+  public buttonStyle: string = 'rounded-md w-full';
 
-  constructor(private registerEquipment: EquipmentService) { }
+  constructor( ) { }
 
   async ngOnInit() {
-    //await this.getEquipament();
-
   }
-  public async getEquipament(){
-    try {
-      const equipament = await this.registerEquipment.getEquipament().toPromise();
-      this.serviceOrders = equipament
-      console.log(this.serviceOrders)
-    } catch (error) {
-      this.serviceOrders = []
-    }
-  }
-  public typeListSelect(type: 'clients' | 'employees' | 'equipments' ){
+  public typeListSelect(type: 'clients' | 'employees' | 'equipments') {
     const style = 'border-b-4 text-md border-blue-300 rounded-md w-full'
-    if(type === 'clients'){
+    
+    if (type === 'clients') {
       this.typeList = type
-      return this.buttonStyleSelected= style
+      return this.buttonStyleSelected = style
     }
-    if(type === 'equipments'){
+    if (type === 'equipments') {
       this.typeList = type
-      return this.buttonStyleSelected= style
+      return this.buttonStyleSelected = style
     }
     this.typeList = type
-    return this.buttonStyleSelected= style
+    return this.buttonStyleSelected = style
   }
 
 }

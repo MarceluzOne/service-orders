@@ -8,20 +8,13 @@
     <button *ngIf="isAdmin" (click)="equipmentForm ='employee'" class="bg-white p-2 rounded-md">Funcionário</button>
   </div>
 
-  <app-equipment-register
-    *ngIf="equipmentForm === 'equipment'"
-  >
+  <app-equipment-register *ngIf="equipmentForm === 'equipment'">
   </app-equipment-register>
 
-  <app-client-register
-  *ngIf="equipmentForm === 'client' && isAdmin"
-  
-  >
+  <app-client-register *ngIf="equipmentForm === 'client' && isAdmin">
   </app-client-register>
 
-  <app-employee-register
-  *ngIf="equipmentForm === 'employee' && isAdmin"
-  >
+  <app-employee-register *ngIf="equipmentForm === 'employee' && isAdmin">
   </app-employee-register>
 
   <div *ngIf="statusMessenger" class="bg-green-500 w-full flex justify-center">

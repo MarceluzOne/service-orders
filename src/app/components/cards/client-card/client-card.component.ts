@@ -8,20 +8,22 @@ import { ClientService } from 'src/app/services/client/client.service';
 })
 export class ClientCardComponent implements OnInit {
   public clients: any;
+  public isLoading: Boolean = false
 
-  constructor( private clientService: ClientService) { }
+  constructor(private clientService: ClientService) { }
 
-  async ngOnInit(){
-    //await this.getClient()
+  async ngOnInit() {
+    await this.getClient()
     console.log(this.clients)
   }
 
-  public async getClient(){
+  public async getClient() {
     try {
       const clients = await this.clientService.getClients().toPromise();
       this.clients = clients
     } catch (error) {
       this.clients = []
+      console.error(error)
     }
   }
   public confirmDelete(cnpj: string) {
@@ -30,10 +32,17 @@ export class ClientCardComponent implements OnInit {
     }
   }
   public deletClient(cnpj: string) {
-    this.clientService.deletClient(cnpj).subscribe({
-      next: () => console.log('Cliente deletado com sucesso'),
-      error: (error) => console.error('Erro ao deletar cliente:', error)
+
+    console.log(cnpj);
+    this.clientService.deleteClient(cnpj).subscribe({
+      next: () => {
+        console.log('Cliente deletado com sucesso');
+        this.clients = this.clients.filter((client: any) => client.cnpj !== cnpj);
+        alert('Cliente deletado com sucesso')
+      },
+      error: (error) => console.error('Erro ao deletar cliente:', error),
     });
+
   }
 
 }

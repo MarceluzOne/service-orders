@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./equipament-card.component.scss']
 })
 export class EquipamentCardComponent implements OnInit {
-  @Input() public productName?: string ;
-  @Input() public refCode?: string ='null';
+  @Input() public productName?: string;
+  @Input() public refCode?: string = 'null';
   @Input() public priority?: String;
   @Input() public description?: String;
   @Input() public entryDate?: string;
