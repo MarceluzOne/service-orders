@@ -40,15 +40,22 @@ export class EquipmentRegisterComponent implements OnInit {
       'power' : new FormControl('', [Validators.required]),
       'voltage' : new FormControl('', [Validators.required]),
       'priority' : new FormControl('', [Validators.required]),
-      'description' : new FormControl('', [Validators.required]),
+      'others' : new FormControl('', [Validators.required]),
       'photo' : new FormControl('', [Validators.required]),
-
+      'ihm' : new FormControl('Não', [Validators.required]),
+      'carcass_damage' : new FormControl('Não', [Validators.required]),
+      'engine' : new FormControl('Não', [Validators.required]),
+      'engine_cables' : new FormControl('Não', [Validators.required]),
+      'fan' : new FormControl('Não', [Validators.required]),
+      'fan_carcass' : new FormControl('Não', [Validators.required]),
     })
   }
 
   public submitEquipment(): void {
     this.statusMessenger = ' Cadastrando Equipamento'
+    console.log(this.formEquipment.value)
     if (this.formEquipment.valid) {
+
       const formData = new FormData();
       
       // Adiciona todos os campos do formulário ao FormData
@@ -63,15 +70,15 @@ export class EquipmentRegisterComponent implements OnInit {
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
       }
-      // this.registerEquipment.registerEquipament(formData).subscribe(
-      //   response => {
-      //     this.statusMessenger = 'Equipamento Cadastrado'
-      //     console.log('Equipamento cadastrado com sucesso:', response);
-      //   },
-      //   error => { 
-      //     console.error('Erro ao cadastrar equipamento:', error);
-      //   }
-      // );
+      this.registerEquipment.registerEquipament(formData).subscribe(
+        response => {
+          this.statusMessenger = 'Equipamento Cadastrado'
+          console.log('Equipamento cadastrado com sucesso:', response);
+        },
+        error => { 
+          console.error('Erro ao cadastrar equipamento:', error);
+        }
+      );
     }
   }
 
