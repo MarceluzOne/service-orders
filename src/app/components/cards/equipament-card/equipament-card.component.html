@@ -1,16 +1,64 @@
-<div class="h-28 w-72 bg-red-300 flex gap-2 justify-between rounded-md">
-  <div class=" flex justify-center items-center w-1/4 p-2">
-    <img *ngIf="photo" [src]="photo" alt="" srcset="">
-    <i *ngIf="!photo" class="fa-regular fa-file-excel"></i>
-  </div>
-  <div class="w-3/4 p-2">
-    <p class="text-[6px] text-right">
-      {{ refCode }}
-      <span *ngIf="priority" class="bg-slate-300 px-[2px] text-[8px] rounded-sm">
-        {{ priority }}</span>
-    </p>
-    <h5>{{ productName }}</h5>
-    <p class="text-[8px] text-justify">{{ description }}</p>
-    <p *ngIf="entryDate" class="text-[6px] text-right">Entrada:{{ entryDate | dateType }}</p>
+<div class="lg:grid lg:grid-cols-3 w-full flex flex-col m-auto gap-3 h-full">
+  <div *ngFor="let equipament of equipaments" class="flex bg-slate-300 rounded-md">
+    <div class="max-w-12 min-h-24 flex justify-center items-center m-3 ">
+      <img class="border-2 border-white bg-cover" src="https://mariananardi.com.br/wp-content/uploads/2018/09/Gato-x-leao.jpg" alt="">
+    </div>
+    <div class="w-full min-h-full flex flex-col justify-between p-1">
+      <div class="flex justify-between px-3 h-1/6 items-center">
+        <p class="text-xs font-bold">{{ equipament.equipmentName }}</p>
+        <p class="text-[6px] text-end">
+          Serial Number: {{ equipament.serialNumber }}
+          <span class="bg-white rounded-md px-1 py-[2px]"> {{ equipament.priority }}</span>
+        </p>
+      </div>
+      <div class=" h-full flex flex-col justify-evenly h-100%">
+        <p class="text-[8px] w-full">{{equipament.others}} </p>
+        <div class="flex gap-2 flex-wrap ">
+          <p class="text-[6px] bg-secondary-color rounded-md py-[2px] px-1 lg:text-[10px]">
+            CONECTORES: 
+            <span class="font-semibold">
+              {{equipament.connectors}}
+            </span>
+          </p>
+          <p class="text-[6px] lg:text-[10px]">
+            IHM:
+            <span class="font-semibold">
+              {{equipament.ihm}}
+            </span>
+          </p>
+          <p class="text-[6px] lg:text-[10px]">
+            AVARIA EM CARCAÇA:
+            <span class="font-semibold">
+              {{equipament.carcass_damage}}
+            </span>
+          </p>
+          <p class="text-[6px] lg:text-[10px]">
+            MOTOR:
+            <span class="font-semibold">
+              {{equipament.engine}}
+            </span>
+          </p>
+          <p class="text-[6px] lg:text-[10px]">
+            CABOS DE MOTOR:
+            <span class="font-semibold">
+              {{equipament.engine_cables}}
+            </span>
+          </p> 
+          <p class="text-[6px] lg:text-[10px]">
+            VENTILADOR:
+            <span class="font-semibold">
+              {{equipament.fan}}
+            </span>
+          </p>
+          <p class="text-[6px] lg:text-[10px]">
+            CARCAÇA DE VENTILADOR:
+            <span class="font-semibold">
+              {{equipament.fan_carcass}}
+            </span>
+          </p>
+        </div>
+      </div>
+      <p class="text-[6px] text-end">Registrado em: {{equipament.registrationDate | dateType}}</p>
+    </div>
   </div>
 </div>

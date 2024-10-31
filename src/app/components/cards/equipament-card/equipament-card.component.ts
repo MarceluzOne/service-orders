@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
   selector: 'app-equipament-card',
@@ -6,17 +7,24 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./equipament-card.component.scss']
 })
 export class EquipamentCardComponent implements OnInit {
-  @Input() public productName?: string;
-  @Input() public refCode?: string = 'null';
-  @Input() public priority?: String;
-  @Input() public description?: String;
-  @Input() public entryDate?: string;
-  @Input() public photo?: string
 
+  public equipaments: any
 
-  constructor() { }
+  constructor(private equipamentService: EquipmentService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(){
+    await this.getEquipaments()
+  }
+  private async getEquipaments(){
+    try {
+      const equipaments = await this.equipamentService.getEquipament().toPromise()
+        this.equipaments = equipaments
+        console.log(this.equipaments)
+    } catch (error) {
+      this.equipaments = []
+      console.log(error)
+      
+    }
   }
 
 }
