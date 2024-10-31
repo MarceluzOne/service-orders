@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, retry, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 const apiUrl = 'http://localhost:8080';
 
@@ -13,14 +14,14 @@ export class ClientService {
   ) { }
 
   public getClients(): Observable<any> {
-    return this.http.get(`${apiUrl}/api/clients/all`)
+    return this.http.get(`${environment.apiUrl}/api/clients/all`)
       .pipe(
         retry(3)
       );
   }
   public deleteClient(cnpj: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete(`${apiUrl}/api/clients/cnpj/${cnpj}`, {headers, observe: 'response' })
+    return this.http.delete(`${environment.apiUrl}/api/clients/cnpj/${cnpj}`, {headers, observe: 'response' })
       .pipe(
         catchError(error => {
           console.error('Erro ao deletar cliente:', error);
@@ -30,11 +31,11 @@ export class ClientService {
   }
   
   public registerClient(data: any): Observable<any> {
-    return this.http.post(`${apiUrl}/api/clients/create`, data)
+    return this.http.post(`${environment.apiUrl}/api/clients/create`, data)
   }
 
   public updateClient(data: any, cnpj: string ): Observable<any> {
-    return this.http.post(`${apiUrl}/api/clients/create/${cnpj}`, data)
+    return this.http.post(`${environment.apiUrl}/api/clients/create/${cnpj}`, data)
       .pipe(
         retry(3)
       );
