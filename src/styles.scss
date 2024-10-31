@@ -8,4 +8,9 @@
 }
 .bg-primary-color{
   background-color: #8ba6ac !important
+
+}
+.bg-secondary-color{
+  $adjusted-color: adjust-color($color: #8ba6ac, $red: 1, $green: 2, $blue: 3);
+  background-color: rgba($adjusted-color, 0.3) !important;
 }

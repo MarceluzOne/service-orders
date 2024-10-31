@@ -7,7 +7,7 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
   styleUrls: ['./employee-card.component.scss']
 })
 export class EmployeeCardComponent implements OnInit {
-  public employees: any;
+  public employees: any = [];
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -22,7 +22,7 @@ export class EmployeeCardComponent implements OnInit {
       const employee = await this.employeeService.getEmployees().toPromise();
       this.employees = employee;
       console.log(' chamando no metodo')
-
+      console.log(this.employees)
     } catch (error) {
       this.employees = []
       console.error(error)

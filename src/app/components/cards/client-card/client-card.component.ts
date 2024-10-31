@@ -23,7 +23,6 @@ export class ClientCardComponent implements OnInit {
       this.clients = clients
     } catch (error) {
       this.clients = []
-      console.error(error)
     }
   }
   public confirmDelete(cnpj: string) {
