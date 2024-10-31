@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +51,7 @@ import { EquipamentCardComponent } from './components/cards/equipament-card/equi
     HttpClientModule,
     NgxMaskModule.forRoot()
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   providers: [],
   bootstrap: [AppComponent]
 })
