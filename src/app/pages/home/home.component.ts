@@ -10,7 +10,7 @@ import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 export class HomeComponent implements OnInit {
   public isAdmin: Boolean = true;
   public serviceOrders: any;
-  public typeList: 'clients' | 'employees' | 'equipments' = 'employees';
+  public typeList: 'clients' | 'employees' | 'equipments' = 'equipments';
   public buttonStyleSelected: string = 'border-b-4 border-blue-300 rounded-md w-full';
   public buttonStyle: string = 'rounded-md w-full';
 

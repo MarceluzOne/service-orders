@@ -2,36 +2,32 @@
 <div class="m-auto justify-center max-w-7xl p-10">
   <div class="w-full flex-col bg-white rounded-md h-auto gap-5 flex justify-center p-4">
     <div *ngIf="isAdmin" class="flex min-w-full justify-around rounded-md gap-4">
-      <button [ngClass]="typeList === 'equipments' ? buttonStyleSelected : buttonStyle"
+      <button
+        class="rounded-md w-full"
+        [ngClass]="typeList=== 'equipments' ? 'border-b-4 border-blue-300': ''"
         (click)="typeListSelect('equipments')">
         Equipamento
       </button>
-      <button [ngClass]="typeList === 'clients' ? buttonStyleSelected : buttonStyle"
+      <button
+        class="rounded-md w-full"
+        [ngClass]="typeList=== 'clients' ? 'border-b-4 border-blue-300': ''"
         (click)="typeListSelect('clients')">
         Cliente
       </button>
-      <button [ngClass]="typeList === 'employees' ? buttonStyleSelected : buttonStyle"
+      <button
+        class="rounded-md w-full"
+        [ngClass]="typeList=== 'employees' ? 'border-b-4 border-blue-300': ''"
         (click)="typeListSelect('employees')">
         Funcionário
       </button>
     </div>
     <div>
-      <div *ngIf="typeList === 'clients'">
-        <app-client-card>
-        </app-client-card>
-      </div>
-      <div *ngIf="typeList === 'employees'">
-        <app-employee-card>
+      <app-client-card *ngIf="typeList === 'clients'">
+      </app-client-card>
+        <app-employee-card *ngIf="typeList === 'employees'">
         </app-employee-card>
-        <app-employee-card>
-        </app-employee-card><app-employee-card>
-        </app-employee-card>
-      </div>
-      <div *ngIf="typeList === 'equipments'">
-        <app-equipament-card>
-
+        <app-equipament-card *ngIf="typeList === 'equipments'">
         </app-equipament-card>
-      </div>
     </div>
   </div>
 </div>
