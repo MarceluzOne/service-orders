@@ -12,7 +12,6 @@ export class EmployeeCardComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    console.log('Chamando getEmployee()');
     this.getEmployees();
 
   }
@@ -21,8 +20,6 @@ export class EmployeeCardComponent implements OnInit {
     try {
       const employee = await this.employeeService.getEmployees().toPromise();
       this.employees = employee;
-      console.log(' chamando no metodo')
-      console.log(this.employees)
     } catch (error) {
       this.employees = []
       console.error(error)

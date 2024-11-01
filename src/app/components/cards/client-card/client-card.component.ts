@@ -35,7 +35,6 @@ export class ClientCardComponent implements OnInit {
     console.log(cnpj);
     this.clientService.deleteClient(cnpj).subscribe({
       next: () => {
-        console.log('Cliente deletado com sucesso');
         this.clients = this.clients.filter((client: any) => client.cnpj !== cnpj);
         alert('Cliente deletado com sucesso')
       },

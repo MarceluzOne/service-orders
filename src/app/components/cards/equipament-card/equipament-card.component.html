@@ -4,7 +4,7 @@
       <img class="border-2 border-white bg-cover" src="https://mariananardi.com.br/wp-content/uploads/2018/09/Gato-x-leao.jpg" alt="">
     </div>
     <div class="w-full min-h-full flex flex-col justify-between p-1">
-      <div class="flex justify-between px-3 h-1/6 items-center">
+      <div class="flex justify-between px-3 h-1/6 pb-1 items-center">
         <p class="text-xs font-bold">{{ equipament.equipmentName }}</p>
         <p class="text-[6px] text-end">
           Serial Number: {{ equipament.serialNumber }}
@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class=" h-full flex flex-col justify-evenly h-100%">
-        <p class="text-[8px] w-full">{{equipament.others}} </p>
+        <p class="text-xs w-full">{{equipament.others}} </p>
         <div class="flex gap-2 flex-wrap ">
           <p class="text-[6px] bg-secondary-color rounded-md py-[2px] px-1 lg:text-[10px]">
             CONECTORES: 
@@ -58,7 +58,7 @@
           </p>
         </div>
       </div>
-      <p class="text-[6px] text-end">Registrado em: {{equipament.registrationDate | dateType}}</p>
+      <p class="text-[8px] text-end">Registrado em: {{equipament.registrationDate | dateType}}</p>
     </div>
   </div>
 </div>

@@ -19,7 +19,6 @@ export class EquipamentCardComponent implements OnInit {
     try {
       const equipaments = await this.equipamentService.getEquipament().toPromise()
         this.equipaments = equipaments
-        console.log(this.equipaments)
     } catch (error) {
       this.equipaments = []
       console.log(error)

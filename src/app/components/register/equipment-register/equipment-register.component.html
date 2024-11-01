@@ -15,6 +15,13 @@
     formControlName="serialNumber"
     class="border-2 rounded-md w-full">
   </div>
+  <div class="flex flex-col">
+    <span class="text-sm font-medium">Cliente</span>
+    <select class="border-2 rounded-md  h-[27px]" >
+      <option selected disabled> Selecione um cliente</option>
+      <option *ngFor="let client of clients" [value]="client.name">{{ client.name.toUpperCase() }}</option>
+    </select>
+  </div>
   <div>
     <span class="text-sm font-medium">Responsável</span>
     <input
@@ -72,30 +79,34 @@
   <div class="flex justify-between">
     <div>
       <div class="flex gap-1">
+        <input type="radio" formControlName="connectors" value="SIM">
+        <p class="text-sm font-light uppercase">CONECTORES</p>
+      </div>
+      <div class="flex gap-1">
         <input type="radio" formControlName="ihm" value="SIM">
-        <p class="text-sm font-light">IHM</p>
+        <p class="text-sm font-light uppercase">IHM</p>
       </div>
       <div class="flex gap-1">
         <input type="radio" formControlName="carcass_damage" value="SIM">
-        <p class="text-sm font-light">Danos aparentes</p>
+        <p class="text-sm font-light uppercase">Danos aparentes</p>
       </div>
       <div class="flex gap-1">
         <input type="radio" formControlName="engine" value="SIM">
-        <p class="text-sm font-light">Motor</p>
+        <p class="text-sm font-light uppercase">Motor</p>
       </div>
     </div>
     <div>
       <div class="flex gap-1">
         <input type="radio" formControlName="engine_cables" value="SIM">
-        <p class="text-sm font-light">engine_cables</p>
+        <p class="text-sm font-light uppercase">Cabos do motor</p>
       </div>
       <div class="flex gap-1">
         <input type="radio" formControlName="fan" value="SIM">
-        <p class="text-sm font-light">fan</p>
+        <p class="text-sm font-light uppercase">Ventilador</p>
       </div>
       <div class="flex gap-1">
         <input type="radio" formControlName="fan_carcass" value="SIM">
-        <p class="text-sm font-light">fan_carcass</p>
+        <p class="text-sm font-light uppercase">Carcaça do ventilador</p>
       </div>
     </div>
   </div>

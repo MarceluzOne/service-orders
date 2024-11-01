@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ClientService } from 'src/app/services/client/client.service';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
@@ -16,9 +17,10 @@ export class EquipmentRegisterComponent implements OnInit {
   public capturedImage: string | null = null;
   public stream: MediaStream | null = null;
   public statusMessenger: String = '';
-  public client: any;
+  public clients: any;
   public employee: any; 
-  public isSubmiting: Boolean = false
+  public isSubmiting: Boolean = false;
+
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -27,12 +29,13 @@ export class EquipmentRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-  ) { }
-
-  ngOnInit(): void {
+    private clientService: ClientService
+  ) { 
     this.formEquipment = this.fb.group({
       'equipmentName' : new FormControl('', [Validators.required]),
       'serialNumber' : new FormControl('', [Validators.required]),
+      'receiver' : new FormControl('Australopitecus', Validators.required),
+      'enterprise_name' : new FormControl('BRF', Validators.required),
       'carrier' : new FormControl('', [Validators.required]),
       'brand' : new FormControl('', [Validators.required]),
       'model' : new FormControl('', [Validators.required]),
@@ -42,20 +45,33 @@ export class EquipmentRegisterComponent implements OnInit {
       'priority' : new FormControl('', [Validators.required]),
       'others' : new FormControl('', [Validators.required]),
       'photo' : new FormControl('', [Validators.required]),
-      'ihm' : new FormControl('Não', [Validators.required]),
-      'carcass_damage' : new FormControl('Não', [Validators.required]),
-      'engine' : new FormControl('Não', [Validators.required]),
-      'engine_cables' : new FormControl('Não', [Validators.required]),
-      'fan' : new FormControl('Não', [Validators.required]),
-      'fan_carcass' : new FormControl('Não', [Validators.required]),
+      'ihm' : new FormControl('NAO', [Validators.required]),
+      'carcass_damage' : new FormControl('NAO', [Validators.required]),
+      'engine' : new FormControl('NAO', [Validators.required]),
+      'engine_cables' : new FormControl('NAO', [Validators.required]),
+      'fan' : new FormControl('NAO', [Validators.required]),
+      'fan_carcass' : new FormControl('NAO', [Validators.required]),
+      'connectors' : new FormControl('NAO', [Validators.required]),
     })
   }
 
+  async ngOnInit() {
+    await this.getClients()
+    
+  }
+  public async getClients(){
+    try {
+      const clients = await this.clientService.getClients().toPromise();
+      this.clients = clients
+    } catch (error) {
+        this.clients = []
+    }
+
+  }
+
   public submitEquipment(): void {
-    this.statusMessenger = ' Cadastrando Equipamento'
     console.log(this.formEquipment.value)
     if (this.formEquipment.valid) {
-
       const formData = new FormData();
       
       // Adiciona todos os campos do formulário ao FormData
@@ -72,7 +88,8 @@ export class EquipmentRegisterComponent implements OnInit {
       }
       this.registerEquipment.registerEquipament(formData).subscribe(
         response => {
-          this.statusMessenger = 'Equipamento Cadastrado'
+          alert('Equipamento Cadastrado')
+          this.formEquipment.reset()
           console.log('Equipamento cadastrado com sucesso:', response);
         },
         error => { 

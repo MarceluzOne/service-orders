@@ -16,7 +16,7 @@ export class EquipmentService {
   }
 
   public registerEquipament(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/equipments`, data)
+    return this.http.post(`${environment.apiUrl}/api/equipments/create`, data)
       .pipe(retry(3));
   }
 }

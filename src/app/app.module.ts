@@ -21,6 +21,8 @@ import { EmployeeRegisterComponent } from './components/register/employee-regist
 import { ClientCardComponent } from './components/cards/client-card/client-card.component';
 import { EmployeeCardComponent } from './components/cards/employee-card/employee-card.component';
 import { EquipamentCardComponent } from './components/cards/equipament-card/equipament-card.component';
+import { PhoneMaskPipe } from './pipes/phone-mask.pipe';
+import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,8 @@ import { EquipamentCardComponent } from './components/cards/equipament-card/equi
     ClientCardComponent,
     EmployeeCardComponent,
     EquipamentCardComponent,
+    PhoneMaskPipe,
+    CpfCnpjMaskPipe,
   ],
   imports: [
     BrowserModule,
