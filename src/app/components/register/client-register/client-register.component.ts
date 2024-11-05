@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
+import { PhoneValidators } from 'src/app/validators/phone-validator';
 
 @Component({
   selector: 'app-client-register',
@@ -29,7 +30,7 @@ export class ClientRegisterComponent implements OnInit {
   async ngOnInit() {
     this.formClient = this.fb.group({
       'name': new FormControl('', [Validators.required]),
-      'phone': new FormControl('', [Validators.required,]),
+      'phone': new FormControl('', [Validators.required, PhoneValidators.minLength(11), PhoneValidators.maxLength(11)]),
       'codClient': new FormControl('', [Validators.required]),
       'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
     });
