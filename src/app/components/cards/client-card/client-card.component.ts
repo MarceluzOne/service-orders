@@ -13,26 +13,7 @@ export class ClientCardComponent implements OnInit {
   constructor(private clientService: ClientService) { }
 
   async ngOnInit() {
-    //await this.getClient()
-    console.log(this.clients)
-    this.clients = [
-      {
-          "id": 2,
-          "name": "BRF",
-          "phone": "994114819",
-          "registerDate": "2024-10-19T22:35:21.958493",
-          "codClient": "2512",
-          "cnpj": "88775595000100"
-      },
-      {
-          "id": 16,
-          "name": "marcelo arruda Silva",
-          "phone": "81982041065",
-          "registerDate": "2024-10-31T20:18:52.303138",
-          "codClient": "0012",
-          "cnpj": "08375188492"
-      }
-  ]
+    await this.getClient();
   }
 
   public async getClient() {
@@ -53,6 +34,7 @@ export class ClientCardComponent implements OnInit {
     console.log(cnpj);
     this.clientService.deleteClient(cnpj).subscribe({
       next: () => {
+        console.log('aqui')
         this.clients = this.clients.filter((client: any) => client.cnpj !== cnpj);
         alert('Cliente deletado com sucesso')
       },

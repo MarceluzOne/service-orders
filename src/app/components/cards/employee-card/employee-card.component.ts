@@ -11,26 +11,9 @@ export class EmployeeCardComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService) { }
 
-  ngOnInit() {
-    //this.getEmployees();
-    this.employees = [
-      {
-          "id": 9,
-          "name": "Marcelo Arruda",
-          "email": "arruda16.marcelo@gmail.com",
-          "role": "NORMAL",
-          "registrationDate": "2024-11-04T15:14:50.991633",
-          "employeeCod": "func01"
-      },
-      {
-          "id": 10,
-          "name": "João Thailan",
-          "email": "Thailan@teste.com",
-          "role": "ADM",
-          "registrationDate": "2024-11-05T11:01:31.799283",
-          "employeeCod": "adm01"
-      }
-  ]
+  async ngOnInit() {
+    await this.getEmployees();
+    console.log(this.employees.lenght)
   }
 
   public async getEmployees() {
