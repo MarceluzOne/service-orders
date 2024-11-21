@@ -23,6 +23,10 @@ import { EmployeeCardComponent } from './components/cards/employee-card/employee
 import { EquipamentCardComponent } from './components/cards/equipament-card/equipament-card.component';
 import { PhoneMaskPipe } from './pipes/phone-mask.pipe';
 import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
+import { InfoClientComponent } from './components/infos/info-client/info-client.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,13 +51,20 @@ import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
     EquipamentCardComponent,
     PhoneMaskPipe,
     CpfCnpjMaskPipe,
+    InfoClientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   providers: [],

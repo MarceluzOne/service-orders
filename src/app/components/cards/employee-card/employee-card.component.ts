@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-card',
@@ -9,28 +10,13 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
 export class EmployeeCardComponent implements OnInit {
   public employees: any = [];
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private toastr: ToastrService
+  ) { }
 
-  ngOnInit() {
-    //this.getEmployees();
-    this.employees = [
-      {
-          "id": 9,
-          "name": "Marcelo Arruda",
-          "email": "arruda16.marcelo@gmail.com",
-          "role": "NORMAL",
-          "registrationDate": "2024-11-04T15:14:50.991633",
-          "employeeCod": "func01"
-      },
-      {
-          "id": 10,
-          "name": "João Thailan",
-          "email": "Thailan@teste.com",
-          "role": "ADM",
-          "registrationDate": "2024-11-05T11:01:31.799283",
-          "employeeCod": "adm01"
-      }
-  ]
+  async ngOnInit() {
+    await this.getEmployees();
   }
 
   public async getEmployees() {
@@ -51,11 +37,13 @@ export class EmployeeCardComponent implements OnInit {
   private deleteEmployee(cod: string) {
     this.employeeService.deleteEmployee(cod).subscribe({
       next: () => {
-        console.log('Cliente deletado com sucesso');
+        this.toastr.success('Cliente deletado com sucesso')
         this.employees = this.employees.filter((employee: any) => employee.employeeCod !== cod);
-        alert('Funcionário deletado com sucesso!')
       },
-      error: (error) => console.error('Erro ao deletar funcionário:', error),
+      error: (error) => {
+        this.toastr.error(error.error.message,'Erro ao deletar o cliente')
+        console.error('Erro ao deletar funcionário:', error)
+      }
     });
 
   }

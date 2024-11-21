@@ -8,7 +8,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 const routes: Routes = [
   {
     path: '',
-    component:LoginComponent
+    component: HomeComponent
   },
   {
     path: 'home',

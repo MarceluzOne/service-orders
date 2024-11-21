@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-equipment-register',
@@ -29,7 +30,8 @@ export class EquipmentRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private toastr: ToastrService
   ) { 
     this.formEquipment = this.fb.group({
       'equipmentName' : new FormControl('', [Validators.required]),
@@ -74,7 +76,6 @@ export class EquipmentRegisterComponent implements OnInit {
     if (this.formEquipment.valid) {
       const formData = new FormData();
       
-      // Adiciona todos os campos do formulário ao FormData
       Object.keys(this.formEquipment.controls).forEach(key => {
         const control = this.formEquipment.get(key);
         if (control) {
@@ -82,24 +83,22 @@ export class EquipmentRegisterComponent implements OnInit {
         }
       });
 
-      // Inclui a foto capturada se existir
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
       }
       this.registerEquipment.registerEquipament(formData).subscribe(
         response => {
-          alert('Equipamento Cadastrado')
-          this.formEquipment.reset()
-          console.log('Equipamento cadastrado com sucesso:', response);
+          this.toastr.success('Equipamento cadastrado com sucesso');
+          this.formEquipment.reset();
         },
         error => { 
+          this.toastr.error(error.error.message,'Erro ao cadastrar o equipamento')
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
     }
   }
 
-  // Função auxiliar para converter Data URL em File
   private convertDataURLToFile(dataURL: string, filename: string): File {
     const arr = dataURL.split(',');
     const mime = arr[0].match(/:(.*?);/)?.[1];
@@ -112,16 +111,22 @@ export class EquipmentRegisterComponent implements OnInit {
     return new File([u8arr], filename, { type: mime });
   }
 
-  // Método para abrir a câmera
   openCamera(): void {
     this.startCamera();
     this.showCam = true;
   }
+  private isMobile(): boolean {
+    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+  }
 
-  // Iniciar a câmera
   startCamera(): void {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
+      navigator.mediaDevices.getUserMedia({
+        video: this.isMobile()
+          ? { facingMode: { exact: "environment" } }
+          : true, 
+      })
         .then((stream: MediaStream) => {
           this.stream = stream;
           this.videoElement.nativeElement.srcObject = stream;
@@ -133,31 +138,23 @@ export class EquipmentRegisterComponent implements OnInit {
     }
   }
 
-  // Capturar a imagem da câmera
   public capture(): void {
     const video = this.videoElement.nativeElement;
     const canvas = this.canvas.nativeElement;
 
-    // Ajustar o canvas para o tamanho do vídeo
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Converter o conteúdo do canvas em base64 (imagem)
     this.capturedImage = canvas.toDataURL('image/png');
 
-    // Atualizar o campo 'photo' no formulário com a imagem capturada
     this.formEquipment.patchValue({
       photo: this.capturedImage
     });
-
-    // Ocultar a câmera e parar o stream
-    
     this.stopCamera();
   }
 
-  // Parar a câmera
   public stopCamera(): void {
     this.showCam = false;
     if (this.stream) {

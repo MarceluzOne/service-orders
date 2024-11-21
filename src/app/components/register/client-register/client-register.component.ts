@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { PhoneValidators } from 'src/app/validators/phone-validator';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-client-register',
   templateUrl: './client-register.component.html',
@@ -25,6 +25,7 @@ export class ClientRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private clientService: ClientService,
+    private toastr: ToastrService
   ) {  }
 
   async ngOnInit() {
@@ -36,20 +37,19 @@ export class ClientRegisterComponent implements OnInit {
     });
   }
 
-  
-
   public submitClient(){
     this.isSubmiting = true
     if (this.formClient.valid) {
       const client = this.formClient.value;
       this.clientService.registerClient(client).subscribe(
         response => {
-          console.log('Cliente registrado com sucesso', response);
-          this.isSubmiting = false
-          this.formClient.reset()
+          this.isSubmiting = false;
+          this.toastr.success('Cliente cadastrado com sucesso')
+          this.formClient.reset();
         },
         error => {
           console.error('Erro ao registrar o cliente', error);
+          this.toastr.error(error.error.message,'Erro ao cadastrar o cliente')
           this.isSubmiting = false
         }
       );
