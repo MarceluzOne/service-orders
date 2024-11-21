@@ -23,6 +23,8 @@ import { EmployeeCardComponent } from './components/cards/employee-card/employee
 import { EquipamentCardComponent } from './components/cards/equipament-card/equipament-card.component';
 import { PhoneMaskPipe } from './pipes/phone-mask.pipe';
 import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
+import { InfoClientComponent } from './components/infos/info-client/info-client.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,13 +49,14 @@ import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
     EquipamentCardComponent,
     PhoneMaskPipe,
     CpfCnpjMaskPipe,
+    InfoClientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   providers: [],

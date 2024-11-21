@@ -24,7 +24,7 @@ export class ClientRegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private clientService: ClientService,
+    private clientService: ClientService
   ) {  }
 
   async ngOnInit() {
@@ -44,7 +44,6 @@ export class ClientRegisterComponent implements OnInit {
       const client = this.formClient.value;
       this.clientService.registerClient(client).subscribe(
         response => {
-          console.log('Cliente registrado com sucesso', response);
           this.isSubmiting = false
           this.formClient.reset()
         },

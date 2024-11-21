@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ClientService } from 'src/app/services/client/client.service';
+
+
 
 @Component({
   selector: 'app-client-card',
@@ -10,7 +13,9 @@ export class ClientCardComponent implements OnInit {
   public clients: any;
   public isLoading: Boolean = false
 
-  constructor(private clientService: ClientService) { }
+  constructor(
+    private clientService: ClientService
+  ) {}
 
   async ngOnInit() {
     await this.getClient();
@@ -40,6 +45,10 @@ export class ClientCardComponent implements OnInit {
       },
       error: (error) => console.error('Erro ao deletar cliente:', error),
     });
+
+  }
+  public openModalClient(cnpj: string){
+
 
   }
 

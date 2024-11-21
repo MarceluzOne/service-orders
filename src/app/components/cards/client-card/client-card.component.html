@@ -1,4 +1,5 @@
-<div class="h-full min-w-64 rounded-md bg-slate-300 p-2 flex flex-col md:flex-row mb-3 md:flex justify-between"
+<div *ngIf="clients.length > 0; else noClients">
+  <div class="h-full min-w-64 rounded-md bg-slate-300 p-2 flex flex-col md:flex-row mb-3 md:flex justify-between"
   *ngFor="let client of clients">
   <div class="flex flex-col gap-1">
     <p class="gap-1 flex items-center ">
@@ -20,7 +21,7 @@
       <p class="text-xs">Data de registro: {{client.registerDate | dateType}}</p>
     </div>
     <div class="flex gap-3">
-      <button>
+      <button (click)="openModalClient(client.cnpj)">
         <i class="fa-solid fa-pencil" style="color: #74C0FC;"></i>
       </button>
       <button (click)="confirmDelete(client.cnpj)">
@@ -29,42 +30,7 @@
     </div>
   </div>
 </div>
-
-<!-- <div  class="bg-slate-300 rounded-md flex flex-col">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-      <div class="overflow-hidden">
-        <table
-          class="min-w-full text-left text-sm font-light text-surface">
-          <thead
-            class="border-b border-neutral-200 font-medium">
-            <tr>
-              <th scope="col" class="px-6 hidden sm:flex py-2">Cod.</th>
-              <th scope="col" class="px-6 py-2">Nome</th>
-              <th scope="col" class="px-6 hidden sm:flex py-2">Documento</th>
-              <th scope="col" class="px-6 py-2">Contato</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let client of clients" class="border-b border-neutral-200 dark:border-white/10">
-              <td class="whitespace-nowrap px-2 hidden sm:flex py-2 font-medium">{{client.codClient}}</td>
-              <td class="whitespace-wrap px-6 py-2">{{client.name.toUpperCase()}}</td>
-              <td class="whitespace-nowrap px-2 hidden sm:flex py-4">{{client.cnpj | cpfCnpjMask}}</td>
-              <td class="whitespace-nowrap px-2 py-2">{{client.phone | phoneMask}}</td>
-              <td class="whitespace-nowrap px-0 py-2">
-                <button>
-                  <i class="fa-solid fa-pencil" style="color: #74C0FC;"></i>
-                </button>
-                <button (click)="confirmDelete(client.cnpj)">
-                  <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, dicta nisi ex cumque eaque impedit, inventore modi repellendus, a vitae temporibus? Velit dolorem fugiat perspiciatis fugit error incidunt, molestias tenetur! -->
+</div>
+<ng-template #noClients>
+  <p>Não há funcionarios cadastrados.</p>
+</ng-template>
