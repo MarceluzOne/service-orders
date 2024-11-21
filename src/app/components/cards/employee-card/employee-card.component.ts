@@ -41,7 +41,7 @@ export class EmployeeCardComponent implements OnInit {
         this.employees = this.employees.filter((employee: any) => employee.employeeCod !== cod);
       },
       error: (error) => {
-        this.toastr.error(error.error.message,'Erro ao deletar o cliente')
+        this.toastr.error('Erro ao deletar o cliente')
         console.error('Erro ao deletar funcionário:', error)
       }
     });

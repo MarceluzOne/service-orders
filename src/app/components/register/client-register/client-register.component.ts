@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
-import { PhoneValidators } from 'src/app/validators/phone-validator';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-client-register',
@@ -31,7 +30,7 @@ export class ClientRegisterComponent implements OnInit {
   async ngOnInit() {
     this.formClient = this.fb.group({
       'name': new FormControl('', [Validators.required]),
-      'phone': new FormControl('', [Validators.required, PhoneValidators.minLength(11), PhoneValidators.maxLength(11)]),
+      'phone': new FormControl('', [Validators.required, Validators.maxLength(11)]),
       'codClient': new FormControl('', [Validators.required]),
       'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
     });
@@ -43,13 +42,14 @@ export class ClientRegisterComponent implements OnInit {
       const client = this.formClient.value;
       this.clientService.registerClient(client).subscribe(
         response => {
+          this.formClient.reset();
           this.isSubmiting = false;
           this.toastr.success('Cliente cadastrado com sucesso')
-          this.formClient.reset();
+          
         },
         error => {
           console.error('Erro ao registrar o cliente', error);
-          this.toastr.error(error.error.message,'Erro ao cadastrar o cliente')
+          this.toastr.error('Erro ao cadastrar o cliente')
           this.isSubmiting = false
         }
       );

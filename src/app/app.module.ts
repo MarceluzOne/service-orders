@@ -61,9 +61,10 @@ import { ToastrModule } from 'ngx-toastr';
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 1500,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
+      progressBar: true
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
