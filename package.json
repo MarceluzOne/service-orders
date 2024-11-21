@@ -22,6 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "moment": "^2.30.1",
     "ngx-mask": "^14.3.3",
+    "ngx-toastr": "^16.2.0",
     "rxjs": "~7.5.0",
     "service-orders": "file:",
     "tslib": "^2.3.0",

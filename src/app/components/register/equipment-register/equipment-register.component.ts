@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-equipment-register',
@@ -29,7 +30,8 @@ export class EquipmentRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private toastr: ToastrService
   ) { 
     this.formEquipment = this.fb.group({
       'equipmentName' : new FormControl('', [Validators.required]),
@@ -86,11 +88,11 @@ export class EquipmentRegisterComponent implements OnInit {
       }
       this.registerEquipment.registerEquipament(formData).subscribe(
         response => {
-          alert('Equipamento Cadastrado')
-          this.formEquipment.reset()
-          console.log('Equipamento cadastrado com sucesso:', response);
+          this.toastr.success('Equipamento cadastrado com sucesso');
+          this.formEquipment.reset();
         },
         error => { 
+          this.toastr.error(error.error.message,'Erro ao cadastrar o equipamento')
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );

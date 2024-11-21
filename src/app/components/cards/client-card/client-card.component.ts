@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ClientService } from 'src/app/services/client/client.service';
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-client-card',
@@ -14,7 +12,8 @@ export class ClientCardComponent implements OnInit {
   public isLoading: Boolean = false
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private toastr: ToastrService
   ) {}
 
   async ngOnInit() {
@@ -35,15 +34,15 @@ export class ClientCardComponent implements OnInit {
     }
   }
   public deletClient(cnpj: string) {
-
-    console.log(cnpj);
     this.clientService.deleteClient(cnpj).subscribe({
       next: () => {
-        console.log('aqui')
+        this.toastr.success('Cliente deletado com sucesso')
         this.clients = this.clients.filter((client: any) => client.cnpj !== cnpj);
-        alert('Cliente deletado com sucesso')
       },
-      error: (error) => console.error('Erro ao deletar cliente:', error),
+      error: (error) => {
+        this.toastr.error(error.error.message,'Erro ao deletar o cliente');
+        console.error('Erro ao deletar cliente:', error.error.message);
+      }
     });
 
   }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IEmployee } from 'src/app/interface/IEmployee';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-register',
@@ -15,7 +16,8 @@ export class EmployeeRegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,    
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private toastr: ToastrService
   ) { }
 
   async ngOnInit() {
@@ -43,11 +45,11 @@ export class EmployeeRegisterComponent implements OnInit {
         const employee = this.formEmployee.value;
         this.employeeService.registerEmployee(employee).subscribe(
           response => {
-            console.log('Cliente registrado com sucesso', response);
-            alert('Funcionário cadastrado com sucesso')
+            this.toastr.success('Funcionário cadastrado com sucesso')
             this.formEmployee.reset()
           },
           error => {
+            this.toastr.error(error.error.message,'Erro ao cadastrar o funcionário')
             console.error('Erro ao registrar o cliente', error);
           }
         );

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-equipament-card',
@@ -10,7 +11,10 @@ export class EquipamentCardComponent implements OnInit {
 
   public equipaments: any
 
-  constructor(private equipamentService: EquipmentService) { }
+  constructor(
+    private equipamentService: EquipmentService,
+    private toastr: ToastrService
+  ) { }
 
   async ngOnInit(){
     await this.getEquipaments()

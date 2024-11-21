@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-card',
@@ -9,11 +10,13 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
 export class EmployeeCardComponent implements OnInit {
   public employees: any = [];
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private toastr: ToastrService
+  ) { }
 
   async ngOnInit() {
     await this.getEmployees();
-    console.log(this.employees.lenght)
   }
 
   public async getEmployees() {
@@ -34,11 +37,13 @@ export class EmployeeCardComponent implements OnInit {
   private deleteEmployee(cod: string) {
     this.employeeService.deleteEmployee(cod).subscribe({
       next: () => {
-        console.log('Cliente deletado com sucesso');
+        this.toastr.success('Cliente deletado com sucesso')
         this.employees = this.employees.filter((employee: any) => employee.employeeCod !== cod);
-        alert('Funcionário deletado com sucesso!')
       },
-      error: (error) => console.error('Erro ao deletar funcionário:', error),
+      error: (error) => {
+        this.toastr.error(error.error.message,'Erro ao deletar o cliente')
+        console.error('Erro ao deletar funcionário:', error)
+      }
     });
 
   }
