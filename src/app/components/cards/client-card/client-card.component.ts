@@ -40,7 +40,7 @@ export class ClientCardComponent implements OnInit {
         this.clients = this.clients.filter((client: any) => client.cnpj !== cnpj);
       },
       error: (error) => {
-        this.toastr.error(error.error.message,'Erro ao deletar o cliente');
+        this.toastr.error('Erro ao deletar o cliente');
         console.error('Erro ao deletar cliente:', error.error.message);
       }
     });

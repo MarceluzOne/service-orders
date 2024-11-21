@@ -49,7 +49,7 @@ export class EmployeeRegisterComponent implements OnInit {
             this.formEmployee.reset()
           },
           error => {
-            this.toastr.error(error.error.message,'Erro ao cadastrar o funcionário')
+            this.toastr.error('Erro ao cadastrar o funcionário')
             console.error('Erro ao registrar o cliente', error);
           }
         );
