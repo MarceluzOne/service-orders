@@ -30,58 +30,40 @@ export class EquipmentRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-    private clientService: ClientService,
     private toastr: ToastrService
   ) { 
     this.formEquipment = this.fb.group({
+      'image' : new FormControl('', [Validators.required]),
       'equipmentName' : new FormControl('', [Validators.required]),
-      'serialNumber' : new FormControl('', [Validators.required]),
-      'receiver' : new FormControl('Australopitecus', Validators.required),
-      'enterprise_name' : new FormControl('BRF', Validators.required),
-      'carrier' : new FormControl('', [Validators.required]),
+      'serialNumber' : new FormControl('', Validators.required),
+      'carrier' : new FormControl('', Validators.required),
+      'receiver' : new FormControl('', [Validators.required]),
+      'enterprise_name' : new FormControl('', [Validators.required]),
       'brand' : new FormControl('', [Validators.required]),
       'model' : new FormControl('', [Validators.required]),
       'current' : new FormControl('', [Validators.required]),
       'power' : new FormControl('', [Validators.required]),
       'voltage' : new FormControl('', [Validators.required]),
       'priority' : new FormControl('', [Validators.required]),
-      'others' : new FormControl('', [Validators.required]),
-      'photo' : new FormControl('', [Validators.required]),
+      'connectors' : new FormControl('NÃO', [Validators.required]),
       'ihm' : new FormControl('NAO', [Validators.required]),
       'carcass_damage' : new FormControl('NAO', [Validators.required]),
       'engine' : new FormControl('NAO', [Validators.required]),
       'engine_cables' : new FormControl('NAO', [Validators.required]),
       'fan' : new FormControl('NAO', [Validators.required]),
       'fan_carcass' : new FormControl('NAO', [Validators.required]),
-      'connectors' : new FormControl('NAO', [Validators.required]),
+      'others' : new FormControl(''),
     })
   }
 
-  async ngOnInit() {
-    await this.getClients()
-    
-  }
-  public async getClients(){
-    try {
-      const clients = await this.clientService.getClients().toPromise();
-      this.clients = clients
-    } catch (error) {
-        this.clients = []
-    }
-
-  }
+  async ngOnInit() {  }
+  
 
   public submitEquipment(): void {
     console.log(this.formEquipment.value)
-    if (this.formEquipment.valid) {
-      const formData = new FormData();
-      
-      Object.keys(this.formEquipment.controls).forEach(key => {
-        const control = this.formEquipment.get(key);
-        if (control) {
-          formData.append(key, control.value);
-        }
-      });
+    const validation = confirm('Deseja cadastrar o equipamento?')
+    if ( validation && this.formEquipment.valid) {
+      const formData = this.formEquipment.value;
 
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
@@ -96,6 +78,8 @@ export class EquipmentRegisterComponent implements OnInit {
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
+    }else{
+      this.toastr.info('Não foi possivel cadastrar o equipamento')
     }
   }
 
@@ -150,7 +134,7 @@ export class EquipmentRegisterComponent implements OnInit {
     this.capturedImage = canvas.toDataURL('image/png');
 
     this.formEquipment.patchValue({
-      photo: this.capturedImage
+      image: this.capturedImage
     });
     this.stopCamera();
   }
@@ -161,6 +145,37 @@ export class EquipmentRegisterComponent implements OnInit {
       this.stream.getTracks().forEach(track => track.stop());
     }
     this.videoElement.nativeElement.srcObject = null;
+  }
+  public uploadImage(event: any){
+  const input = event.target as HTMLInputElement;
+
+  if (input?.files && input.files.length > 0) {
+    const file = input.files[0]; // Obtem o arquivo selecionado
+
+    // Verifica se é uma imagem
+    if (!file.type.startsWith('image/')) {
+      console.error('Por favor, selecione um arquivo de imagem.');
+      return;
+    }
+
+    // Converte a imagem para Base64
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageBase64 = reader.result as string;
+
+      // Atualiza o formulário com a imagem
+      this.formEquipment.patchValue({
+        image: imageBase64,
+      });
+
+      // Define a imagem capturada para pré-visualização
+      this.capturedImage = imageBase64;
+    };
+
+    reader.readAsDataURL(file); // Lê o arquivo como Base64
+  } else {
+    console.error('Nenhum arquivo foi selecionado.');
+  }
   }
 
 }

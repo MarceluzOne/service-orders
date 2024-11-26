@@ -31,10 +31,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
-export function tokenGetter() {
-  return localStorage.getItem('ostoken'); 
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,9 +66,8 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
-        
-        allowedDomains: ['http://http://localhost:8080'], // Substitua pelo domínio da API
-        disallowedRoutes: ['http://http://localhost:8080/auth/login'] // Substitua conforme necessário
+        allowedDomains: ['http://http://localhost:8080'], 
+        disallowedRoutes: ['http://http://localhost:8080/auth/login'] 
       }
     }),
     ToastrModule.forRoot({
@@ -86,9 +81,9 @@ export function tokenGetter() {
   providers: [
     JwtHelperService,
     {
-      provide: HTTP_INTERCEPTORS,  // Registra o interceptor
-      useClass: AuthInterceptor,    // Usa o interceptor criado
-      multi: true                   // Permite a utilização de múltiplos interceptors
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
   ],
   bootstrap: [AppComponent]

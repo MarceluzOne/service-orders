@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
   constructor(
     private fb : FormBuilder,
-    private localStorage: LocalStorageService,
     private authService: AuthService,
     private router: Router
 
@@ -39,16 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   public toLogin() {
-  const login = this.login.value; // Obtém os valores do formulário
-  console.log('Dados de login:', login);
+  const login = this.login.value; 
 
   this.authService.login(login).subscribe({
     next: (response) => {
-      // Verifique se o token existe na resposta
       if (response && response.token) {
-        console.log('Token recebido:', response.token);
-
-        // Navega para a rota '/home' após o login
         this.router.navigate(['/home']);
       } else {
         console.error('Nenhum token foi encontrado na resposta.');

@@ -18,6 +18,6 @@ export class EquipmentService {
 
   public registerEquipament(data: any): Observable<any> {
     const headers = this.authService.getAuthHeaders(); 
-    return this.http.post(`${environment.apiUrl}/api/equipments/create`, data, { headers });
+    return this.http.post(`${environment.apiUrl}/api/equipments`, data, { headers });
   }
 }

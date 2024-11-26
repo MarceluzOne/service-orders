@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -6,15 +7,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public isAdmin: Boolean = true;
   public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
   public equipament: any;
   public statusMessenger: String = '';
 
-
-  @ViewChild('video') videoElement!: ElementRef;
-  @ViewChild('canvas') canvas!: ElementRef;
-
+  get isAdmin(){
+    return this.authService.isAdmin.getValue()
+  }
   public get registerTitle() {
     if (this.equipmentForm == 'client') {
       return 'Cadastro de Cliente'
@@ -24,11 +23,8 @@ export class RegisterComponent implements OnInit {
     return 'Cadastro de Equipamento'
   };
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  async ngOnInit() {
-
-
-  }
+  async ngOnInit() { }
 
 }

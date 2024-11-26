@@ -23,7 +23,6 @@ export class EquipamentCardComponent implements OnInit {
       this.equipaments = equipaments
     } catch (error) {
       this.equipaments = []
-      console.log(error);
     }
   }
 
