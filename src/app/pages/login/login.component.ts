@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private localStorage: LocalStorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
 
   ) { }
 
@@ -36,11 +38,13 @@ export class LoginComponent implements OnInit {
   }
   public toLogin(){
     const login = this.login.value
-    console.log(login)
+    console.log(login);
     this.authService.login(login).subscribe({
       next: (response)=>{
-        this.localStorage.set('ostoken',response)
-        console.log(response)
+        this.localStorage.set('ostoken',response.token)
+        console.log('Token: ', response.token)
+
+        this.router.navigate(['/home']);
       },
       error: (error)=>{
         console.log(error)

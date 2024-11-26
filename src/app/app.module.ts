@@ -13,7 +13,7 @@ import { MemberRegisterComponent } from './components/register/member-register/m
 import { EquipmentRegisterComponent } from './components/register/equipment-register/equipment-register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DateTypePipe } from './pipes/date-type.pipe';
 import { AlertComponent } from './components/alert/alert.component';
 import { ClientRegisterComponent } from './components/register/client-register/client-register.component';
@@ -26,6 +26,7 @@ import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
 import { InfoClientComponent } from './components/infos/info-client/info-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './interceptor/auth.interceptor'; // Ajuste o caminho conforme necessário
 
 @NgModule({
   declarations: [
@@ -68,7 +69,13 @@ import { ToastrModule } from 'ngx-toastr';
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,  // Registra o interceptor
+      useClass: AuthInterceptor,    // Usa o interceptor criado
+      multi: true                   // Permite a utilização de múltiplos interceptors
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
