@@ -10,7 +10,7 @@
     <div class="flex justify-center flex-col gap-14">
       <div class="flex justify-center gap-5">
         <p class="font-semibold text-black">
-          Welcome Back ! 
+          Bem-vindo de volta ! 
         <p>
       </div>
       <h4 class="text-center font-semibold subtitle-text">
@@ -18,11 +18,11 @@
       </h4>
       <div class="w-full flex flex-col gap-8">
         <div class="w-full">
-          <p class="font-bold text-black">Username:</p>
+          <p class="font-bold text-black">Usuário:</p>
           <input formControlName="username" class="w-full h-8 rounded-md outline-none" type="text">
         </div>
         <div>
-          <p class="font-bold text-black">Password:</p>
+          <p class="font-bold text-black">Senha:</p>
           <div class="bg-white flex h-8 w-full rounded-md pl-1 pr-2">
             <input formControlName="username" class="outline-none" [type]="type">
             <button class="w-4" (click)="changeType()">
@@ -33,29 +33,10 @@
         </div>
       </div>
       <div class="bg-slate-600 btn-collor rounded-md h-8 flex justify-center">
-        <button routerLink="/home" (click)="toLogin()" class="w-full font-medium">Login now</button>
+        <button (click)="toLogin()" class="w-full font-medium">Entrar</button>
       </div>
     </div>
   </div>
   </form>
   
 </div>
-
-
-
-
-<!-- <div class="w-full flex flex-col justify-around items-center h-[100vh] bg-primary-color">
-  <h1>OS TRACKER</h1>
-  <div class="w-72 p-4 bg-white h-auto rounded-md flex justify-center flex-col items-center">
-    
-    <p>Bem vindo</p>
-    <div class=" w-full flex flex-col">
-      <span>Username</span>
-      <input class="shadow-md border-2 rounded-lg" type="text">
-    </div>
-    <div class=" w-full flex flex-col">
-      <span>Password</span>
-      <input class="shadow-md border-2 rounded-lg" type="text">
-    </div>
-  </div>
-</div> -->

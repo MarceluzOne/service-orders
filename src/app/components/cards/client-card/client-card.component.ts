@@ -41,7 +41,7 @@ export class ClientCardComponent implements OnInit {
       },
       error: (error) => {
         this.toastr.error('Erro ao deletar o cliente');
-        console.error('Erro ao deletar cliente:', error.error.message);
+        console.error('Erro ao deletar cliente:', error);
       }
     });
 

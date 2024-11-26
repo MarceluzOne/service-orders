@@ -16,13 +16,11 @@ export class EmployeeService {
   }
 
   public registerEmployee(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/employees/create`, data)
-      ;
+    return this.http.post(`${environment.apiUrl}/auth/register`, data);
   }
 
-
   public updateEmployee(data: any, cnpj: string ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/clients/create/${cnpj}`, data)
+    return this.http.post(`${environment.apiUrl}/api/clients/${cnpj}`, data)
       .pipe(
         retry(3)
       );

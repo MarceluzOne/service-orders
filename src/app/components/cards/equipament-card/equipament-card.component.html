@@ -2,13 +2,13 @@
   <div class="lg:grid lg:grid-cols-3 w-full flex flex-col m-auto gap-3 h-full">
     <div *ngFor="let equipament of equipaments" class="flex bg-slate-300 rounded-md">
       <div class="max-w-12 min-h-24 flex justify-center items-center m-3 ">
-        <img class="border-2 border-white bg-cover" src="https://mariananardi.com.br/wp-content/uploads/2018/09/Gato-x-leao.jpg" alt="">
+        <img class="border-2 border-white bg-cover" [src]="equipament.photoURL" alt="">
       </div>
       <div class="w-full min-h-full flex flex-col justify-between p-1">
         <div class="flex justify-between px-3 h-1/6 pb-1 items-center">
           <p class="text-xs font-bold">{{ equipament.equipmentName }}</p>
           <p class="text-[6px] text-end">
-            Serial Number: {{ equipament.serialNumber }}
+            Número de serie: {{ equipament.serialNumber }}
             <span class="bg-white rounded-md px-1 py-[2px]"> {{ equipament.priority }}</span>
           </p>
         </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
-import { UserProfileService } from 'src/app/services/profile/user-profile.service';
+
 
 @Component({
   selector: 'app-login',
@@ -19,15 +20,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private localStorage: LocalStorageService,
-    private serviceClient: UserProfileService
+    private authService: AuthService
 
   ) { }
 
   ngOnInit() {
     this.login = this.fb.group({
-      'username': ['', [Validators.required]],
-      'password': ['', [Validators.required, Validators.min
-        (6)
+      'username': ['thialy786@gmail.com', [Validators.required]],
+      'password': ['minhasenha1234', [Validators.required, Validators.min(6)
       ]]
     })
   }
@@ -35,6 +35,11 @@ export class LoginComponent implements OnInit {
     this.canShowPassowrd = !this.canShowPassowrd
   }
   public toLogin(){
-    console.log(this.login.value)
+    const login = this.login.value
+    this.authService.login(login).subscribe({
+      next: (response)=>{
+        console.log(response)
+      }
+    })
   }
 }

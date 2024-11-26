@@ -28,16 +28,6 @@ export class EmployeeRegisterComponent implements OnInit {
       'role' : new FormControl('', [Validators.required]),
       'employeeCod' : new FormControl('', [Validators.required]),      
     })
-    await this.getEmployee()
-  }
-
-  public async getEmployee(){
-    try {
-      const employees: IEmployee[] = await this.employeeService.getEmployees().toPromise();
-      this.employee = [...employees]
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   public submitEmployee(){
