@@ -31,7 +31,7 @@ export class ClientService {
   }
   
   public registerClient(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/clients/create`, data)
+    return this.http.post(`${environment.apiUrl}/api/clients`, data)
   }
 
   public updateClient(data: any, cnpj: string ): Observable<any> {

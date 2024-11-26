@@ -16,7 +16,7 @@
       </p>
   
       </div>
-      <p class="text-sm text-white font-semibold hidden sm:flex gap-3 px-3 cursor-pointer">Sair</p>
+      <p class="text-sm text-white font-semibold hidden sm:flex gap-3 px-3 cursor-pointer" (click)="toLogout()">Sair</p>
       <div class="sm:hidden">
         <i class="fa-solid fa-bars" style="color: #ffffff;"
         (click)="showMenu(canShowMenu)"></i>
@@ -35,7 +35,7 @@
   >
     {{item.name}}
   </p>
-
+  <p class="px-3 py-1 hover:underline cursor-pointer" (click)="toLogout()">Sair</p>
   </div>
 
 </ng-container>

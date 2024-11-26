@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+
+export enum StorageKeys {
+  Profile = 'storageprofile',
+  Token = 'ostoken'
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +18,7 @@ export class LocalStorageService {
     this.storage = window.localStorage;
   }
 
-  set(key: string, value: any): boolean {
+  set(key: StorageKeys, value: any): boolean {
     if (this.storage) {
       this.storage.setItem(key, JSON.stringify(value));
       return true;
@@ -27,7 +33,15 @@ export class LocalStorageService {
     return null;
   }
 
+  remove(key: StorageKeys): boolean {
+    if (this.storage) {
+      this.storage.removeItem(key);
+      return true;
+    }
+    return false;
+  }
+
   public isLogged(){
-    this.profile.next(this.get('isLogged'))
+    
   }
 }

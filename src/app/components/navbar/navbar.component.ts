@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,20 +18,27 @@ export class NavbarComponent implements OnInit {
       router: '/register'
     },
   ]
-  public canShowMenu:Boolean = false;
-  constructor(private router: Router) { }
+  public canShowMenu: Boolean = false;
+  constructor(
+    private router: Router, 
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     setInterval(() => {
-      if(this.canShowMenu){
+      if (this.canShowMenu) {
         this.canShowMenu = !this.canShowMenu
       }
     }, 5000);
   }
-  public goTo(router: String){
-this.router.navigate([router])
+  public goTo(router: String) {
+    this.router.navigate([router])
   }
-  public showMenu(menu:Boolean){
+  public toLogout(){
+    this.authService.logout();
+    this.router.navigateByUrl('/')
+  }
+
+  public showMenu(menu: Boolean) {
     this.canShowMenu = !menu
   }
 }

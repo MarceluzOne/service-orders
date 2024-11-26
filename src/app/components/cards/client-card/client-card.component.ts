@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./client-card.component.scss']
 })
 export class ClientCardComponent implements OnInit {
-  public clients: any;
+  public clients: any = [];
   public isLoading: Boolean = false
 
   constructor(

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { StorageKeys } from 'src/app/services/local-storage/local-storage.service';
 
 
 @Component({
@@ -28,27 +29,34 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.login = this.fb.group({
-      'email': ['thialy786@gmail.com', [Validators.required]],
-      'password': ['minhasenha1234', [Validators.required, Validators.min(6)
+      'email': ['', [Validators.required]],
+      'password': ['', [Validators.required, Validators.min(6)
       ]]
     })
   }
   public changeType(){
     this.canShowPassowrd = !this.canShowPassowrd
   }
-  public toLogin(){
-    const login = this.login.value
-    console.log(login);
-    this.authService.login(login).subscribe({
-      next: (response)=>{
-        this.localStorage.set('ostoken',response.token)
-        console.log('Token: ', response.token)
 
+  public toLogin() {
+  const login = this.login.value; // Obtém os valores do formulário
+  console.log('Dados de login:', login);
+
+  this.authService.login(login).subscribe({
+    next: (response) => {
+      // Verifique se o token existe na resposta
+      if (response && response.token) {
+        console.log('Token recebido:', response.token);
+
+        // Navega para a rota '/home' após o login
         this.router.navigate(['/home']);
-      },
-      error: (error)=>{
-        console.log(error)
+      } else {
+        console.error('Nenhum token foi encontrado na resposta.');
       }
-    })
-  }
+    },
+    error: (error) => {
+      console.error('Erro durante o login:', error);
+    }
+  });
+}
 }

@@ -26,7 +26,14 @@ import { CpfCnpjMaskPipe } from './pipes/cpf-cnpj-mask.pipe';
 import { InfoClientComponent } from './components/infos/info-client/info-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AuthInterceptor } from './interceptor/auth.interceptor'; // Ajuste o caminho conforme necessário
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
+
+
+export function tokenGetter() {
+  return localStorage.getItem('ostoken'); 
+}
 
 @NgModule({
   declarations: [
@@ -61,6 +68,13 @@ import { AuthInterceptor } from './interceptor/auth.interceptor'; // Ajuste o ca
     HttpClientModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
+    JwtModule.forRoot({
+      config: {
+        
+        allowedDomains: ['http://http://localhost:8080'], // Substitua pelo domínio da API
+        disallowedRoutes: ['http://http://localhost:8080/auth/login'] // Substitua conforme necessário
+      }
+    }),
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
@@ -70,6 +84,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor'; // Ajuste o ca
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   providers: [
+    JwtHelperService,
     {
       provide: HTTP_INTERCEPTORS,  // Registra o interceptor
       useClass: AuthInterceptor,    // Usa o interceptor criado
