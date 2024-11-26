@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.login = this.fb.group({
-      'username': ['thialy786@gmail.com', [Validators.required]],
+      'email': ['thialy786@gmail.com', [Validators.required]],
       'password': ['minhasenha1234', [Validators.required, Validators.min(6)
       ]]
     })
@@ -36,9 +36,14 @@ export class LoginComponent implements OnInit {
   }
   public toLogin(){
     const login = this.login.value
+    console.log(login)
     this.authService.login(login).subscribe({
       next: (response)=>{
+        this.localStorage.set('ostoken',response)
         console.log(response)
+      },
+      error: (error)=>{
+        console.log(error)
       }
     })
   }

@@ -19,12 +19,12 @@
       <div class="w-full flex flex-col gap-8">
         <div class="w-full">
           <p class="font-bold text-black">Usuário:</p>
-          <input formControlName="username" class="w-full h-8 rounded-md outline-none" type="text">
+          <input formControlName="email" class="w-full h-8 rounded-md outline-none" type="text">
         </div>
         <div>
           <p class="font-bold text-black">Senha:</p>
           <div class="bg-white flex h-8 w-full rounded-md pl-1 pr-2">
-            <input formControlName="username" class="outline-none" [type]="type">
+            <input formControlName="password" class="outline-none" [type]="type">
             <button class="w-4" (click)="changeType()">
               <i *ngIf="!canShowPassowrd" class="fa-solid fa-eye-slash"></i>
               <i *ngIf="canShowPassowrd" class="fa-solid fa-eye"></i>
@@ -38,5 +38,4 @@
     </div>
   </div>
   </form>
-  
 </div>
