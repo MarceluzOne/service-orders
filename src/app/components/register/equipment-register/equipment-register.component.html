@@ -1,89 +1,87 @@
-<form 
-  [formGroup]="formEquipment"
-  class="w-auto bg-white flex rounded-md flex-col p-3 border-4">
+<form [formGroup]="formEquipment" class="w-auto bg-white flex rounded-md flex-col p-3 border-4">
   <div>
     <span class="text-sm font-medium">Equipamento</span>
-    <input 
-      type="text"
-      formControlName="equipmentName"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="equipmentName" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('equipmentName')?.invalid && formEquipment.get('equipmentName')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('equipmentName')?.errors?.['required']">O nome do equipamento é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Número de Serie</span>
-    <input
-    type="text"
-    formControlName="serialNumber"
-    class="border-2 rounded-md w-full">
+    <input type="text" formControlName="serialNumber" class="border-2 rounded-md w-full">
   </div>
   <div>
     <span class="text-sm font-medium">Cliente</span>
-    <input
-    type="text"
-    formControlName="enterprise_name"
-    class="border-2 rounded-md w-full">
+    <input type="text" formControlName="enterprise_name" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('enterprise_name')?.invalid && formEquipment.get('enterprise_name')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('enterprise_name')?.errors?.['required']">O nome do cliente é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Recebedor</span>
-    <input
-      type="text"
-      formControlName="receiver"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="receiver" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('receiver')?.invalid && formEquipment.get('receiver')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('receiver')?.errors?.['required']">O nome do recebedor é obrigatório.</span>
   </div>
 
   <div>
     <span class="text-sm font-medium">Portador</span>
-    <input
-      type="text"
-      formControlName="carrier"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="carrier" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('carrier')?.invalid && formEquipment.get('carrier')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('carrier')?.errors?.['required']">O nome do portador é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Marca</span>
-    <input
-      type="text"
-      formControlName="brand"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="brand" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('brand')?.invalid && formEquipment.get('brand')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('brand')?.errors?.['required']">A marca é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Modelo</span>
-    <input
-      type="text"
-      formControlName="model"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="model" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('model')?.invalid && formEquipment.get('model')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('model')?.errors?.['required']">O modelo é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Corrente</span>
-    <input
-      type="text"
-      formControlName="current"
-      class="border-2 rounded-md w-full">
+    <input type="text" formControlName="current" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('current')?.invalid && formEquipment.get('current')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('current')?.errors?.['required']">O modelo é obrigatório.</span>
   </div>
   <div>
-    <span class="text-sm font-medium">Potencia</span>
-    <input
-      type="text"
-      formControlName="power"
-      class="border-2 rounded-md w-full">
+    <span class="text-sm font-medium">Potência</span>
+    <input type="text" formControlName="power" class="border-2 rounded-md w-full">
+    <p *ngIf="formEquipment.get('power')?.invalid && formEquipment.get('power')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('power')?.errors?.['required']">A potência é obrigatório.</span>
   </div>
   <div class="flex justify-between items-center gap-3">
     <div>
       <span class="text-sm font-medium">Tensão</span>
-      <input
-        type="text"
-        formControlName="voltage"
-        class="border-2 rounded-md text-xs w-full h-8">
+      <input type="text" formControlName="voltage" class="border-2 rounded-md text-xs w-full h-8">
+      <p *ngIf="formEquipment.get('voltage')?.invalid && formEquipment.get('voltage')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('voltage')?.errors?.['required']">A tensão é obrigatório.</span>
     </div>
     <div>
       <span class="text-sm font-medium">Prioridade</span>
       <select formControlName="priority" class="border-2 rounded-md text-xs w-full h-8">
-        <option value="" disabled selected >Qual a prioridade?</option>
+        <option value="" disabled selected>Qual a prioridade?</option>
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
       </select>
+      <p *ngIf="formEquipment.get('priority')?.invalid && formEquipment.get('priority')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEquipment.get('priority')?.errors?.['required']">A prioridade é obrigatório.</span>
     </div>
   </div>
-  
+
   <div class="flex justify-between">
     <div>
       <div class="flex gap-1">
@@ -119,21 +117,25 @@
     </div>
   </div>
   <div>
-    <span class="text-sm font-medium">Descrição</span>
-    <textarea class="border-2 rounded-md w-full" rows="4" cols="50" formControlName="others" placeholder="Digite aqui..."></textarea>
+    <span class="text-sm font-medium">
+      Descrição
+      <span class="text-sm font-thin">(opcional)</span>
+    </span>
+    <textarea class="border-2 rounded-md w-full" rows="4" cols="50" formControlName="others"
+      placeholder="Digite aqui..."></textarea>
   </div>
-  
+
   <div *ngIf="showCam" class="flex w-80 flex-col justify-center items-center">
     <video *ngIf="showCam" #video autoplay></video>
     <canvas #canvas></canvas>
-  
+
     <div class="flex gap-3" *ngIf="showCam">
       <button class="bg-gray-300 p-3 rounded-md" (click)="capture()">Capturar foto</button>
       <button class="bg-gray-300 p-3 rounded-md" (click)="stopCamera()">Encerrar câmera</button>
     </div>
   </div>
   <div class="w-full flex justify-center" *ngIf="capturedImage">
-    <img class="w-80"  [src]="capturedImage" alt="Foto Capturada">
+    <img class="w-80" [src]="capturedImage" alt="Foto Capturada">
   </div>
   <div class="flex gap-2 sm:flex-col justify-end">
     <button (click)="openCamera()">
@@ -145,6 +147,13 @@
     </div>
   </div>
 
-  <button class="bg-gray-300 p-3 mt-3 rounded-md" type="submit" (click)="submitEquipment()">Cadastrar</button>
+  <button 
+    [ngClass]="formEquipment.valid ? 'bg-blue-400 p-3 mt-3 rounded-md' : 'bg-gray-300 p-3 mt-3 rounded-md'" 
+    type="submit" 
+    (click)="submitEquipment()"
+    [disabled]="isSubmiting || !formEquipment.valid"
+  >
+    Cadastrar
+  </button>
 
 </form>

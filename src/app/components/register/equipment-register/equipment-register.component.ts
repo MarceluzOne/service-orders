@@ -34,36 +34,34 @@ export class EquipmentRegisterComponent implements OnInit {
   ) { 
     this.formEquipment = this.fb.group({
       'image' : new FormControl('', [Validators.required]),
-      'equipmentName' : new FormControl('', [Validators.required]),
-      'serialNumber' : new FormControl('', Validators.required),
-      'carrier' : new FormControl('', Validators.required),
-      'receiver' : new FormControl('', [Validators.required]),
-      'enterprise_name' : new FormControl('', [Validators.required]),
-      'brand' : new FormControl('', [Validators.required]),
-      'model' : new FormControl('', [Validators.required]),
-      'current' : new FormControl('', [Validators.required]),
-      'power' : new FormControl('', [Validators.required]),
-      'voltage' : new FormControl('', [Validators.required]),
-      'priority' : new FormControl('', [Validators.required]),
+      'equipmentName' : new FormControl('Ar Condicionado Samsung', [Validators.required]),
+      'serialNumber' : new FormControl('SM00254558BR'),
+      'carrier' : new FormControl('motorista', Validators.required),
+      'receiver' : new FormControl('usuario que esta logado', [Validators.required]),
+      'enterprise_name' : new FormControl('BRF', [Validators.required]),
+      'brand' : new FormControl('SAMSUNG', [Validators.required]),
+      'model' : new FormControl('SPLITWALL', [Validators.required]),
+      'current' : new FormControl('200', [Validators.required]),
+      'power' : new FormControl('200', [Validators.required]),
+      'voltage' : new FormControl('200', [Validators.required]),
+      'priority' : new FormControl('A', [Validators.required]),
       'connectors' : new FormControl('NÃO', [Validators.required]),
       'ihm' : new FormControl('NAO', [Validators.required]),
       'carcass_damage' : new FormControl('NAO', [Validators.required]),
       'engine' : new FormControl('NAO', [Validators.required]),
       'engine_cables' : new FormControl('NAO', [Validators.required]),
       'fan' : new FormControl('NAO', [Validators.required]),
-      'fan_carcass' : new FormControl('NAO', [Validators.required]),
-      'others' : new FormControl(''),
+      'fan_carcass' : new FormControl('SIM', [Validators.required]),
+      'others' : new FormControl('ALGO AQUI'),
     })
   }
 
-  async ngOnInit() {  }
-  
-
+  async ngOnInit() { }
   public submitEquipment(): void {
     console.log(this.formEquipment.value)
     const validation = confirm('Deseja cadastrar o equipamento?')
     if ( validation && this.formEquipment.valid) {
-      const formData = this.formEquipment.value;
+      const formData = new FormData();
 
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
@@ -74,7 +72,7 @@ export class EquipmentRegisterComponent implements OnInit {
           this.formEquipment.reset();
         },
         error => { 
-          this.toastr.error(error.error.message,'Erro ao cadastrar o equipamento')
+          this.toastr.error(error,'Erro ao cadastrar o equipamento')
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
@@ -150,29 +148,24 @@ export class EquipmentRegisterComponent implements OnInit {
   const input = event.target as HTMLInputElement;
 
   if (input?.files && input.files.length > 0) {
-    const file = input.files[0]; // Obtem o arquivo selecionado
+    const file = input.files[0];
 
-    // Verifica se é uma imagem
     if (!file.type.startsWith('image/')) {
       console.error('Por favor, selecione um arquivo de imagem.');
       return;
     }
-
-    // Converte a imagem para Base64
     const reader = new FileReader();
     reader.onload = () => {
       const imageBase64 = reader.result as string;
 
-      // Atualiza o formulário com a imagem
       this.formEquipment.patchValue({
         image: imageBase64,
       });
 
-      // Define a imagem capturada para pré-visualização
       this.capturedImage = imageBase64;
     };
 
-    reader.readAsDataURL(file); // Lê o arquivo como Base64
+    reader.readAsDataURL(file);
   } else {
     console.error('Nenhum arquivo foi selecionado.');
   }

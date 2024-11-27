@@ -24,9 +24,9 @@ export class EmployeeRegisterComponent implements OnInit {
     this.formEmployee = this.fb.group({
       'name' : new FormControl('', [Validators.required]),
       'email' : new FormControl('', [Validators.required, Validators.email, ]),
-      'password' : new FormControl('', [Validators.required, Validators.min(6)]),
+      'password' : new FormControl('inverame', [Validators.required, Validators.min(6)]),
       'role' : new FormControl('', [Validators.required]),
-      'employeeCod' : new FormControl('', [Validators.required]),      
+      'employeeCod' : new FormControl('', [Validators.required, Validators.maxLength(10)]),      
     })
   }
 

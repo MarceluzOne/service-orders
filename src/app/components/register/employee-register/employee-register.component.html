@@ -4,14 +4,23 @@
   <div>
     <span class="text-sm font-medium">Nome</span>
     <input type="text" formControlName="name" class="border-2 rounded-md w-full h-8">
+    <p *ngIf="formEmployee.get('name')?.invalid && formEmployee.get('name')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEmployee.get('name')?.errors?.['required']">O nome é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">E-mail</span>
     <input type="phone" formControlName="email" class="border-2 rounded-md w-full h-8">
+    <p *ngIf="formEmployee.get('email')?.invalid && formEmployee.get('email')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formEmployee.get('email')?.errors?.['required']">O email é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Senha</span>
     <input type="password" formControlName="password" class="border-2 rounded-md w-full h-8">
+    <p
+      class="text-red-500 text-sm">
+      <span>A senha padrão é: "inverame".</span>
   </div>
   <div>
     <span class="text-sm font-medium">Tipo de funcionário</span>
@@ -24,10 +33,15 @@
   <div>
     <span class="text-sm font-medium">Código do funcionário</span>
     <input type="text" formControlName="employeeCod" class="border-2 rounded-md w-full h-8">
+    <p *ngIf="formEmployee.get('employeeCod')?.invalid && formEmployee.get('employeeCod')?.touched"
+      class="text-blue-400 text-sm">
+      <span *ngIf="formEmployee.get('employeeCod')?.errors?.['required']">O código é obrigatório.</span>
+      <span *ngIf="formEmployee.get('employeeCod')?.errors?.['maxlength']">Máximo de 10 caracteres.</span>
   </div>
   <button 
-    class="bg-gray-300 p-3 mt-3 rounded-md" 
+    [ngClass]="formEmployee.valid ? 'bg-blue-400 p-3 mt-3 rounded-md' : 'bg-gray-300 p-3 mt-3 rounded-md'"  
     type="submit" 
     (click)="submitEmployee()"
+    [disabled]="isSubmiting || !formEmployee.valid"
   >Cadastrar funcionário</button>
 </form>

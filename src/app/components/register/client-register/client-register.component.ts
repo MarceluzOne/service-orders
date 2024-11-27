@@ -31,7 +31,7 @@ export class ClientRegisterComponent implements OnInit {
     this.formClient = this.fb.group({
       'name': new FormControl('', [Validators.required]),
       'phone': new FormControl('', [Validators.required, Validators.maxLength(11)]),
-      'codClient': new FormControl('', [Validators.required]),
+      'codClient': new FormControl('', [Validators.required, Validators.maxLength(10)]),
       'cnpj': new FormControl('', [Validators.required, Validators.maxLength(18)]),
     });
   }

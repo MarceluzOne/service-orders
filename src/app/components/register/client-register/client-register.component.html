@@ -16,10 +16,16 @@
   <div>
     <span class="text-sm font-medium">Nome</span>
     <input type="text" formControlName="name" class="border-2 rounded-md w-full">
+    <p *ngIf="formClient.get('name')?.invalid && formClient.get('name')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formClient.get('name')?.errors?.['required']">O nome é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Telefone</span>
     <input mask="(00) 0 0000-0000" type="phone" formControlName="phone" class="border-2 rounded-md w-full">
+    <p *ngIf="formClient.get('phone')?.invalid && formClient.get('phone')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formClient.get('phone')?.errors?.['required']">O telefone é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">{{documentInput}}</span>
@@ -28,16 +34,24 @@
       type="text"
       formControlName="cnpj"
       class="border-2 rounded-md w-full">
+      <p *ngIf="formClient.get('cnpj')?.invalid && formClient.get('cnpj')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formClient.get('cnpj')?.errors?.['required'] && isCpf">O CPF é obrigatório.</span>
+      <span *ngIf="formClient.get('cnpj')?.errors?.['required'] && !isCpf">O CNPJ é obrigatório.</span>
   </div>
   <div>
     <span class="text-sm font-medium">Código do cliente </span>
     <input type="text" formControlName="codClient" class="border-2 rounded-md w-full">
+    <p *ngIf="formClient.get('codClient')?.invalid && formClient.get('codClient')?.touched"
+      class="text-red-500 text-sm">
+      <span *ngIf="formClient.get('codClient')?.errors?.['required']">O código do cliente é obrigatório.</span>
+      <span *ngIf="formClient.get('codClient')?.errors?.['maxlength']">O código do cliente não pode ter mais de 10 caracteres.</span>
   </div>
   <button 
-    [ngClass]="isSubmiting ? 'bg-blue-400 p-3 mt-3 rounded-md' : 'bg-gray-300 p-3 mt-3 rounded-md'" 
+    [ngClass]="formClient.valid ? 'bg-blue-400 p-3 mt-3 rounded-md' : 'bg-gray-300 p-3 mt-3 rounded-md'" 
     type="submit" 
     (click)="submitClient()"
-    [disabled]="isSubmiting"
+    [disabled]="isSubmiting || !formClient.valid"
   >
     Cadastrar cliente
   </button>
