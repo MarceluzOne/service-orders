@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, retry } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
-const apiUrl = 'http://localhost:8080'
 @Injectable({
   providedIn: 'root'
 })
@@ -14,14 +13,14 @@ export class UserProfileService {
   ) { }
 
   public getClients(): Observable<any> {
-    return this.http.get(`${apiUrl}/api/clients`)
+    return this.http.get(`${environment.apiUrl}/api/clients`)
       .pipe(
         retry(3)
       );
   }
 
   public get(){
-    return this.http.get(`${apiUrl}/api/clients`)
+    return this.http.get(`${environment.apiUrl}/api/clients`)
       .pipe(
         retry(3),
         map((response) => {

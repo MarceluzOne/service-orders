@@ -42,8 +42,6 @@ export class AuthService {
 
   public getCustomerToken(): boolean {
     const profile = this.localStorage.get(StorageKeys.Profile);
-    
-    // Verifica se o profile existe e se possui a chave roles corretamente
     if (profile && profile.roles && profile.roles.includes('ROLE_ADM')) {
       return true;
     }
@@ -58,8 +56,7 @@ export class AuthService {
     if (token && typeof token === 'string') {
       try {
         const profile = this.jwtDecoder.decodeToken(token);
-        console.log('Perfil decodificado:', profile);
-        this.localStorage.set(StorageKeys.Profile, profile); // Salva o profile no localStorage
+        this.localStorage.set(StorageKeys.Profile, profile); 
       } catch (error) {
         console.error('Erro ao decodificar o token:', error);
       }

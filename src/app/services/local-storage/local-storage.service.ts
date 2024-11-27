@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 
 export enum StorageKeys {
@@ -11,8 +10,7 @@ export enum StorageKeys {
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private storage: Storage|any;
-  public profile: BehaviorSubject<any> = new BehaviorSubject<any>(false)
+  private storage: Storage | any;
 
   constructor() {
     this.storage = window.localStorage;
@@ -39,9 +37,5 @@ export class LocalStorageService {
       return true;
     }
     return false;
-  }
-
-  public isLogged(){
-    
   }
 }

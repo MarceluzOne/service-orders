@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, retry, throwError } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
-const apiUrl = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
