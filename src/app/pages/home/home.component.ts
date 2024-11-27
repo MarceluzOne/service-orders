@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocalStorageService, StorageKeys } from 'src/app/services/local-storage/local-storage.service';
 
 
 @Component({
@@ -15,10 +15,14 @@ export class HomeComponent implements OnInit {
   public buttonStyle: string = 'rounded-md w-full';
 
   get isAdmin(){
+    const admin = this.localStorage.get(StorageKeys.Profile)
+    if(admin.role == 'ROLE_NORMAL'){
+      return false
+    }
     return true
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private localStorage: LocalStorageService) { }
 
   async ngOnInit() { }
   public typeListSelect(type: 'clients' | 'employees' | 'equipments') {

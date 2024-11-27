@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class EquipamentCardComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.getEquipaments()
+    await this.getEquipaments();
   }
   private async getEquipaments() {
     try {

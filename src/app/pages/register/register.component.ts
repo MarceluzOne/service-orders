@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageService, StorageKeys } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +12,10 @@ export class RegisterComponent implements OnInit {
   public statusMessenger: String = '';
 
   get isAdmin(){
+    const admin = this.localStorage.get(StorageKeys.Profile)
+    if(admin.role == 'ROLE_NORMAL'){
+      return false
+    }
     return true
   }
   public get registerTitle() {
@@ -23,7 +27,7 @@ export class RegisterComponent implements OnInit {
     return 'Cadastro de Equipamento'
   };
 
-  constructor(private authService: AuthService) { }
+  constructor(private localStorage: LocalStorageService) { }
 
   async ngOnInit() { }
 

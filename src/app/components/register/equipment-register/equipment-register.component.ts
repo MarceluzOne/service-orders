@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientService } from 'src/app/services/client/client.service';
 import { EquipmentService } from 'src/app/services/equipment/equipment.service';
 import { ToastrService } from 'ngx-toastr';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { StorageKeys } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-equipment-register',
@@ -21,6 +22,9 @@ export class EquipmentRegisterComponent implements OnInit {
   public clients: any;
   public employee: any; 
   public isSubmiting: Boolean = false;
+  public get profile(){
+    return this.localStorage.get(StorageKeys.Profile)
+  }
 
 
   @ViewChild('video') videoElement!: ElementRef;
@@ -30,69 +34,63 @@ export class EquipmentRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private localStorage : LocalStorageService
   ) { 
     this.formEquipment = this.fb.group({
       'image' : new FormControl('', [Validators.required]),
-      'equipmentName' : new FormControl('Ar Condicionado Samsung', [Validators.required]),
-      'serialNumber' : new FormControl('SM00254558BR'),
-      'carrier' : new FormControl('motorista', Validators.required),
-      'receiver' : new FormControl('usuario que esta logado', [Validators.required]),
-      'enterprise_name' : new FormControl('BRF', [Validators.required]),
-      'brand' : new FormControl('SAMSUNG', [Validators.required]),
-      'model' : new FormControl('SPLITWALL', [Validators.required]),
-      'current' : new FormControl('200', [Validators.required]),
-      'power' : new FormControl('200', [Validators.required]),
-      'voltage' : new FormControl('200', [Validators.required]),
-      'priority' : new FormControl('A', [Validators.required]),
+      'equipmentName' : new FormControl('', [Validators.required]),
+      'serialNumber' : new FormControl(''),
+      'carrier' : new FormControl('', Validators.required),
+      'receiver' : new FormControl(this.profile['name'], [Validators.required]),
+      'enterprise_name' : new FormControl('', [Validators.required]),
+      'brand' : new FormControl('', [Validators.required]),
+      'model' : new FormControl('', [Validators.required]),
+      'current' : new FormControl('', [Validators.required]),
+      'power' : new FormControl('', [Validators.required]),
+      'voltage' : new FormControl('', [Validators.required]),
+      'priority' : new FormControl('', [Validators.required]),
       'connectors' : new FormControl('NAO', [Validators.required]),
       'ihm' : new FormControl('NAO', [Validators.required]),
       'carcass_damage' : new FormControl('NAO', [Validators.required]),
       'engine' : new FormControl('NAO', [Validators.required]),
       'engine_cables' : new FormControl('NAO', [Validators.required]),
       'fan' : new FormControl('NAO', [Validators.required]),
-      'fan_carcass' : new FormControl('SIM', [Validators.required]),
-      'others' : new FormControl('ALGO AQUI'),
+      'fan_carcass' : new FormControl('', [Validators.required]),
+      'others' : new FormControl(''),
     })
   }
 
-  async ngOnInit() { }
+  async ngOnInit() {  }
+
   public submitEquipment(): void {
-    console.log(this.formEquipment.value);
-  
+    this.isSubmiting = true
+    this.toastr.info('Cadastrando equipamento')
     const validation = confirm('Deseja cadastrar o equipamento?');
     if (validation && this.formEquipment.valid) {
       const formData = new FormData();
-  
-      // Adiciona todos os campos do formulário
       Object.keys(this.formEquipment.controls).forEach(key => {
         formData.append(key, this.formEquipment.get(key)?.value);
       });
-  
-      // Adiciona a imagem, se existir
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
-      } else {
-        this.toastr.error('Por favor, capture ou envie uma imagem do equipamento.');
-        return;
       }
-  
-      // Envia a requisição
+
       this.registerEquipment.registerEquipament(formData).subscribe(
         response => {
           this.toastr.success('Equipamento cadastrado com sucesso');
+          this.isSubmiting = false;
           this.formEquipment.reset();
         },
         error => {
-          this.toastr.error('Erro ao cadastrar o equipamento.');
-          console.error('Erro ao cadastrar equipamento:', error);
+          this.toastr.error(error.error.message);
+          this.isSubmiting = false;
         }
       );
     } else {
       this.toastr.info('Não foi possível cadastrar o equipamento.');
     }
   }
-  
 
   private convertDataURLToFile(dataURL: string, filename: string): File {
     const arr = dataURL.split(',');
@@ -110,6 +108,7 @@ export class EquipmentRegisterComponent implements OnInit {
     this.startCamera();
     this.showCam = true;
   }
+
   private isMobile(): boolean {
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
@@ -157,6 +156,7 @@ export class EquipmentRegisterComponent implements OnInit {
     }
     this.videoElement.nativeElement.srcObject = null;
   }
+
   public uploadImage(event: any){
   const input = event.target as HTMLInputElement;
 
@@ -183,5 +183,4 @@ export class EquipmentRegisterComponent implements OnInit {
     console.error('Nenhum arquivo foi selecionado.');
   }
   }
-
 }

@@ -1,22 +1,23 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
-  <div class="lg:grid lg:grid-cols-3 w-full flex flex-col m-auto gap-3 h-full">
+  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 h-full">
     <div *ngFor="let equipament of equipaments" class="flex bg-slate-300 rounded-md">
-      <div class="max-w-12 min-h-24 flex justify-center items-center m-3 ">
+      <div class="max-w-12 min-h-24 flex flex-col m-3 ">
+        <p class="bg-white w-min rounded-md text-[6px] text-left mb-[25%] px-1 py-[2px]"> {{ equipament.priority }}</p>
         <img class="border-2 border-white bg-cover" [src]="equipament.photoURL" alt="">
       </div>
-      <div class="w-full min-h-full flex flex-col justify-between p-1">
-        <div class="flex justify-between px-3 h-1/6 pb-1 items-center">
-          <p class="text-xs font-bold">{{ equipament.equipmentName }}</p>
+      <div class="w-full min-h-full flex flex-col gap-4 justify-between p-1">
+        <div class="flex flex-nowrap justify-between px-3 h-1/6 pb-1 items-center">
+          <p class="text-xs whitespace-nowrap text-ellipsis overflow-hidden font-bold">{{ equipament.equipmentName }}</p>
           <p class="text-[6px] text-end">
-            Número de serie: {{ equipament.serialNumber }}
-            <span class="bg-white rounded-md px-1 py-[2px]"> {{ equipament.priority }}</span>
+            <span class="hidden">Número de serie:</span>
+            {{ equipament.serialNumber }}
           </p>
         </div>
         <div class=" h-full flex flex-col justify-evenly h-100%">
           <p class="text-xs w-full">{{equipament.others}} </p>
-          <div class="flex gap-2 flex-wrap ">
+          <div class="md:flex gap-2 hidden flex-wrap ">
             <p class="text-[6px] bg-secondary-color rounded-md py-[2px] px-1 lg:text-[10px]">
-              CONECTORES: 
+              CONECTORES:
               <span class="font-semibold">
                 {{equipament.connectors}}
               </span>
@@ -44,7 +45,7 @@
               <span class="font-semibold">
                 {{equipament.engine_cables}}
               </span>
-            </p> 
+            </p>
             <p class="text-[6px] lg:text-[10px]">
               VENTILADOR:
               <span class="font-semibold">

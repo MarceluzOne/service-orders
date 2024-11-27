@@ -37,7 +37,7 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   public submitClient(){
-    this.isSubmiting = true
+    this.toastr.info('Cadastrando cliente')
     if (this.formClient.valid) {
       const client = this.formClient.value;
       this.clientService.registerClient(client).subscribe(

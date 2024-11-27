@@ -82,37 +82,40 @@
     </div>
   </div>
 
-  <div class="flex justify-between">
-    <div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="connectors" value="SIM">
-        <p class="text-sm font-light uppercase">CONECTORES</p>
+  <div class="flex flex-col justify-between">
+    <p class="text-sm font-medium">Possui:</p>
+    <div class="flex justify-between">
+      <div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="connectors" value="SIM">
+          <p class="text-sm font-light uppercase">CONECTORES</p>
+        </div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="ihm" value="SIM">
+          <p class="text-sm font-light uppercase">IHM</p>
+        </div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="carcass_damage" value="SIM">
+          <p class="text-sm font-light uppercase">Avarias em carcaça</p>
+        </div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="engine" value="SIM">
+          <p class="text-sm font-light uppercase">Motor</p>
+        </div>
       </div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="ihm" value="SIM">
-        <p class="text-sm font-light uppercase">IHM</p>
-      </div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="carcass_damage" value="SIM">
-        <p class="text-sm font-light uppercase">Avarias em carcaça</p>
-      </div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="engine" value="SIM">
-        <p class="text-sm font-light uppercase">Motor</p>
-      </div>
-    </div>
-    <div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="engine_cables" value="SIM">
-        <p class="text-sm font-light uppercase">Cabos do motor</p>
-      </div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="fan" value="SIM">
-        <p class="text-sm font-light uppercase">Ventilador</p>
-      </div>
-      <div class="flex gap-1">
-        <input type="radio" formControlName="fan_carcass" value="SIM">
-        <p class="text-sm font-light uppercase">Carcaça do ventilador</p>
+      <div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="engine_cables" value="SIM">
+          <p class="text-sm font-light uppercase">Cabos do motor</p>
+        </div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="fan" value="SIM">
+          <p class="text-sm font-light uppercase">Ventilador</p>
+        </div>
+        <div class="flex gap-1">
+          <input type="radio" formControlName="fan_carcass" value="SIM">
+          <p class="text-sm font-light uppercase">Carcaça do ventilador</p>
+        </div>
       </div>
     </div>
   </div>
