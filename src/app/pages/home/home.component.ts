@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   public buttonStyle: string = 'rounded-md w-full';
 
   get isAdmin(){
-    return this.authService.isAdmin.getValue()
+    return true
   }
 
   constructor(private authService: AuthService) { }

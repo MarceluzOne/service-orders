@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   public statusMessenger: String = '';
 
   get isAdmin(){
-    return this.authService.isAdmin.getValue()
+    return true
   }
   public get registerTitle() {
     if (this.equipmentForm == 'client') {

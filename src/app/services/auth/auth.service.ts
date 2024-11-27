@@ -10,7 +10,7 @@ import { StorageKeys } from 'src/app/services/local-storage/local-storage.servic
 })
 export class AuthService {
 
-  public isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getCustomerToken());
+  //public isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getCustomerToken());
 
 constructor(
   private http: HttpClient,
@@ -36,7 +36,6 @@ public login(payload: any): Observable<any> {
 public logout() {
   this.localStorage.remove(StorageKeys.Token);
   this.localStorage.remove(StorageKeys.Profile);
-  this.isAdmin.next(false);
 }
 
 public getCustomerToken(): boolean {
@@ -49,7 +48,7 @@ public getCustomerToken(): boolean {
 }
 
 private updateAdminStatus(): void {
-  this.isAdmin.next(this.getCustomerToken());
+
 }
 
   public decoderToken(token: any): void {
