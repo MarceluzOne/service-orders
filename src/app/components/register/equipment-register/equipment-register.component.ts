@@ -45,7 +45,7 @@ export class EquipmentRegisterComponent implements OnInit {
       'power' : new FormControl('200', [Validators.required]),
       'voltage' : new FormControl('200', [Validators.required]),
       'priority' : new FormControl('A', [Validators.required]),
-      'connectors' : new FormControl('NÃO', [Validators.required]),
+      'connectors' : new FormControl('NAO', [Validators.required]),
       'ihm' : new FormControl('NAO', [Validators.required]),
       'carcass_damage' : new FormControl('NAO', [Validators.required]),
       'engine' : new FormControl('NAO', [Validators.required]),
@@ -58,28 +58,41 @@ export class EquipmentRegisterComponent implements OnInit {
 
   async ngOnInit() { }
   public submitEquipment(): void {
-    console.log(this.formEquipment.value)
-    const validation = confirm('Deseja cadastrar o equipamento?')
-    if ( validation && this.formEquipment.valid) {
+    console.log(this.formEquipment.value);
+  
+    const validation = confirm('Deseja cadastrar o equipamento?');
+    if (validation && this.formEquipment.valid) {
       const formData = new FormData();
-
+  
+      // Adiciona todos os campos do formulário
+      Object.keys(this.formEquipment.controls).forEach(key => {
+        formData.append(key, this.formEquipment.get(key)?.value);
+      });
+  
+      // Adiciona a imagem, se existir
       if (this.capturedImage) {
         formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
+      } else {
+        this.toastr.error('Por favor, capture ou envie uma imagem do equipamento.');
+        return;
       }
+  
+      // Envia a requisição
       this.registerEquipment.registerEquipament(formData).subscribe(
         response => {
           this.toastr.success('Equipamento cadastrado com sucesso');
           this.formEquipment.reset();
         },
-        error => { 
-          this.toastr.error(error,'Erro ao cadastrar o equipamento')
+        error => {
+          this.toastr.error('Erro ao cadastrar o equipamento.');
           console.error('Erro ao cadastrar equipamento:', error);
         }
       );
-    }else{
-      this.toastr.info('Não foi possivel cadastrar o equipamento')
+    } else {
+      this.toastr.info('Não foi possível cadastrar o equipamento.');
     }
   }
+  
 
   private convertDataURLToFile(dataURL: string, filename: string): File {
     const arr = dataURL.split(',');
