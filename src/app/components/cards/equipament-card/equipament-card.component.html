@@ -1,11 +1,10 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
-  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-4 text-gray-200">
-    <div
-      *ngFor="let equipament of equipaments"
-      class="flex bg-card-color rounded-md shadow-md"
-    >
+  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-1 text-gray-200">
+
+    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md">
+      
       <!-- Detalhes do Equipamento -->
-      <div class="w-[35%] flex flex-col m-3 justify-center ">
+      <div class="w-[80%] sm:w-[40%] flex flex-col m-4 justify-center">
         <img
           class="w-full h-auto border-2 border-white rounded-md bg-cover flex-shrink-0"
           [src]="equipament.photoURL"
@@ -14,16 +13,16 @@
       </div>
 
       <!-- Informações do Equipamento -->
-      <div class="w-[70%] flex flex-col gap-5 justify-between p-4">
+      <div class="w-[100%] sm:w-[70%] flex flex-col gap-3 justify-between p-2">
         <!-- Nome e Número de Série -->
-        <div class="flex justify-between px-3 items-center">
-          <p class="text-sm font-bold text-ellipsis overflow-hidden">
+        <div class="flex flex-col sm:flex-row justify-between px-3 items-center">
+          <p class="text-sm text-center m-1 p-1 overflow-hidden">
             {{ equipament.equipmentName }}
           </p>
-          <p class="text-[10px] bg-info-color rounded-md p-1 text-end ">
+          <p class="text-[10px] bg-info-color rounded-md p-1 m-1 text-end ">
             {{ equipament.serialNumber }}
           </p>
-          <p class="bg-white w-min rounded-md text-xs text-end px-2 py-1 text-black">
+          <p class="bg-white w-min rounded-md text-xs text-end px-2 py-1 m-1 text-black">
             {{ equipament.priority }}
           </p>
         </div>
@@ -57,13 +56,13 @@
           </p>
         </div>
 
-        <!-- Outros Detalhes -->
-        <div class="flex flex-col justify-evenly h-full">
-          <p class="text-xs">{{ equipament.others }}</p>
-        </div>
+      <!-- Outros Detalhes -->
+      <div class="flex flex-col justify-evenly h-full sm:items-start items-center">
+      <p class="text-xs text-center">{{ equipament.others }}</p>
+      </div>
 
         <!-- Data de Registro -->
-        <p class="text-[10px] text-end">
+        <p class="flex flex-col justify-end h-full sm:items-end items-center m-2 text-[10px] ">
           Registrado em: {{ equipament.registrationDate | dateType }}
         </p>
       </div>
@@ -72,5 +71,5 @@
 </div>
 
 <ng-template #noEquipament>
-  <p class="text-center text-lg text-white">Nenhum equipamento cadastrado</p>
+  <p class="text-center text-lg text-blue-900">Nenhum equipamento cadastrado</p>
 </ng-template>

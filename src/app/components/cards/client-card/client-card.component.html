@@ -17,6 +17,7 @@
         <span>{{ client.phone | phoneMask }}</span>
       </p>
     </div>
+    
     <div class="flex md:flex-col justify-between gap-1">
       <div>
         <p class="text-sm bg-info-color rounded-md p-1 m-2">Cód: {{ client.codClient }}</p>
@@ -35,5 +36,5 @@
 </div>
 
 <ng-template #noClients>
-  <p class="text-white">Não há clientes cadastrados.</p>
+  <p class="text-blue-900">Não há clientes cadastrados.</p>
 </ng-template>

@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   public typeList: 'clients' | 'employees' | 'equipments' = 'equipments';
   public buttonStyleSelected: string = 'border-b-4 border-blue-800 rounded-md w-full';
   public buttonStyle: string = 'rounded-md w-full';
+  public dropdownOpen: boolean = false; 
 
   get isAdmin(){
     const admin = this.localStorage.get(StorageKeys.Profile)
@@ -25,19 +26,14 @@ export class HomeComponent implements OnInit {
   constructor(private localStorage: LocalStorageService) { }
 
   async ngOnInit() { }
-  public typeListSelect(type: 'clients' | 'employees' | 'equipments') {
-    const style = 'border-b-4 text-md border-blue-800 rounded-md w-full'
-    
-    if (type === 'clients') {
-      this.typeList = type
-      return this.buttonStyleSelected = style
-    }
-    if (type === 'equipments') {
-      this.typeList = type
-      return this.buttonStyleSelected = style
-    }
-    this.typeList = type
-    return this.buttonStyleSelected = style
+  public toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  // Seleciona o tipo da lista e fecha o dropdown
+  public typeListSelect(type: 'clients' | 'employees' | 'equipments'): void {
+    this.typeList = type;
+    this.dropdownOpen = false;
   }
 
 }
