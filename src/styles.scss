@@ -4,13 +4,13 @@
 @tailwind utilities;
 
 .primary-color{
-  color: #8ba6ac
+  color: #252525
 }
 .bg-primary-color{
-  background-color: #8ba6ac !important
+  background-color: #252525 !important
 
 }
 .bg-secondary-color{
-  $adjusted-color: adjust-color($color: #8ba6ac, $red: 1, $green: 2, $blue: 3);
+  $adjusted-color: adjust-color($color: #252525, $red: 1, $green: 2, $blue: 3);
   background-color: rgba($adjusted-color, 0.3) !important;
 }
