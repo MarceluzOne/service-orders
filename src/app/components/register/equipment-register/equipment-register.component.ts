@@ -56,7 +56,7 @@ export class EquipmentRegisterComponent implements OnInit {
       'engine' : new FormControl('NAO', [Validators.required]),
       'engine_cables' : new FormControl('NAO', [Validators.required]),
       'fan' : new FormControl('NAO', [Validators.required]),
-      'fan_carcass' : new FormControl('', [Validators.required]),
+      'fan_carcass' : new FormControl('NAO', [Validators.required]),
       'others' : new FormControl(''),
     })
   }

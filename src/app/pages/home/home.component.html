@@ -37,21 +37,21 @@
     <!-- Botões de seleção horizontal (Desktop) -->
     <div class="hidden sm:flex min-w-full justify-around rounded-md gap-4">
       <button
-        class="text-lg text-blue-900 w-full"
+        class="text-lg text-white w-full"
         [ngClass]="typeList === 'equipments' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('equipments')">
         Equipamento
       </button>
       <button
         *ngIf="isAdmin"
-        class="text-lg text-blue-900 w-full"
+        class="text-lg text-white w-full"
         [ngClass]="typeList === 'clients' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('clients')">
         Cliente
       </button>
       <button
         *ngIf="isAdmin"
-        class="text-lg text-blue-900 w-full"
+        class="text-lg text-white w-full"
         [ngClass]="typeList === 'employees' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('employees')">
         Funcionário

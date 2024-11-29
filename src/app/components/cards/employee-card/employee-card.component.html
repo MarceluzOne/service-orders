@@ -3,15 +3,15 @@
   *ngFor="let employee of employees">
     <div class="flex flex-col gap-2 m-2">
       <p class="gap-1 flex items-center ">
-        <span class="text-lg bg-info-color rounded-md p-1">Nome: </span>
+        <span class="text-base bg-info-color rounded-md p-1">Nome: </span>
         <span>{{employee.name}}</span>
       </p>
       <p class="gap-1 flex items-center ">
-        <span class="text-lg bg-info-color rounded-md p-1">Email: </span>
+        <span class="text-base bg-info-color rounded-md p-1">Email: </span>
         <span>{{employee.email}}</span>
       </p>
       <p class="gap-1 flex items-center ">
-        <span class="text-lg bg-info-color rounded-md p-1">Tipo de conta: </span>
+        <span class="text-base bg-info-color rounded-md p-1">Tipo de conta: </span>
         <span>{{employee.role}}</span>
       </p>
     </div>
@@ -20,18 +20,18 @@
         <p class="text-sm bg-info-color rounded-md p-1 m-2">Cód: {{employee.employeeCod}}</p>
         <p class="text-sm bg-info-color rounded-md p-1 m-2">Data de registro: {{employee.registrationDate | dateType}}</p>
       </div>
-      <div class="flex gap-4 m-2 justify-end">
+      <div class="flex gap-6 m-2 justify-end items-end">
         <button>
-          <i class="fa-solid fa-pencil" style="color: #51abf0;"></i>
+          <i class="fa-solid fa-pencil" style="color: #2184cf;"></i>
         </button>
         <button (click)="confirmDelete(employee.employeeCod)">
-          <i class="fa-solid fa-trash" style="color: #51abf0;"></i>
+          <i class="fa-solid fa-trash" style="color: #a10909;"></i>
         </button>
       </div>
     </div>
   </div>
 </div>
 <ng-template #noEmployees>
-  <p class="text-blue-900">Não há funcionários cadastrados.</p>
+  <p class="text-center text-lg text-white">Não há funcionários cadastrados.</p>
 </ng-template>
 

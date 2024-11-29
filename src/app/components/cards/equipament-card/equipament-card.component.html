@@ -1,5 +1,5 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
-  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-1 text-gray-200">
+  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-gray-200">
 
     <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md">
       
@@ -71,5 +71,5 @@
 </div>
 
 <ng-template #noEquipament>
-  <p class="text-center text-lg text-blue-900">Nenhum equipamento cadastrado</p>
+  <p class="text-center text-lg text-white">Nenhum equipamento cadastrado</p>
 </ng-template>
