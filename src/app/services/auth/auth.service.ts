@@ -20,6 +20,7 @@ export class AuthService {
   ) {}
 
   public login(payload: any): Observable<any> {
+    this.localStorage.clean()
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${environment.apiUrl}/auth/login`, payload, { headers }).pipe(
       tap((response: any) => {
