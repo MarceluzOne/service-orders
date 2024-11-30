@@ -53,7 +53,7 @@ export class AuthService {
     this.isAdmin.next(this.getCustomerToken());
   }
 
-  public decoderToken(token: any): void {
+  public decoderToken(token: string): void {
     if (token && typeof token === 'string') {
       try {
         const profile = this.jwtDecoder.decodeToken(token);
