@@ -61,9 +61,8 @@ export class EquipmentRegisterComponent implements OnInit {
 
   public submitEquipment(): void {
     this.isSubmiting = true
-    this.toastr.info('Cadastrando equipamento');
-
-    const updatedValues = { ...this.formEquipment.value };
+    this.toastr.info('Cadastrando equipamento')
+    const updatedValues = { ...this.formEquipment.value }
     Object.keys(updatedValues).forEach((key) => {
       if (updatedValues[key] === true) {
         updatedValues[key] = "SIM";
@@ -73,7 +72,6 @@ export class EquipmentRegisterComponent implements OnInit {
       }
     });
     this.formEquipment.patchValue(updatedValues);
-
     const validation = confirm('Deseja cadastrar o equipamento?');
 
     if (validation && this.formEquipment.valid) {
@@ -95,7 +93,7 @@ export class EquipmentRegisterComponent implements OnInit {
         this.formEquipment.reset();
       },
         error => {
-          this.toastr.error(error.error.message);
+          this.toastr.error(error.message);
           this.isSubmiting = false;
         }
       );
