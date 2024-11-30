@@ -11,7 +11,7 @@ import { StorageKeys } from 'src/app/services/local-storage/local-storage.servic
   styleUrls: ['./equipment-register.component.scss']
 })
 export class EquipmentRegisterComponent implements OnInit {
-  public formEquipment:  FormGroup = this.fb.group({});
+  public formEquipment: FormGroup = this.fb.group({});
   public showCam: boolean = false;
   public isAdmin: Boolean = true;
   public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
@@ -19,79 +19,81 @@ export class EquipmentRegisterComponent implements OnInit {
   public stream: MediaStream | null = null;
   public isSubmiting: Boolean = false;
 
-  public get profile(){
+  public get profile() {
     return this.localStorage.get(StorageKeys.Profile)
   }
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
-  
+
 
   constructor(
     private fb: FormBuilder,
     private registerEquipment: EquipmentService,
     private toastr: ToastrService,
-    private localStorage : LocalStorageService
-  ) { 
+    private localStorage: LocalStorageService
+  ) {
     this.formEquipment = this.fb.group({
-      'image' : new FormControl('', [Validators.required]),
-      'equipmentName' : new FormControl('', [Validators.required]),
-      'serialNumber' : new FormControl(''),
-      'carrier' : new FormControl('', Validators.required),
-      'receiver' : new FormControl(this.profile['name'], [Validators.required]),
-      'enterprise_name' : new FormControl('', [Validators.required]),
-      'brand' : new FormControl('', [Validators.required]),
-      'model' : new FormControl('', [Validators.required]),
-      'current' : new FormControl('', [Validators.required]),
-      'power' : new FormControl('', [Validators.required]),
-      'voltage' : new FormControl('', [Validators.required]),
-      'priority' : new FormControl('', [Validators.required]),
-      'connectors' : new FormControl(''),
-      'ihm' : new FormControl(''),
-      'carcass_damage' : new FormControl(''),
-      'engine' : new FormControl(''),
-      'engine_cables' : new FormControl(''),
-      'fan' : new FormControl(''),
-      'fan_carcass' : new FormControl('', ),
-      'others' : new FormControl(''),
+      'image': new FormControl('', [Validators.required]),
+      'equipmentName': new FormControl('', [Validators.required]),
+      'serialNumber': new FormControl(''),
+      'carrier': new FormControl('', Validators.required),
+      'receiver': new FormControl(this.profile['name'], [Validators.required]),
+      'enterprise_name': new FormControl('', [Validators.required]),
+      'brand': new FormControl('', [Validators.required]),
+      'model': new FormControl('', [Validators.required]),
+      'current': new FormControl('', [Validators.required]),
+      'power': new FormControl('', [Validators.required]),
+      'voltage': new FormControl('', [Validators.required]),
+      'priority': new FormControl('', [Validators.required]),
+      'connectors': new FormControl(''),
+      'ihm': new FormControl(''),
+      'carcass_damage': new FormControl(''),
+      'engine': new FormControl(''),
+      'engine_cables': new FormControl(''),
+      'fan': new FormControl(''),
+      'fan_carcass': new FormControl('',),
+      'others': new FormControl(''),
     })
   }
 
-  async ngOnInit() {  }
+  async ngOnInit() { }
 
   public submitEquipment(): void {
     this.isSubmiting = true
-    this.toastr.info('Cadastrando equipamento')
-    console.log(this.formEquipment.value)
-    const updatedValues = { ...this.formEquipment.value }
+    this.toastr.info('Cadastrando equipamento');
+
+    const updatedValues = { ...this.formEquipment.value };
     Object.keys(updatedValues).forEach((key) => {
       if (updatedValues[key] === true) {
         updatedValues[key] = "SIM";
       }
-      if (updatedValues[key] === ''){
+      if (updatedValues[key] === '') {
         updatedValues[key] = "NAO"
       }
     });
-
     this.formEquipment.patchValue(updatedValues);
-    console.log(this.formEquipment.value)
-    const validation = confirm('Deseja cadastrar o equipamento?');
-    if (validation && this.formEquipment.valid) {
-      this.toastr.info('Cadastrando equipamento','AGUARDE')
-      const formData = new FormData();
-      Object.keys(this.formEquipment.controls).forEach(key => {
-        formData.append(key, this.formEquipment.get(key)?.value);
-      });
-      if (this.capturedImage) {
-        formData.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
-      }
 
-      this.registerEquipment.registerEquipament(formData).subscribe(
-        response => {
-          this.toastr.success('Equipamento cadastrado com sucesso');
-          this.isSubmiting = false;
-          this.formEquipment.reset();
-        },
+    const validation = confirm('Deseja cadastrar o equipamento?');
+
+    if (validation && this.formEquipment.valid) {
+      this.toastr.info('Cadastrando equipamento', 'AGUARDE')
+      let payload: any;
+      if (this.capturedImage) {
+        payload = new FormData();
+        Object.keys(this.formEquipment.value).forEach((key) => {
+          payload.append(key, this.formEquipment.value[key])
+        });
+        payload.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
+      }
+      
+      console.log(payload)
+    this.registerEquipment.registerEquipament(payload).subscribe(
+      response => {
+        this.toastr.success('Equipamento cadastrado com sucesso');
+        this.isSubmiting = false;
+        this.formEquipment.reset();
+      },
         error => {
           this.toastr.error(error.error.message);
           this.isSubmiting = false;
@@ -129,7 +131,7 @@ export class EquipmentRegisterComponent implements OnInit {
       navigator.mediaDevices.getUserMedia({
         video: this.isMobile()
           ? { facingMode: { exact: "environment" } }
-          : true, 
+          : true,
       })
         .then((stream: MediaStream) => {
           this.stream = stream;
@@ -167,30 +169,30 @@ export class EquipmentRegisterComponent implements OnInit {
     this.videoElement.nativeElement.srcObject = null;
   }
 
-  public uploadImage(event: any){
-  const input = event.target as HTMLInputElement;
+  public uploadImage(event: any) {
+    const input = event.target as HTMLInputElement;
 
-  if (input?.files && input.files.length > 0) {
-    const file = input.files[0];
+    if (input?.files && input.files.length > 0) {
+      const file = input.files[0];
 
-    if (!file.type.startsWith('image/')) {
-      console.error('Por favor, selecione um arquivo de imagem.');
-      return;
+      if (!file.type.startsWith('image/')) {
+        console.error('Por favor, selecione um arquivo de imagem.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageBase64 = reader.result as string;
+
+        this.formEquipment.patchValue({
+          image: imageBase64,
+        });
+
+        this.capturedImage = imageBase64;
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      console.error('Nenhum arquivo foi selecionado.');
     }
-    const reader = new FileReader();
-    reader.onload = () => {
-      const imageBase64 = reader.result as string;
-
-      this.formEquipment.patchValue({
-        image: imageBase64,
-      });
-
-      this.capturedImage = imageBase64;
-    };
-
-    reader.readAsDataURL(file);
-  } else {
-    console.error('Nenhum arquivo foi selecionado.');
-  }
   }
 }
