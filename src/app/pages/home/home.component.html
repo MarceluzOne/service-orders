@@ -1,35 +1,68 @@
 <app-navbar></app-navbar>
-<div class="m-auto justify-center max-w-7xl p-10">
-  <div class="w-full flex-col bg-white rounded-md h-auto gap-5 flex justify-center p-4">
-    <div  class="flex min-w-full justify-around rounded-md gap-4">
+<div class="m-auto justify-center max-w-[90%] sm:max-w-[95%] p-4 sm:p-10">
+  <div class="w-full flex flex-col bg-all-cards-color rounded-md h-auto gap-5 flex justify-center p-4 shadow-md">
+    
+    <!-- Dropdown para seleção de tipo (Mobile) -->
+    <div class="relative w-full sm:hidden">
+      <button class="text-lg text-black w-full sm:w-auto flex bg-gray-200 items-center justify-center p-2 rounded-md" (click)="toggleDropdown()">
+        <span>{{ typeList === 'equipments' ? 'Equipamento' : typeList === 'clients' ? 'Cliente' : 'Funcionário' }}</span>
+        <i class="fa-solid fa-caret-down ml-2"></i>
+      </button>
+      
+      <!-- Dropdown Menu (Mobile) -->
+      <div *ngIf="dropdownOpen" class="absolute left-0 mt-2 w-full bg-gray-200 text-black rounded-md shadow-lg z-10">
+        <button
+          class="w-full text-left p-2 hover:bg-gray-100"
+          [ngClass]="typeList === 'equipments' ? 'bg-gray-100' : ''"
+          (click)="typeListSelect('equipments')">
+          Equipamento
+        </button>
+        <button
+          *ngIf="isAdmin"
+          class="w-full text-left p-2 hover:bg-gray-100"
+          [ngClass]="typeList === 'clients' ? 'bg-gray-100' : ''"
+          (click)="typeListSelect('clients')">
+          Cliente
+        </button>
+        <button
+          *ngIf="isAdmin"
+          class="w-full text-left p-2 hover:bg-gray-100"
+          [ngClass]="typeList === 'employees' ? 'bg-gray-100' : ''"
+          (click)="typeListSelect('employees')">
+          Funcionário
+        </button>
+      </div>
+    </div>
+
+    <!-- Botões de seleção horizontal (Desktop) -->
+    <div class="hidden sm:flex min-w-full justify-around rounded-md gap-4">
       <button
-        class="rounded-md w-full"
-        [ngClass]="typeList=== 'equipments' ? 'border-b-4 border-blue-300': ''"
+        class="text-lg text-white w-full"
+        [ngClass]="typeList === 'equipments' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('equipments')">
         Equipamento
       </button>
       <button
         *ngIf="isAdmin"
-        class="rounded-md w-full"
-        [ngClass]="typeList=== 'clients' ? 'border-b-4 border-blue-300': ''"
+        class="text-lg text-white w-full"
+        [ngClass]="typeList === 'clients' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('clients')">
         Cliente
       </button>
       <button
         *ngIf="isAdmin"
-        class="rounded-md w-full"
-        [ngClass]="typeList=== 'employees' ? 'border-b-4 border-blue-300': ''"
+        class="text-lg text-white w-full"
+        [ngClass]="typeList === 'employees' ? 'border-b-2 border-blue-900' : ''"
         (click)="typeListSelect('employees')">
         Funcionário
       </button>
     </div>
-    <div>
-      <app-client-card *ngIf="typeList === 'clients'">
-      </app-client-card>
-        <app-employee-card *ngIf="typeList === 'employees'">
-        </app-employee-card>
-        <app-equipament-card *ngIf="typeList === 'equipments'">
-        </app-equipament-card>
+
+    <!-- Cards -->
+    <div class="mt-5">
+      <app-client-card *ngIf="typeList === 'clients'"></app-client-card>
+      <app-employee-card *ngIf="typeList === 'employees'"></app-employee-card>
+      <app-equipament-card *ngIf="typeList === 'equipments'"></app-equipament-card>
     </div>
   </div>
 </div>

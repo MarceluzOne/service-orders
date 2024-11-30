@@ -38,4 +38,9 @@ export class LocalStorageService {
     }
     return false;
   }
+
+  clean(){
+    this.storage.removeItem(StorageKeys.Profile);
+    this.storage.removeItem(StorageKeys.Token);
+  }
 }

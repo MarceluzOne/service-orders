@@ -15,17 +15,13 @@ export class EquipmentRegisterComponent implements OnInit {
   public showCam: boolean = false;
   public isAdmin: Boolean = true;
   public equipmentForm: 'client' | 'equipment' | 'employee' = 'equipment';
-  public equipament: any;
   public capturedImage: string | null = null;
   public stream: MediaStream | null = null;
-  public statusMessenger: String = '';
-  public clients: any;
-  public employee: any; 
   public isSubmiting: Boolean = false;
+
   public get profile(){
     return this.localStorage.get(StorageKeys.Profile)
   }
-
 
   @ViewChild('video') videoElement!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -50,13 +46,13 @@ export class EquipmentRegisterComponent implements OnInit {
       'power' : new FormControl('', [Validators.required]),
       'voltage' : new FormControl('', [Validators.required]),
       'priority' : new FormControl('', [Validators.required]),
-      'connectors' : new FormControl('NAO', [Validators.required]),
-      'ihm' : new FormControl('NAO', [Validators.required]),
-      'carcass_damage' : new FormControl('NAO', [Validators.required]),
-      'engine' : new FormControl('NAO', [Validators.required]),
-      'engine_cables' : new FormControl('NAO', [Validators.required]),
-      'fan' : new FormControl('NAO', [Validators.required]),
-      'fan_carcass' : new FormControl('', [Validators.required]),
+      'connectors' : new FormControl(''),
+      'ihm' : new FormControl(''),
+      'carcass_damage' : new FormControl(''),
+      'engine' : new FormControl(''),
+      'engine_cables' : new FormControl(''),
+      'fan' : new FormControl(''),
+      'fan_carcass' : new FormControl('', ),
       'others' : new FormControl(''),
     })
   }
@@ -66,8 +62,22 @@ export class EquipmentRegisterComponent implements OnInit {
   public submitEquipment(): void {
     this.isSubmiting = true
     this.toastr.info('Cadastrando equipamento')
+    console.log(this.formEquipment.value)
+    const updatedValues = { ...this.formEquipment.value }
+    Object.keys(updatedValues).forEach((key) => {
+      if (updatedValues[key] === true) {
+        updatedValues[key] = "SIM";
+      }
+      if (updatedValues[key] === ''){
+        updatedValues[key] = "NAO"
+      }
+    });
+
+    this.formEquipment.patchValue(updatedValues);
+    console.log(this.formEquipment.value)
     const validation = confirm('Deseja cadastrar o equipamento?');
     if (validation && this.formEquipment.valid) {
+      this.toastr.info('Cadastrando equipamento','AGUARDE')
       const formData = new FormData();
       Object.keys(this.formEquipment.controls).forEach(key => {
         formData.append(key, this.formEquipment.get(key)?.value);

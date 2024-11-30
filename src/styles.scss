@@ -3,14 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .primary-color{
-  color: #8ba6ac
+  color: #26354e
 }
 .bg-primary-color{
-  background-color: #8ba6ac !important
-
+  background-color: #26354e !important
 }
 .bg-secondary-color{
-  $adjusted-color: adjust-color($color: #8ba6ac, $red: 1, $green: 2, $blue: 3);
+  $adjusted-color: adjust-color($color: #26354e, $red: 1, $green: 2, $blue: 3);
   background-color: rgba($adjusted-color, 0.3) !important;
+}
+
+/* Estilo para a barra de rolagem */
+::-webkit-scrollbar {
+  width: 7px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #080f1b;
+  border-radius: 8px; 
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2f405c; 
 }

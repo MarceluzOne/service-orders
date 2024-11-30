@@ -1,36 +1,37 @@
-<div  *ngIf="employees.length > 0; else noEmployees">
-  <div class="h-full min-w-64 rounded-md bg-slate-300 p-2 flex flex-col md:flex-row mb-3 md:flex "
+<div *ngIf="employees.length > 0; else noEmployees" class="lg:grid lg:grid-cols-2 gap-4">
+  <div class="h-full min-w-64 rounded-md bg-card-color p-2 flex flex-col md:flex-row mb-3 md:flex justify-between text-gray-200"
   *ngFor="let employee of employees">
-  <div class="flex flex-col gap-1">
-    <p class="gap-1 flex items-center ">
-      <span class="text-sm">Nome: </span>
-      <span>{{employee.name}}</span>
-    </p>
-    <p class="text-xs">
-      <span class="text-sm">Email: </span>
-      <span>{{employee.email}}</span>
-    </p>
-    <p class="text-xs">
-      <span class="text-sm">Tipo de conta:</span>
-      <span>{{employee.role}}</span>
-    </p>
-  </div>
-  <div class="flex md:flex-col justify-between gap-1">
-    <div>
-      <p class="text-xs">Cód: {{employee.employeeCod}}</p>
-      <p class="text-xs">Data de registro: {{employee.registrationDate | dateType}}</p>
+    <div class="flex flex-col gap-2 m-2">
+      <p class="gap-1 flex items-center ">
+        <span class="text-base bg-info-color rounded-md p-1">Nome: </span>
+        <span>{{employee.name}}</span>
+      </p>
+      <p class="gap-1 flex items-center ">
+        <span class="text-base bg-info-color rounded-md p-1">Email: </span>
+        <span>{{employee.email}}</span>
+      </p>
+      <p class="gap-1 flex items-center ">
+        <span class="text-base bg-info-color rounded-md p-1">Tipo de conta: </span>
+        <span>{{employee.role}}</span>
+      </p>
     </div>
-    <div class="flex gap-3">
-      <button>
-        <i class="fa-solid fa-pencil" style="color: #74C0FC;"></i>
-      </button>
-      <button (click)="confirmDelete(employee.employeeCod)">
-        <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
-      </button>
+    <div class="flex md:flex-col justify-between gap-1">
+      <div>
+        <p class="text-sm bg-info-color rounded-md p-1 m-2">Cód: {{employee.employeeCod}}</p>
+        <p class="text-sm bg-info-color rounded-md p-1 m-2">Data de registro: {{employee.registrationDate | dateType}}</p>
+      </div>
+      <div class="flex gap-6 m-2 justify-end items-end">
+        <button>
+          <i class="fa-solid fa-pencil" style="color: #2184cf;"></i>
+        </button>
+        <button (click)="confirmDelete(employee.employeeCod)">
+          <i class="fa-solid fa-trash" style="color: #a10909;"></i>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <ng-template #noEmployees>
-  <p>Não há funcionarios cadastrados.</p>
+  <p class="text-center text-lg text-white">Não há funcionários cadastrados.</p>
 </ng-template>
+

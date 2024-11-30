@@ -1,70 +1,75 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
-  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 h-full">
-    <div *ngFor="let equipament of equipaments" class="flex bg-slate-300 rounded-md">
-      <div class="max-w-12 min-h-24 flex flex-col m-3 ">
-        <p class="bg-white w-min rounded-md text-[6px] text-left mb-[25%] px-1 py-[2px]"> {{ equipament.priority }}</p>
-        <img class="border-2 border-white bg-cover" [src]="equipament.photoURL" alt="">
+  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-gray-200">
+
+    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md">
+      
+      <!-- Detalhes do Equipamento -->
+      <div class="w-[80%] sm:w-[40%] flex flex-col m-4 justify-center">
+        <img
+          class="w-full h-auto border-2 border-white rounded-md bg-cover flex-shrink-0"
+          [src]="equipament.photoURL"
+          alt="Equipamento Foto"
+        />
       </div>
-      <div class="w-full min-h-full flex flex-col gap-4 justify-between p-1">
-        <div class="flex flex-nowrap justify-between px-3 h-1/6 pb-1 items-center">
-          <p class="text-xs whitespace-nowrap text-ellipsis overflow-hidden font-bold">{{ equipament.equipmentName }}</p>
-          <p class="text-[6px] text-end">
-            <span class="hidden">Número de serie:</span>
+
+      <!-- Informações do Equipamento -->
+      <div class="w-[100%] sm:w-[70%] flex flex-col gap-3 justify-between p-2">
+        <!-- Nome e Número de Série -->
+        <div class="flex flex-col sm:flex-row justify-between px-3 items-center">
+          <p class="text-sm text-center m-1 p-1 overflow-hidden">
+            {{ equipament.equipmentName }}
+          </p>
+          <p class="text-[10px] bg-info-color rounded-md p-1 m-1 text-end ">
             {{ equipament.serialNumber }}
           </p>
+          <p class="bg-white w-min rounded-md text-xs text-end px-2 py-1 m-1 text-black">
+            {{ equipament.priority }}
+          </p>
         </div>
-        <div class=" h-full flex flex-col justify-evenly h-100%">
-          <p class="text-xs w-full">{{equipament.others}} </p>
-          <div class="md:flex gap-2 hidden flex-wrap ">
-            <p class="text-[6px] bg-secondary-color rounded-md py-[2px] px-1 lg:text-[10px]">
-              CONECTORES:
-              <span class="font-semibold">
-                {{equipament.connectors}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              IHM:
-              <span class="font-semibold">
-                {{equipament.ihm}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              AVARIA EM CARCAÇA:
-              <span class="font-semibold">
-                {{equipament.carcass_damage}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              MOTOR:
-              <span class="font-semibold">
-                {{equipament.engine}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              CABOS DE MOTOR:
-              <span class="font-semibold">
-                {{equipament.engine_cables}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              VENTILADOR:
-              <span class="font-semibold">
-                {{equipament.fan}}
-              </span>
-            </p>
-            <p class="text-[6px] lg:text-[10px]">
-              CARCAÇA DE VENTILADOR:
-              <span class="font-semibold">
-                {{equipament.fan_carcass}}
-              </span>
-            </p>
-          </div>
+
+        <!-- Detalhes extras -->
+        <div class="md:flex gap-2 hidden flex-wrap">
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            CONECTORES:
+            <span class="font-semibold">{{ equipament.connectors }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            IHM: <span class="font-semibold">{{ equipament.ihm }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            AVARIA EM CARCAÇA:
+            <span class="font-semibold">{{ equipament.carcass_damage }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            MOTOR: <span class="font-semibold">{{ equipament.engine }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            CABOS DE MOTOR:
+            <span class="font-semibold">{{ equipament.engine_cables }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            VENTILADOR: <span class="font-semibold">{{ equipament.fan }}</span>
+          </p>
+          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+            CARCAÇA DE VENTILADOR:
+            <span class="font-semibold">{{ equipament.fan_carcass }}</span>
+          </p>
         </div>
-        <p class="text-[8px] text-end">Registrado em: {{equipament.registrationDate | dateType}}</p>
+
+      <!-- Outros Detalhes -->
+      <div class="flex flex-col justify-evenly h-full sm:items-start items-center">
+      <p class="text-xs text-center">{{ equipament.others }}</p>
+      </div>
+
+        <!-- Data de Registro -->
+        <p class="flex flex-col justify-end h-full sm:items-end items-center m-2 text-[10px] ">
+          Registrado em: {{ equipament.registrationDate | dateType }}
+        </p>
       </div>
     </div>
   </div>
 </div>
+
 <ng-template #noEquipament>
-  <p>Nenhum equipamento cadastrado</p>
+  <p class="text-center text-lg text-white">Nenhum equipamento cadastrado</p>
 </ng-template>

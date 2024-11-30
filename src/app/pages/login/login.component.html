@@ -1,25 +1,24 @@
-<div class="flex flex-col bg-primary-color min-h-screen justify-center items-center">
-  <div class="bg-white p-3 w-2/3 h-2/4 flex-col justify-center items-center rounded-md shadow-2xl">
-    <div class="flex flex-col md:flex-row gap-6 items-center justify-around">
-      <img class="w-1/4 lg:w-3/12" src="../../../assets/LYMTT_logo.png" alt="Logo Marca LYMTT_logo">
-      <p class="text-1xl md:text-3xl font-bold text-blue-500">O.S Tracker</p>
+<div class="flex flex-col bg-gradient-to-br from-blue-900 to-blue-300 min-h-screen justify-center items-center">
+  <div class="bg-white flex flex-col items-center rounded-md shadow-2xl">
+    <div class="flex flex-col md:flex-row gap-6 items-center justify-around mb-4">
+      <img class="large-logo" src="../../../assets/OS_TRACKER_LOGO.png" alt="Logo Marca LYMTT_logo">
+      <p class="large-title">O.S. TRACKER</p>
     </div>
-    <form [formGroup]="login" class="my-4">
-      <div class="flex-col items-center justify-center mb-4 w-full">
-        <p class="text-lg font-semibold text-center">Bem-vindo</p>
-        <p class="text-sm font-medium text-center">Acesse para continuar</p>
+    <form [formGroup]="login" class="w-full">
+      <div class="flex flex-col items-center mb-8">
+        <p class="text-xl font-semibold text-blue-700">Bem-vindo</p>
+        <p class="text-lg font-medium text-blue-600">Acesse para continuar</p>
       </div>
-      <div class="flex flex-col gap-3">
-        <div class="flex md:gap-3 flex-col md:flex-row">
-          <span class="text-lg font-normal">Usuário:</span>
-          <input formControlName="email" class="w-full pl-2 border-blue-100 border-[3px] rounded-md outline-none"
-            type="text">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="email" class="text-lg font-normal">Usuário:</label>
+          <input id="email" formControlName="email" class="w-full pl-2 border-container rounded-md outline-none" type="text">
         </div>
-        <div class="flex md:gap-6 flex-col md:flex-row">
-          <span class="text-lg">Senha:</span>
-          <div class="pr-2 border-blue-100 border-[3px] rounded-md flex w-full">
-            <input formControlName="password" class="pl-2 w-full border-none outline-none" [type]="type">
-            <button (click)="changeType()">
+        <div class="flex flex-col gap-1">
+          <label for="password" class="text-lg">Senha:</label>
+          <div class="border-container rounded-md flex w-full items-center">
+            <input id="password" formControlName="password" class="pl-2 w-full border-none outline-none" [type]="type">
+            <button (click)="changeType()" class="px-2">
               <i *ngIf="!canShowPassowrd" class="fa-solid fa-eye-slash"></i>
               <i *ngIf="canShowPassowrd" class="fa-solid fa-eye"></i>
             </button>
@@ -30,6 +29,5 @@
         <button (click)="toLogin()" class="w-full text-white text-xl font-medium">Entrar</button>
       </div>
     </form>
-
   </div>
 </div>

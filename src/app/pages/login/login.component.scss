@@ -1,9 +1,27 @@
 .bg-color {
-  background-color: #DDF3FA;
+  background-color: #06428b;
 }
 
-.logo-title {
-  color: #0658B9;
+.large-logo {
+  width: 60%; 
+  max-width: 300px; 
+}
+
+@media (min-width: 1024px) {
+  .large-logo {
+    width: 75%;
+    max-width: 400px;
+  }
+}
+
+.large-title {
+  font-size: 1.5rem; 
+  font-weight: semibold;
+  color: #042863;
+  font-family: 'Oswald', sans-serif;
+  @media (min-width: 768px) {
+    font-size: 2rem; 
+  }
 }
 
 .subtitle-text {
@@ -11,11 +29,87 @@
 }
 
 .btn-collor {
-  background-color: #1790E8;
+  background-color: #1195f3;
+  transition: background-color 0.3s ease;
+}
+
+.btn-collor:hover {
+  background-color: #0C7ACF;
 }
 
 .bg-wallpapper {
   clip-path: polygon(0 0, 100% 0%, 67% 100%, 0% 100%);
   background: linear-gradient(90deg, #1790E8, #0C7ACF);
+}
 
+/* Atualizações gerais para centralização e layout */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Caixa do formulário de login */
+.bg-primary-color {
+  background: linear-gradient(135deg, #1790E8, #87CEEB);
+}
+
+.bg-white {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+}
+
+p {
+  text-align: center;
+}
+
+.border-container {
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 1rem;
+
+
+&:focus-within {
+  border-color: #1790E8;
+  box-shadow: 0 0 5px rgba(23, 144, 232, 0.5);
+}
+
+button {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .bg-white {
+    max-width: 500px;
+  }
+
+  .text-1xl {
+    font-size: 1.25rem;
+  }
+
+  .text-lg {
+    font-size: 1rem;
+  }
 }
