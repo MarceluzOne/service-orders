@@ -13,20 +13,35 @@
         <div class="flex flex-col gap-1">
           <label for="email" class="text-lg font-normal">Usuário:</label>
           <input id="email" formControlName="email" class="w-full pl-2 border-container rounded-md outline-none" type="text">
+          <p *ngIf="login.get('email')?.invalid && login.get('email')?.touched" class="text-red-500 text-sm">
+            <span *ngIf="login.get('email')?.errors?.['required']">O e-mail é obrigatório.</span>
+            <span *ngIf="login.get('email')?.errors?.['email']">Insira um e-mail válido.</span>
         </div>
         <div class="flex flex-col gap-1">
           <label for="password" class="text-lg">Senha:</label>
           <div class="border-container rounded-md flex w-full items-center">
             <input id="password" formControlName="password" class="pl-2 w-full border-none outline-none" [type]="type">
-            <button (click)="changeType()" class="px-2">
+            <span (click)="changeType()" class="px-2">
               <i *ngIf="!canShowPassowrd" class="fa-solid fa-eye-slash"></i>
               <i *ngIf="canShowPassowrd" class="fa-solid fa-eye"></i>
-            </button>
+            </span>
           </div>
+          <p *ngIf="login.get('password')?.invalid && login.get('password')?.touched" class="text-red-500 text-sm">
+            <span *ngIf="login.get('password')?.errors?.['required']">Informe sua senha.</span>
         </div>
       </div>
       <div class="bg-blue-400 btn-collor mt-4 rounded-md h-12 flex justify-center">
-        <button (click)="toLogin()" class="w-full text-white text-xl font-medium">Entrar</button>
+        <button 
+          (click)="toLogin()"
+          class="w-full text-white text-xl font-medium"
+          [disabled]="!login.valid"
+        >
+        Entrar
+        <span>
+          <i *ngIf="!isLoading" class="fa-solid fa-right-to-bracket"></i>
+          <i *ngIf="isLoading" class="animate-spin fa-solid fa-spinner"></i>
+        </span>
+      </button>
       </div>
     </form>
   </div>
