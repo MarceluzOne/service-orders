@@ -29,6 +29,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InfoEmployeeComponent } from './components/infos/info-employee/info-employee.component';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     PhoneMaskPipe,
     CpfCnpjMaskPipe,
     InfoClientComponent,
+    InfoEmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     HttpClientModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
+    MatDialogModule,
     JwtModule.forRoot({
       config: {
         allowedDomains: ['http://http://localhost:8080'], 
