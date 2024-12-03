@@ -13,7 +13,9 @@
     <input type="phone" formControlName="email" class="border-2 rounded-md w-full h-8">
     <p *ngIf="formEmployee.get('email')?.invalid && formEmployee.get('email')?.touched"
       class="text-red-500 text-sm">
-      <span *ngIf="formEmployee.get('email')?.errors?.['required']">O email é obrigatório.</span>
+      <span *ngIf="formEmployee.get('email')?.errors?.['required']">O e-mail é obrigatório.</span>
+      <span *ngIf="formEmployee.get('email')?.errors?.['email']">Insira um e-mail válido.</span>
+
   </div>
   <div>
     <span class="text-sm font-medium">Senha</span>
@@ -34,7 +36,7 @@
     <span class="text-sm font-medium">Código do funcionário</span>
     <input type="text" formControlName="employeeCod" class="border-2 rounded-md w-full h-8">
     <p *ngIf="formEmployee.get('employeeCod')?.invalid && formEmployee.get('employeeCod')?.touched"
-      class="text-blue-400 text-sm">
+      class="text-red-500 text-sm">
       <span *ngIf="formEmployee.get('employeeCod')?.errors?.['required']">O código é obrigatório.</span>
       <span *ngIf="formEmployee.get('employeeCod')?.errors?.['maxlength']">Máximo de 10 caracteres.</span>
   </div>
