@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class EquipmentService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService) {}
 
   public getEquipament(): Observable<any> {
     const headers = this.authService.getAuthHeaders(); 

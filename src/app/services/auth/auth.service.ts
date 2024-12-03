@@ -69,6 +69,7 @@ export class AuthService {
 
   public getAuthHeaders(): HttpHeaders {
     const token = this.localStorage.get(StorageKeys.Token);
+    console.log(token)
     return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
   }
 }

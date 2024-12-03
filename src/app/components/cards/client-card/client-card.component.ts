@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoClientComponent } from '../../infos/info-client/info-client.component';
 
 @Component({
   selector: 'app-client-card',
@@ -13,7 +15,8 @@ export class ClientCardComponent implements OnInit {
 
   constructor(
     private clientService: ClientService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialog: MatDialog
   ) {}
 
   async ngOnInit() {
@@ -46,7 +49,15 @@ export class ClientCardComponent implements OnInit {
     });
 
   }
-  public openModalClient(cnpj: string){
+  public openModalClient(client: any){
+    const dialogRef = this.dialog.open(InfoClientComponent,{
+      data: client
+    })
+    dialogRef.afterClosed().subscribe(async result => {
+      if(result === true){
+        await this.getClient()
+      }
+    })
 
 
   }

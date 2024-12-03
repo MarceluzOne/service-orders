@@ -24,7 +24,7 @@
         <p class="text-sm bg-info-color rounded-md p-1 m-2">Data de registro: {{ client.registerDate | dateType }}</p>
       </div>
       <div class="flex gap-6 m-2 justify-end items-end">
-        <button (click)="openModalClient(client.cnpj)">
+        <button (click)="openModalClient(client)">
           <i class="fa-solid fa-pencil" style="color: #2184cf;"></i>
         </button>
         <button (click)="confirmDelete(client.cnpj)">

@@ -21,7 +21,7 @@
         <p class="text-sm bg-info-color rounded-md p-1 m-2">Data de registro: {{employee.registrationDate | dateType}}</p>
       </div>
       <div class="flex gap-6 m-2 justify-end items-end">
-        <button>
+        <button (click)="openModal(employee)">
           <i class="fa-solid fa-pencil" style="color: #2184cf;"></i>
         </button>
         <button (click)="confirmDelete(employee.employeeCod)">

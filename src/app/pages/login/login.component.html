@@ -34,7 +34,7 @@
         <button 
           (click)="toLogin()"
           class="w-full text-white text-xl font-medium"
-          [disabled]="!login.valid"
+          [disabled]="!login.valid || isLoading"
         >
         Entrar
         <span>

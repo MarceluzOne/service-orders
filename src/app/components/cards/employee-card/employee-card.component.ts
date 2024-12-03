@@ -47,4 +47,7 @@ export class EmployeeCardComponent implements OnInit {
     });
 
   }
+  public openModal(employee: any){
+
+  }
 }

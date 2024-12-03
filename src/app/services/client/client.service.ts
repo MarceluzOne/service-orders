@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({
@@ -9,7 +10,9 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class ClientService {
 
-  constructor(private http: HttpClient
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   public getClients(): Observable<any> {
@@ -20,7 +23,7 @@ export class ClientService {
   }
   public deleteClient(cnpj: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete(`${environment.apiUrl}/api/clients/cnpj/${cnpj}`, {headers, observe: 'response' })
+    return this.http.delete(`${environment.apiUrl}/api/clients/cnpj/${cnpj}`, {headers, observe: 'response'})
       .pipe(
         catchError(error => {
           console.error('Erro ao deletar cliente:', error);
@@ -34,7 +37,8 @@ export class ClientService {
   }
 
   public updateClient(data: any, cnpj: string ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/clients/create/${cnpj}`, data)
+    const headers = this.authService.getAuthHeaders();
+    return this.http.put(`${environment.apiUrl}/api/clients/cnpj/${cnpj}`, data, {headers})
       .pipe(
         retry(3)
       );
