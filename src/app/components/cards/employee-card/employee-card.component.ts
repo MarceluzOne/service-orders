@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoEmployeeComponent } from '../../infos/info-employee/info-employee.component';
 
 @Component({
   selector: 'app-employee-card',
@@ -12,7 +14,8 @@ export class EmployeeCardComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -48,6 +51,9 @@ export class EmployeeCardComponent implements OnInit {
 
   }
   public openModal(employee: any){
+    const dialog = this.dialog.open(InfoEmployeeComponent,{
+      data: employee
+    })
 
   }
 }

@@ -21,6 +21,7 @@ export class ClientCardComponent implements OnInit {
 
   async ngOnInit() {
     await this.getClient();
+    console.log(this.clients)
   }
 
   public async getClient() {

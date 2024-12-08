@@ -10,7 +10,7 @@ import { LocalStorageService, StorageKeys } from 'src/app/services/local-storage
 export class HomeComponent implements OnInit {
 
   public serviceOrders: any;
-  public typeList: 'clients' | 'employees' | 'equipments' = 'clients';
+  public typeList: 'clients' | 'employees' | 'equipments' = 'employees';
   public buttonStyleSelected: string = 'border-b-4 border-blue-800 rounded-md w-full';
   public buttonStyle: string = 'rounded-md w-full';
   public dropdownOpen: boolean = false; 

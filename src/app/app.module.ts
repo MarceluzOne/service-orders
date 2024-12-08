@@ -15,7 +15,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DateTypePipe } from './pipes/date-type.pipe';
-import { AlertComponent } from './components/alert/alert.component';
 import { ClientRegisterComponent } from './components/register/client-register/client-register.component';
 import { EmployeeRegisterComponent } from './components/register/employee-register/employee-register.component';
 import { ClientCardComponent } from './components/cards/client-card/client-card.component';
@@ -31,6 +30,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoEmployeeComponent } from './components/infos/info-employee/info-employee.component';
+import { DeleteAlertComponent } from './alerts/delete-alert/delete-alert.component';
+import { ConfirmAlertComponent } from './alerts/confirm-alert/confirm-alert.component';
 
 
 @NgModule({
@@ -49,7 +50,6 @@ import { InfoEmployeeComponent } from './components/infos/info-employee/info-emp
     EquipmentRegisterComponent,
     ProfileComponent,
     DateTypePipe,
-    AlertComponent,
     ClientRegisterComponent,
     EmployeeRegisterComponent,
     ClientCardComponent,
@@ -59,6 +59,8 @@ import { InfoEmployeeComponent } from './components/infos/info-employee/info-emp
     CpfCnpjMaskPipe,
     InfoClientComponent,
     InfoEmployeeComponent,
+    DeleteAlertComponent,
+    ConfirmAlertComponent,
   ],
   imports: [
     BrowserModule,

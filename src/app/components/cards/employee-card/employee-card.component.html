@@ -12,7 +12,7 @@
       </p>
       <p class="gap-1 flex items-center ">
         <span class="text-base bg-info-color rounded-md p-1">Tipo de conta: </span>
-        <span>{{employee.role}}</span>
+        <span>{{employee.role === 'ADM'? 'Administrador': 'Funcionário'}}</span>
       </p>
     </div>
     <div class="flex md:flex-col justify-between gap-1">

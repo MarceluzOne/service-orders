@@ -25,14 +25,11 @@ export class InfoClientComponent implements OnInit {
     'codClient': new FormControl(this.data.codClient, [Validators.required, Validators.maxLength(10)]),
     'cnpj': new FormControl(this.data.cnpj, [Validators.required, Validators.maxLength(18)]),
   });}
-  ngOnInit(): void {
-    console.log(this.data)
-  }
+  ngOnInit(): void {}
   onNoClick(): void {
     this.dialogRef.close();
   }
   public updateClient(){
-    console.log(this.formClient.value)
     if(this.formClient.valid){
       const payload = this.formClient.value;
       this.clientService.updateClient(payload, payload.cnpj).subscribe({

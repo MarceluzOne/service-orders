@@ -84,8 +84,6 @@ export class EquipmentRegisterComponent implements OnInit {
         });
         payload.append('image', this.convertDataURLToFile(this.capturedImage, 'captured-image.png'));
       }
-      
-      console.log(payload)
     this.registerEquipment.registerEquipament(payload).subscribe(
       response => {
         this.toastr.success('Equipamento cadastrado com sucesso');
