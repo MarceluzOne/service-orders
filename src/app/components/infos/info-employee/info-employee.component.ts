@@ -9,7 +9,7 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
   templateUrl: './info-employee.component.html',
   styleUrls: ['./info-employee.component.scss']
 })
-export class InfoEmployeeComponent {
+export class InfoEmployeeComponent  {
   public employeeForm: FormGroup = this.fb.group({})
 
   constructor(

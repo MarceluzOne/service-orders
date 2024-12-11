@@ -1,7 +1,7 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
   <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-gray-200">
 
-    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md">
+    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md" (click)="openModal(equipament)">
       
       <!-- Detalhes do Equipamento -->
       <div class="w-[80%] sm:w-[40%] flex flex-col m-4 justify-center">
