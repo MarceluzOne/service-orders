@@ -19,6 +19,7 @@ export class EquipamentCardComponent implements OnInit {
 
   async ngOnInit() {
     await this.getEquipaments();
+    this.openModal(this.equipaments[0])
   }
   private async getEquipaments() {
     try {

@@ -20,6 +20,6 @@ export class InfoEquipamentComponent {
 
   ngOnInit(): void {
     console.log(this.data)
-   }
+  }
 
 }
