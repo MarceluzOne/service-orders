@@ -1,7 +1,7 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
   <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-gray-200">
 
-    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-center bg-card-color rounded-md shadow-md">
+    <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-stretch p-4 bg-card-color rounded-md shadow-md">
       
       <!-- Detalhes do Equipamento -->
       <div class="w-[80%] sm:w-[40%] flex flex-col m-4 justify-center">
@@ -13,53 +13,53 @@
       </div>
 
       <!-- Informações do Equipamento -->
-      <div class="w-[100%] sm:w-[70%] flex flex-col gap-3 justify-between p-2">
+      <div class="w-[100%] sm:w-[70%] flex flex-col gap-3 justify-between">
         <!-- Nome e Número de Série -->
-        <div class="flex flex-col sm:flex-row justify-between px-3 items-center">
-          <p class="text-sm text-center m-1 p-1 overflow-hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-center py-3">
+          <p class="text-xl text-center overflow-hidden sm:text-start">
             {{ equipament.equipmentName }}
           </p>
-          <p class="text-[10px] bg-info-color rounded-md p-1 m-1 text-end ">
+          <p class="text-[15px] bg-info-color rounded-md p-1 m-1 text-end ">
             {{ equipament.serialNumber }}
           </p>
-          <p class="bg-white w-min rounded-md text-xs text-end px-2 py-1 m-1 text-black">
+          <p class="bg-white w-min rounded-md text-sm text-end px-2 py-1 m-1 text-black">
             {{ equipament.priority }}
           </p>
         </div>
 
+      <!-- Outros Detalhes -->
+        <div class="flex flex-col justify-center h-full items-center sm:items-start ">
+          <p class="text-base">{{ equipament.others }}</p>
+        </div>
+        
         <!-- Detalhes extras -->
         <div class="md:flex gap-2 hidden flex-wrap">
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             CONECTORES:
             <span class="font-semibold">{{ equipament.connectors }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             IHM: <span class="font-semibold">{{ equipament.ihm }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             AVARIA EM CARCAÇA:
             <span class="font-semibold">{{ equipament.carcass_damage }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             MOTOR: <span class="font-semibold">{{ equipament.engine }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             CABOS DE MOTOR:
             <span class="font-semibold">{{ equipament.engine_cables }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             VENTILADOR: <span class="font-semibold">{{ equipament.fan }}</span>
           </p>
-          <p class="text-[6px] lg:text-sm bg-info-color rounded-md p-1">
+          <p class="lg:text-xs bg-info-color rounded-md p-1">
             CARCAÇA DE VENTILADOR:
             <span class="font-semibold">{{ equipament.fan_carcass }}</span>
           </p>
         </div>
-
-      <!-- Outros Detalhes -->
-      <div class="flex flex-col justify-evenly h-full sm:items-start items-center">
-      <p class="text-xs text-center">{{ equipament.others }}</p>
-      </div>
 
         <!-- Data de Registro -->
         <p class="flex flex-col justify-end h-full sm:items-end items-center m-2 text-sm">

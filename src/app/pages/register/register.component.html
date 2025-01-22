@@ -1,21 +1,57 @@
 <app-navbar></app-navbar>
 
-<div class=" w-auto flex items-center flex-col gap-3 py-4 px-4">
-  <h3>{{ registerTitle }}</h3>
-  <div class="flex gap-2">
-    <button (click)="equipmentForm ='equipment'" class="bg-white p-2 rounded-md">Equipamento</button>
-    <button *ngIf="isAdmin" (click)="equipmentForm ='client'" class="bg-white p-2 rounded-md">Cliente</button>
-    <button *ngIf="isAdmin" (click)="equipmentForm ='employee'" class="bg-white p-2 rounded-md">Funcionário</button>
+<div class="w-auto flex items-center flex-col gap-3 py-4 px-4">
+  <h3 class="text-white">{{ registerTitle }}</h3>
+
+  <!-- Dropdown para seleção de tipo -->
+  <div class="relative w-full sm:hidden">
+    <button class="text-lg text-black w-full sm:w-auto flex bg-gray-200 items-center justify-center p-2 rounded-md" (click)="toggleDropdown()">
+      <span>{{ equipmentForm === 'equipment' ? 'Equipamento' : equipmentForm === 'client' ? 'Cliente' : 'Funcionário' }}</span>
+      <i class="fa-solid fa-caret-down ml-2"></i>
+    </button>
+
+    <!-- Dropdown Menu (Mobile) -->
+    <div *ngIf="dropdownOpen" class="absolute left-0 mt-2 w-full bg-gray-200 text-black rounded-md shadow-lg z-10">
+      <button
+        class="w-full text-left p-2 hover:bg-gray-100"
+        [ngClass]="equipmentForm === 'equipment' ? 'bg-gray-100' : ''"
+        (click)="equipmentFormSelect('equipment')">
+        Equipamento
+      </button>
+      <button
+        *ngIf="isAdmin"
+        class="w-full text-left p-2 hover:bg-gray-100"
+        [ngClass]="equipmentForm === 'client' ? 'bg-gray-100' : ''"
+        (click)="equipmentFormSelect('client')">
+        Cliente
+      </button>
+      <button
+        *ngIf="isAdmin"
+        class="w-full text-left p-2 hover:bg-gray-100"
+        [ngClass]="equipmentForm === 'employee' ? 'bg-gray-100' : ''"
+        (click)="equipmentFormSelect('employee')">
+        Funcionário
+      </button>
+    </div>
   </div>
 
-  <app-equipment-register *ngIf="equipmentForm === 'equipment'">
-  </app-equipment-register>
+  <!-- Botões de seleção para Desktop -->
+  <div class="hidden sm:flex gap-2">
+    <button (click)="equipmentFormSelect('equipment')" class="bg-white p-2 rounded-md" [ngClass]="equipmentForm === 'equipment' ? 'bg-gray-100' : ''">
+      Equipamento
+    </button>
+    <button *ngIf="isAdmin" (click)="equipmentFormSelect('client')" class="bg-white p-2 rounded-md" [ngClass]="equipmentForm === 'client' ? 'bg-gray-100' : ''">
+      Cliente
+    </button>
+    <button *ngIf="isAdmin" (click)="equipmentFormSelect('employee')" class="bg-white p-2 rounded-md" [ngClass]="equipmentForm === 'employee' ? 'bg-gray-100' : ''">
+      Funcionário
+    </button>
+  </div>
 
-  <app-client-register *ngIf="equipmentForm === 'client' && isAdmin">
-  </app-client-register>
-
-  <app-employee-register *ngIf="equipmentForm === 'employee' && isAdmin">
-  </app-employee-register>
+  <!-- Formulários de registro -->
+  <app-equipment-register *ngIf="equipmentForm === 'equipment'"></app-equipment-register>
+  <app-client-register *ngIf="equipmentForm === 'client' && isAdmin"></app-client-register>
+  <app-employee-register *ngIf="equipmentForm === 'employee' && isAdmin"></app-employee-register>
 
   <div *ngIf="statusMessenger" class="bg-green-500 w-full flex justify-center">
     <p>{{ statusMessenger }}</p>
