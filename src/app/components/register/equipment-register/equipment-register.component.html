@@ -71,7 +71,7 @@
   <div class="flex flex-col sm:flex-row justify-between gap-4">
     <div class="flex-1">
       <span class="text-xs sm:text-sm font-medium">Tensão</span>
-      <input type="text" formControlName="voltage" class="border-2 rounded-md text-xs w-full h-8">
+      <input type="text" formControlName="voltage" class="border-2 rounded-md text-xs w-full sm:h-8">
       <p *ngIf="formEquipment.get('voltage')?.invalid && formEquipment.get('voltage')?.touched"
         class="text-red-500 text-sm">
         <span *ngIf="formEquipment.get('voltage')?.errors?.['required']">A tensão é obrigatória.</span>
