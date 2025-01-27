@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'nav-color': '#111b2d',
-        'all-cards-color': '#15223a',
-        'card-color': '#1a2944',
-        'info-color': '#253757',
+        'nav-color': '#F0F2FB',
+        'all-cards-color': '#F0F2FB',
+        'card-color': '#E3E8FA',
+        'info-color': '#f1f2fc',
+        'user-color': '#0a1443',
+        'search-bar-color': '#BDC0D8'
       },
     },
   },
