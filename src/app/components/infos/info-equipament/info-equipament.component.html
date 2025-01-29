@@ -1,27 +1,88 @@
-<div class="w-80 h-fit rounded-md bg white px-2 flex justify-center items-center flex-col">
+<div class="rounded-md bg white px-2 flex py-2 justify-center items-center flex-col">
   <div class="w-full px-5 flex justify-end items-end">
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
-  <div class=" flex-col justify-center items-center gap-5">
-    <span class="text-xs font-medium"> Nome do equipamento</span>
-    <img class="border-2 border-slate-400 w-32 h-40 object-contain" [src]="data.photoURL" alt="">
-  </div>
-  <div class="">
-    <div class="flex-col">
-      <div>
-        <p class="text-xs">Descriçaõ:</p>
+  <div class="flex flex-col md:flex justify-center items-center">
+    <div class=" flex-col justify-center items-center gap-5">
+      <span class="text-xs font-medium"> Nome do equipamento</span>
+      <img class="border-2 border-slate-400 w-32 h-40 object-contain" [src]="data.photoURL" alt="">
+    </div>
+    <div class="">
+      <div class="flex-col mb-4">
+        <div>
+          <p class="text-xs">Descriçaõ:</p>
+        </div>
+        <div class="break-word">
+          <p class="text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.</p>
+        </div>
       </div>
-      <div class="break-word">
-        <p class="text-[6px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-          and scrambled it to make a type specimen book.</p>
+      <div class="grid grid-cols-2 gap-3 justify-around">
+        <div class="bg-red-400 flex gap-2">
+          <div>
+            <p>Recebedor:</p>
+            <p>Ordem de Serviço:</p>
+          </div> 
+          <div>
+            <p>João Thailan</p>
+            <p>OS5587I</p>
+          </div>
+          <!-- <span class="flex gap-2">
+            <p class="text-xs">Recebedor:</p>
+            <p class="text-xs">Thailan</p>
+          </span>
+          <span class="flex gap-2">
+            <p class="text-xs">OS:</p>
+            <p class="text-xs">OS5587I</p>
+          </span>
+          <span class="flex gap-2">
+            <p class="text-xs">Prioridade</p>
+            <p class="text-xs">A</p>
+          </span>
+          <span class="flex gap-2n">
+            <p class="text-xs">Conectores:</p>
+            <p class="text-xs">Sim</p>
+          </span>
+          <span class="flex gap-2">
+            <p class="text-xs">Motor</p>
+            <p class="text-xs">Sim</p>
+          </span>
+          <span class="flex gap-2">
+            <p class="text-xs">Ventilador:</p>
+            <p class="text-xs">Não</p>
+          </span> -->
+        </div>
+        <div>
+          <span class="flex ">
+            <p class="text-xs">Entregador:</p>
+            <p class="text-xs">sn</p>
+          </span>
+          <span class="flex gap-1">
+            <p class="text-xs">S.N:</p>
+            <p class="text-xs">55875516</p>
+          </span>
+          <span class="flex gap-1">
+            <p class="text-xs">IHM:</p>
+            <p class="text-xs">NÃO</p>
+          </span>
+          <span class="flex gap-1">
+            <p class="text-xs">AVARIAS NA CARCAÇA:</p>
+            <p class="text-xs">SIM</p>
+          </span>
+          <span class="flex gap-1">
+            <p class="text-xs">CABOS DO MOTOR:</p>
+            <p class="text-xs">SIM</p>
+          </span>
+          <span class="flex gap-1">
+            <p class="text-xs">CARCAÇA DO VENTILADOR:</p>
+            <p class="text-xs">sim</p>
+          </span>
+
+        </div>
+        
       </div>
     </div>
-    <div>
-      <span class="flex gap1">
-        <p class="text-xs">Recebedor:</p>
-        <p class="text-xs">Thailan</p>
-      </span>
-    </div>
   </div>
+  
 </div>
