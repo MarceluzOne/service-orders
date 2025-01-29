@@ -1,5 +1,5 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
-  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-gray-200">
+  <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-blue">
 
     <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-stretch p-4 bg-card-color rounded-md shadow-md" (click)="openModal(equipament)">
       
@@ -16,53 +16,58 @@
       <div class="w-[100%] sm:w-[70%] flex flex-col gap-3 justify-between">
         <!-- Nome e Número de Série -->
         <div class="flex flex-col sm:flex-row justify-between items-center py-3">
-          <p class="text-xl text-center overflow-hidden sm:text-start">
-            {{ equipament.equipmentName }}
-          </p>
-          <p class="text-[15px] bg-info-color rounded-md p-1 m-1 text-end ">
-            {{ equipament.serialNumber }}
-          </p>
+          <div class="flex-col">
+            <p class="text-xl text-center font-bold overflow-hidden sm:text-start">
+              {{ equipament.equipmentName }}
+            </p>
+            <p class="text-base font-bold sm:text-left text-center">
+              {{ equipament.serialNumber }}
+            </p>
+          </div>
           <p class="bg-white w-min rounded-md text-sm text-end px-2 py-1 m-1 text-black">
             {{ equipament.priority }}
           </p>
         </div>
 
       <!-- Outros Detalhes -->
-        <div class="flex flex-col justify-center h-full items-center sm:items-start ">
+        <div class="flex flex-col justify-center h-full items-center sm:items-start bg-info-color rounded-md p-2">
           <p class="text-base">{{ equipament.others }}</p>
         </div>
+
+        <div class="text-sm sm:text-left text-center text-blue-800 p-2">
+          <h3>Clique aqui para ver mais informações</h3>
+        </div>
         
-        <!-- Detalhes extras -->
-        <div class="md:flex gap-2 hidden flex-wrap">
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+        <!-- <div class="md:flex gap-2 hidden lg:text-[11px] rounded-md px-2 flex-wrap">
+          <p>
             CONECTORES:
             <span class="font-semibold">{{ equipament.connectors }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             IHM: <span class="font-semibold">{{ equipament.ihm }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             AVARIA EM CARCAÇA:
             <span class="font-semibold">{{ equipament.carcass_damage }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             MOTOR: <span class="font-semibold">{{ equipament.engine }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             CABOS DE MOTOR:
             <span class="font-semibold">{{ equipament.engine_cables }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             VENTILADOR: <span class="font-semibold">{{ equipament.fan }}</span>
           </p>
-          <p class="lg:text-xs bg-info-color rounded-md p-1">
+          <p>
             CARCAÇA DE VENTILADOR:
             <span class="font-semibold">{{ equipament.fan_carcass }}</span>
           </p>
-        </div>
+        </div> -->
 
         <!-- Data de Registro -->
-        <p class="flex flex-col justify-end h-full sm:items-end items-center m-2 text-sm">
+        <p class="flex flex-col justify-end h-full sm:items-end text-center m-2 text-sm text-gray-600">
           Registrado em: {{ equipament.registrationDate | dateType }}
         </p>
       </div>
@@ -71,5 +76,5 @@
 </div>
 
 <ng-template #noEquipament>
-  <p class="text-center text-lg text-white">Nenhum equipamento cadastrado</p>
+  <p class="text-center text-lg text-blue">Nenhum equipamento cadastrado</p>
 </ng-template>

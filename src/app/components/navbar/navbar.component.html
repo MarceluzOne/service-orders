@@ -1,11 +1,28 @@
 <div class=" bg-nav-color flex justify-center w-full h-10 bg-nav-color flex items-center gap-5 justify-between px-8">
-    <div class="bg-white rounded-full px-4">
-      <i class="fa-regular fa-user"></i>
+
+    <div class="flex gap-4">
+      <div class="bg-user-color rounded-full px-4">
+        <i class="fa-regular fa-user text-white"></i>
+      </div>
+      <!-- Barra de busca -->
+      <div class="hidden sm:flex items-center bg-[#BDC0D8] text-sm rounded-full px-2">
+        <input
+          type="text"
+          placeholder="Buscar..."
+          class="rounded-full focus:outline-none px-2 bg-[#BDC0D8] placeholder-white"
+        />
+        <i class="fa-solid fa-search text-white"></i>
+      </div>
     </div>
+
+    <div>
+      <h1 class="font-bold text-xl">S.O. Tracker</h1>
+    </div>
+
     <div class="flex gap-6">
       <div
         *ngFor="let item of menu"
-        class="text-sm text-white font-semibold hidden sm:flex gap-8 px-4">
+        class="text-sm text-blue font-semibold hidden sm:flex gap-8 px-4">
         <p
           class="hover:underline cursor-pointer"
           (click)="goTo(item.router)"
@@ -14,9 +31,9 @@
       </p>
   
       </div>
-      <p class="text-sm hover:underline text-white font-semibold hidden sm:flex gap-8 px-4 cursor-pointer" (click)="toLogout()">Sair</p>
+      <p class="text-sm hover:underline text-blue font-semibold hidden sm:flex gap-8 px-4 cursor-pointer" (click)="toLogout()">Sair</p>
       <div class="sm:hidden">
-        <i class="fa-solid fa-bars" style="color: #ffffff;"
+        <i class="fa-solid fa-bars" style="color: #01061d;"
         (click)="showMenu(canShowMenu)"></i>
       </div>
     </div>
