@@ -1,8 +1,8 @@
 <div *ngIf="equipaments.length > 0; else noEquipament">
   <div class="lg:grid lg:grid-cols-2 w-full flex flex-col m-auto gap-3 text-blue">
 
+    <!-- Dentro do loop *ngFor, passamos o equipamento individual para o modal -->
     <div *ngFor="let equipament of equipaments" class="flex flex-col sm:flex-row items-stretch p-4 bg-card-color rounded-md shadow-md">
-      
       <!-- Detalhes do Equipamento -->
       <div class="w-[80%] sm:w-[40%] flex flex-col m-4 justify-center">
         <img
@@ -29,43 +29,68 @@
           </p>
         </div>
 
-      <!-- Outros Detalhes -->
+        <!-- Outros Detalhes -->
         <div class="flex flex-col justify-center h-full items-center sm:items-start bg-info-color rounded-md p-2">
           <p class="text-base">{{ equipament.others }}</p>
         </div>
 
-        <div class="text-sm sm:text-left text-center text-blue-800 p-2">
+        <!-- Botão para abrir o modal -->
+        <div class="text-sm sm:text-left text-center text-blue-800 p-2 cursor-pointer" (click)="openModal(equipament)">
           <h3>Clique aqui para ver mais informações</h3>
         </div>
         
-        <!-- <div class="md:flex gap-2 hidden lg:text-[11px] rounded-md px-2 flex-wrap">
-          <p>
-            CONECTORES:
-            <span class="font-semibold">{{ equipament.connectors }}</span>
-          </p>
-          <p>
-            IHM: <span class="font-semibold">{{ equipament.ihm }}</span>
-          </p>
-          <p>
-            AVARIA EM CARCAÇA:
-            <span class="font-semibold">{{ equipament.carcass_damage }}</span>
-          </p>
-          <p>
-            MOTOR: <span class="font-semibold">{{ equipament.engine }}</span>
-          </p>
-          <p>
-            CABOS DE MOTOR:
-            <span class="font-semibold">{{ equipament.engine_cables }}</span>
-          </p>
-          <p>
-            VENTILADOR: <span class="font-semibold">{{ equipament.fan }}</span>
-          </p>
-          <p>
-            CARCAÇA DE VENTILADOR:
-            <span class="font-semibold">{{ equipament.fan_carcass }}</span>
-          </p>
-        </div> -->
+        <!-- Modal -->
+        <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-[#03082d] bg-opacity-20 z-50">
+          <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+            <h2 class="text-xl font-semibold mb-4">Mais Informações</h2>
 
+          <!-- Exibe os detalhes da ordem de serviço -->
+          <div *ngIf="serviceOrderDetails else noServiceOrder">
+            <p>OS Number: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.osNumber }}</span></p>
+            <p>Localization: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.localization }}</span></p>
+            <p>Cod Cliente: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.codClient }}</span></p>
+            <p>Número de série: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.equipmentSerialNumber }}</span></p>
+            <p>Responsável: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.responsible }}</span></p>
+            <p>NFE: <span class="font-semibold text-blue-800">{{ serviceOrderDetails?.nfe }}</span></p>
+            <p>Equipamento <span class="font-semibold text-blue-800">{{ serviceOrderDetails.equipment?.model }}</span></p>
+          </div>
+          
+          <ng-template #noServiceOrder>
+            <p>Ordem de serviço não encontrada.</p>
+          </ng-template>
+
+            <div class="md:flex gap-2 hidden lg:text-[11px] rounded-md px-2 flex-wrap">
+              <p>
+                CONECTORES:
+                <span class="font-semibold">{{ selectedEquipamento?.connectors }}</span>
+              </p>
+              <p>
+                IHM: <span class="font-semibold">{{ selectedEquipamento?.ihm }}</span>
+              </p>
+              <p>
+                AVARIA EM CARCAÇA:
+                <span class="font-semibold">{{ selectedEquipamento?.carcass_damage }}</span>
+              </p>
+              <p>
+                MOTOR: <span class="font-semibold">{{ selectedEquipamento?.engine }}</span>
+              </p>
+              <p>
+                CABOS DE MOTOR:
+                <span class="font-semibold">{{ selectedEquipamento?.engine_cables }}</span>
+              </p>
+              <p>
+                VENTILADOR: <span class="font-semibold">{{ selectedEquipamento?.fan }}</span>
+              </p>
+              <p>
+                CARCAÇA DE VENTILADOR:
+                <span class="font-semibold">{{ selectedEquipamento?.fan_carcass }}</span>
+              </p>
+            </div>
+
+            <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md" (click)="closeModal()">Fechar</button>
+          </div>
+        </div>
+        
         <!-- Data de Registro -->
         <p class="flex flex-col justify-end h-full sm:items-end text-center m-2 text-sm text-gray-600">
           Registrado em: {{ equipament.registrationDate | dateType }}
